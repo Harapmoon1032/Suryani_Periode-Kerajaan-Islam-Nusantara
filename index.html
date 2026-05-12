@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -204,6 +204,7 @@
                 top: 0;
                 height: 100vh;
                 z-index: 50;
+                width: min(78vw, 320px);
                 transform: translateX(-100%);
                 transition: transform 0.25s ease;
             }
@@ -239,6 +240,9 @@
     <aside id="sidebar"
         class="mobile-sidebar lg:translate-x-0 lg:static w-64 bg-charcoal text-paper h-full flex flex-col shadow-2xl relative z-10 transition-all duration-300">
         <div class="p-6 border-b border-stone-600">
+            <div class="lg:hidden mb-3 flex justify-end">
+                <button onclick="closeSidebar()" class="w-8 h-8 rounded-md border border-gray-300 text-charcoal">x</button>
+            </div>
             <h2 class="poster-title text-4xl text-gold">HISTORIA</h2>
             <p class="text-xs text-stone-300 mt-1 uppercase tracking-[0.18em]">Kerajaan Islam Nusantara</p>
         </div>
@@ -327,9 +331,9 @@
     <main class="flex-1 h-full overflow-y-auto relative z-10 p-4 md:p-8 lg:p-12">
         <div
             class="lg:hidden sticky top-0 z-30 -mx-4 mb-4 px-4 py-3 bg-white border-b border-gray-200 flex items-center justify-between">
-            <button onclick="openSidebar()"
+            <button onclick="openSidebar()" aria-label="Buka menu"
                 class="w-10 h-10 rounded-lg border border-gray-300 flex items-center justify-center text-charcoal">
-                <i class="fas fa-bars"></i>
+                <span class="text-xl leading-none">☰</span>
             </button>
             <p class="text-sm font-semibold tracking-wide text-charcoal">ISLAMIC-PEDIA</p>
             <div class="w-10 h-10"></div>
@@ -337,7 +341,7 @@
 
         <!-- SECTION: BERANDA -->
         <section id="beranda"
-            class="content-section active max-w-5xl mx-auto h-full flex flex-col justify-center relative">
+            class="content-section active max-w-5xl mx-auto relative pb-8">
             <div class="beranda-cover hidden lg:block absolute -top-4 left-1/4 w-24 h-24 shape-ring opacity-60"></div>
             <div
                 class="beranda-cover hidden lg:block absolute top-24 left-[42%] w-20 h-20 shape-dot-grid rounded-xl opacity-40">
@@ -347,24 +351,24 @@
                 <i class="fas fa-compass text-terra"></i>
                 <span class="text-xs uppercase tracking-[0.14em] text-charcoal">Jalur Rempah • Selat Malaka</span>
             </div>
-            <div class="absolute top-0 right-0 text-right">
+            <div class="hidden lg:block absolute top-0 right-0 text-right">
                 <p class="text-sm font-bold tracking-[0.2em] text-terra uppercase">Universitas Sebelas Maret</p>
                 <p class="text-xs text-stone-600">S2 Pendidikan Sejarah</p>
             </div>
 
-            <div class="relative z-10 mt-10">
-                <h3 class="subheading text-xl md:text-2xl text-terra mb-2">Atlas Pembelajaran Interdisipliner</h3>
-                <h1 class="poster-title text-7xl md:text-9xl text-charcoal uppercase mb-6 relative inline-block">
+            <div class="relative z-10 mt-3 md:mt-8">
+                <h3 class="subheading text-lg md:text-2xl text-terra mb-2">Atlas Pembelajaran Interdisipliner</h3>
+                <h1 class="poster-title text-5xl md:text-7xl lg:text-8xl text-charcoal uppercase mb-4 relative inline-block leading-[0.96]">
                     KERAJAAN
                     <span class="block text-terra">ISLAM DI NUSANTARA</span>
-                    <span class="block subheading text-3xl md:text-5xl text-gold">Jalur Dagang, Kuasa, dan Budaya</span>
+                    <span class="block subheading text-2xl md:text-4xl text-gold">Jalur Dagang, Kuasa, dan Budaya</span>
                     <!-- Dekorasi Garis -->
                     <div class="absolute -bottom-4 left-0 w-1/2 h-2 bg-terra"></div>
                 </h1>
 
-                <div class="content-frame p-6 rounded-xl max-w-2xl mt-8 relative">
+                <div class="content-frame p-4 md:p-6 rounded-xl max-w-2xl mt-8 relative">
                     <div class="absolute -top-3 -left-3 text-terra text-4xl"><i class="fas fa-quote-left"></i></div>
-                    <p class="body-copy text-lg">
+                    <p class="body-copy text-base md:text-lg">
                         Pengembangan Bahan Ajar Digital Materi Periode Kerajaan Islam di Nusantara dengan Pendekatan
                         Interdisipliner Untuk Meningkatkan Keterampilan Berpikir Kritis Siswa di SMAN Negeri Kabupaten
                         Karanganyar.
@@ -966,6 +970,16 @@
             document.getElementById('sidebar').classList.remove('open');
             document.getElementById('mobile-overlay').classList.remove('show');
         }
+
+        window.addEventListener('load', () => {
+            closeSidebar();
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                closeSidebar();
+            }
+        });
     </script>
 </body>
 
