@@ -1,0 +1,972 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bahan Ajar Interaktif: Nusantara Masa Islam</title>
+    <!-- Tailwind CSS untuk Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'paper': '#F3F4F6',
+                        'terra': '#1F2937',
+                        'terra-dark': '#111827',
+                        'charcoal': '#0F172A',
+                        'gold': '#334155',
+                        'sand': '#E5E7EB'
+                    },
+                    fontFamily: {
+                        'display': ['Playfair Display', 'Georgia', 'serif'],
+                        'sans': ['DM Sans', 'Segoe UI', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'texture': "url('https://www.transparenttextures.com/patterns/paper-fibers.png')"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f3f4f6;
+            background-image: none;
+            color: #111827;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f3f4f6;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #9ca3af;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+
+        .content-section {
+            display: none !important;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block !important;
+        }
+
+        #beranda.content-section.active {
+            display: flex !important;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Nav Item Active State */
+        .nav-item.active {
+            background-color: #111827;
+            color: #f9fafb;
+            font-weight: 600;
+            border-left: 4px solid #6b7280;
+        }
+
+        /* Decorative Elements */
+        .circle-decor {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        .poster-title {
+            font-family: "Playfair Display", Georgia, serif;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            line-height: 1.02;
+        }
+
+        .subtitle-italic {
+            font-family: "DM Sans", "Segoe UI", sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .subheading {
+            font-family: "DM Sans", "Segoe UI", sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            text-transform: none;
+        }
+
+        .body-copy {
+            font-family: "DM Sans", "Segoe UI", sans-serif;
+            font-weight: 400;
+            line-height: 1.75;
+        }
+
+        .interdiscipline-chip {
+            background: #e5e7eb;
+            color: #111827;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+            border: 1px solid rgba(17, 24, 39, 0.12);
+        }
+
+        .content-frame {
+            border: 1px solid rgba(17, 24, 39, 0.08);
+            box-shadow: 0 8px 28px rgba(17, 24, 39, 0.08);
+            background: #ffffff;
+            backdrop-filter: none;
+            border-radius: 16px;
+        }
+
+        .shape-dot-grid,
+        .shape-ring,
+        .shape-stamp,
+        .shape-paper-strip,
+        .shape-connector,
+        .circle-decor {
+            display: none !important;
+        }
+
+        .content-section:not(.active) .beranda-cover {
+            display: none !important;
+        }
+
+        aside {
+            background: #ffffff !important;
+            color: #0f172a !important;
+            border-right: 1px solid #e5e7eb;
+            box-shadow: 0 0 0 transparent !important;
+        }
+
+        aside .border-stone-600,
+        aside .border-gray-700 {
+            border-color: #e5e7eb !important;
+        }
+
+        aside .text-stone-300,
+        aside .text-gray-400,
+        aside .text-gray-500 {
+            color: #6b7280 !important;
+        }
+
+        aside .bg-gray-900 {
+            background: #f8fafc !important;
+        }
+
+        .nav-item {
+            color: #1f2937;
+        }
+
+        .nav-item:hover {
+            background: #f3f4f6 !important;
+        }
+
+        @media (max-width: 1023px) {
+            body {
+                overflow: auto;
+            }
+
+            .mobile-sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100vh;
+                z-index: 50;
+                transform: translateX(-100%);
+                transition: transform 0.25s ease;
+            }
+
+            .mobile-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .mobile-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(15, 23, 42, 0.38);
+                z-index: 40;
+                display: none;
+            }
+
+            .mobile-overlay.show {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans font-light antialiased overflow-hidden flex h-screen">
+
+    <!-- Dekorasi Background -->
+    <div class="circle-decor bg-terra w-96 h-96 -top-20 -left-20"></div>
+    <div class="circle-decor border-4 border-terra w-64 h-64 bottom-10 right-10 opacity-20"></div>
+
+    <div id="mobile-overlay" class="mobile-overlay lg:hidden" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar"
+        class="mobile-sidebar lg:translate-x-0 lg:static w-64 bg-charcoal text-paper h-full flex flex-col shadow-2xl relative z-10 transition-all duration-300">
+        <div class="p-6 border-b border-stone-600">
+            <h2 class="poster-title text-4xl text-gold">HISTORIA</h2>
+            <p class="text-xs text-stone-300 mt-1 uppercase tracking-[0.18em]">Kerajaan Islam Nusantara</p>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-2 px-3">
+                <li>
+                    <button onclick="switchTab('beranda')" id="nav-beranda"
+                        class="nav-item active w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-3 hover:bg-gray-800">
+                        <i class="fas fa-home w-5"></i> Beranda
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchTab('kata-pengantar')" id="nav-kata-pengantar"
+                        class="nav-item w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-3 hover:bg-gray-800">
+                        <i class="fas fa-feather-pointed w-5"></i> Kata Pengantar
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchTab('peta-konsep')" id="nav-peta-konsep"
+                        class="nav-item w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-3 hover:bg-gray-800">
+                        <i class="fas fa-project-diagram w-5"></i> Peta Konsep
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchTab('cp-atp')" id="nav-cp-atp"
+                        class="nav-item w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-3 hover:bg-gray-800">
+                        <i class="fas fa-bullseye w-5"></i> CP & ATP
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchTab('alur-belajar')" id="nav-alur-belajar"
+                        class="nav-item w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-3 hover:bg-gray-800">
+                        <i class="fas fa-route w-5"></i> Alur Pembelajaran
+                    </button>
+                </li>
+                <li class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase">Materi Inti</li>
+                <li>
+                    <button onclick="switchTab('materi')" id="nav-materi"
+                        class="nav-item w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-3 hover:bg-gray-800">
+                        <i class="fas fa-book-open w-5"></i> Jelajah Kerajaan
+                    </button>
+                </li>
+                <li class="pl-6">
+                    <button onclick="switchTab('materi-sumatra')" id="nav-materi-sumatra"
+                        class="nav-item w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center gap-2 text-sm hover:bg-gray-800">
+                        <i class="fas fa-map-marker-alt w-4 text-gold"></i> Sumatra
+                    </button>
+                </li>
+                <li class="pl-6">
+                    <button onclick="switchTab('materi-jawa')" id="nav-materi-jawa"
+                        class="nav-item w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center gap-2 text-sm hover:bg-gray-800">
+                        <i class="fas fa-map-marker-alt w-4 text-gold"></i> Jawa
+                    </button>
+                </li>
+                <li class="pl-6">
+                    <button onclick="switchTab('materi-sulmal')" id="nav-materi-sulmal"
+                        class="nav-item w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center gap-2 text-sm hover:bg-gray-800">
+                        <i class="fas fa-map-marker-alt w-4 text-gold"></i> Sulawesi & Maluku
+                    </button>
+                </li>
+                <li class="pl-6">
+                    <button onclick="switchTab('materi-peran')" id="nav-materi-peran"
+                        class="nav-item w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center gap-2 text-sm hover:bg-gray-800">
+                        <i class="fas fa-landmark w-4 text-gold"></i> Peran & Peninggalan
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="p-4 bg-gray-900 border-t border-gray-700">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-10 h-10 rounded-full bg-terra flex items-center justify-center text-white font-sans font-bold font-bold">
+                    S
+                </div>
+                <div>
+                    <p class="text-sm font-semibold">Suryani, S.Pd</p>
+                    <p class="text-xs text-gray-400">Penyusun</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 h-full overflow-y-auto relative z-10 p-4 md:p-8 lg:p-12">
+        <div
+            class="lg:hidden sticky top-0 z-30 -mx-4 mb-4 px-4 py-3 bg-white border-b border-gray-200 flex items-center justify-between">
+            <button onclick="openSidebar()"
+                class="w-10 h-10 rounded-lg border border-gray-300 flex items-center justify-center text-charcoal">
+                <i class="fas fa-bars"></i>
+            </button>
+            <p class="text-sm font-semibold tracking-wide text-charcoal">ISLAMIC-PEDIA</p>
+            <div class="w-10 h-10"></div>
+        </div>
+
+        <!-- SECTION: BERANDA -->
+        <section id="beranda"
+            class="content-section active max-w-5xl mx-auto h-full flex flex-col justify-center relative">
+            <div class="beranda-cover hidden lg:block absolute -top-4 left-1/4 w-24 h-24 shape-ring opacity-60"></div>
+            <div
+                class="beranda-cover hidden lg:block absolute top-24 left-[42%] w-20 h-20 shape-dot-grid rounded-xl opacity-40">
+            </div>
+            <div
+                class="beranda-cover hidden absolute bottom-8 left-0 items-center gap-3 bg-paper/80 border border-charcoal/20 rounded-full px-4 py-2">
+                <i class="fas fa-compass text-terra"></i>
+                <span class="text-xs uppercase tracking-[0.14em] text-charcoal">Jalur Rempah • Selat Malaka</span>
+            </div>
+            <div class="absolute top-0 right-0 text-right">
+                <p class="text-sm font-bold tracking-[0.2em] text-terra uppercase">Universitas Sebelas Maret</p>
+                <p class="text-xs text-stone-600">S2 Pendidikan Sejarah</p>
+            </div>
+
+            <div class="relative z-10 mt-10">
+                <h3 class="subheading text-xl md:text-2xl text-terra mb-2">Atlas Pembelajaran Interdisipliner</h3>
+                <h1 class="poster-title text-7xl md:text-9xl text-charcoal uppercase mb-6 relative inline-block">
+                    KERAJAAN
+                    <span class="block text-terra">ISLAM DI NUSANTARA</span>
+                    <span class="block subheading text-3xl md:text-5xl text-gold">Jalur Dagang, Kuasa, dan Budaya</span>
+                    <!-- Dekorasi Garis -->
+                    <div class="absolute -bottom-4 left-0 w-1/2 h-2 bg-terra"></div>
+                </h1>
+
+                <div class="content-frame p-6 rounded-xl max-w-2xl mt-8 relative">
+                    <div class="absolute -top-3 -left-3 text-terra text-4xl"><i class="fas fa-quote-left"></i></div>
+                    <p class="body-copy text-lg">
+                        Pengembangan Bahan Ajar Digital Materi Periode Kerajaan Islam di Nusantara dengan Pendekatan
+                        Interdisipliner Untuk Meningkatkan Keterampilan Berpikir Kritis Siswa di SMAN Negeri Kabupaten
+                        Karanganyar.
+                    </p>
+                </div>
+
+                <div class="mt-12 flex gap-4">
+                    <button onclick="switchTab('materi')"
+                        class="bg-terra text-paper px-8 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-terra-dark transition-colors shadow-lg flex items-center gap-2">
+                        Mulai Jelajah <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gambar Kolase ala AERIS -->
+            <div class="beranda-cover hidden lg:block absolute right-10 top-1/2 transform -translate-y-1/2 w-96 h-96">
+                <div class="relative w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=700&q=80"
+                        alt="Masjid bersejarah"
+                        class="absolute w-64 h-64 object-cover rounded-full border-8 border-paper shadow-2xl z-20 right-0 top-0 grayscale hover:grayscale-0 transition duration-500">
+                    <img src="https://images.unsplash.com/photo-1577083552431-6e5fd01988f1?auto=format&fit=crop&w=500&q=80"
+                        alt="Peta dan navigasi maritim"
+                        class="absolute w-48 h-48 object-cover rounded-full border-4 border-gold shadow-xl z-10 left-0 bottom-10">
+                    <!-- Ornamen -->
+                    <div class="absolute w-full border-t-2 border-dashed border-charcoal top-1/2 z-0"></div>
+                    <div class="absolute left-10 top-8 shape-stamp z-30 flex items-center justify-center text-3xl">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <div
+                        class="absolute -right-5 bottom-10 bg-charcoal text-paper text-xs uppercase tracking-[0.16em] px-3 py-2 rounded-md z-30">
+                        Interdisipliner</div>
+                    <div
+                        class="absolute left-1/2 bottom-0 -translate-x-1/2 shape-paper-strip text-paper text-xs px-4 py-2 rounded-md z-30 uppercase tracking-[0.12em]">
+                        Politik • Ekonomi • Budaya • Geografi
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: KATA PENGANTAR -->
+        <section id="kata-pengantar" class="content-section max-w-4xl mx-auto py-10 relative">
+            <div class="absolute -top-3 right-10 w-20 h-20 shape-ring opacity-40 hidden md:block"></div>
+            <h2 class="poster-title text-6xl text-terra mb-3">Kata Pengantar</h2>
+            <p class="text-stone-600 mb-8">Pengantar penyusunan bahan ajar digital interaktif.</p>
+
+            <article class="content-frame rounded-2xl p-8 md:p-10">
+                <p class="text-sm md:text-base text-gray-700 leading-relaxed mb-5">
+                    Puji syukur ke hadirat Allah SWT atas rahmat dan karunia-Nya sehingga bahan ajar digital ini dapat
+                    disusun sebagai bagian dari pengembangan kajian tesis berjudul
+                    <span class="font-semibold text-charcoal">"Pengembangan Bahan Ajar Digital Materi Periode Kerajaan
+                        Islam di Nusantara dengan Pendekatan Interdisipliner untuk Meningkatkan Keterampilan Berpikir
+                        Kritis Siswa di SMAN Negeri Kabupaten Karanganyar."</span>
+                </p>
+                <p class="text-sm md:text-base text-gray-700 leading-relaxed mb-5">
+                    Bahan ajar ini dirancang untuk menghadirkan pembelajaran sejarah yang tidak berhenti pada hafalan
+                    kronologi, tetapi mendorong siswa membaca peristiwa melalui keterkaitan aspek geografi, ekonomi
+                    maritim, dinamika politik, serta proses sosial-budaya. Melalui pendekatan interdisipliner, materi
+                    Kerajaan Islam di Nusantara diharapkan menjadi ruang belajar yang kontekstual, dialogis, dan relevan
+                    dengan tantangan pembelajaran abad ke-21.
+                </p>
+                <p class="text-sm md:text-base text-gray-700 leading-relaxed mb-5">
+                    Pengembangan konten digital interaktif ini juga diarahkan untuk menumbuhkan keterampilan berpikir
+                    kritis peserta didik, terutama dalam menganalisis sebab-akibat, mengevaluasi berbagai sudut pandang
+                    sumber sejarah, serta menyusun argumen historis yang logis dan berbasis data.
+                </p>
+                <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+                    Penulis menyadari bahwa bahan ajar ini masih dapat terus disempurnakan. Oleh karena itu, saran dan
+                    masukan konstruktif sangat diharapkan demi peningkatan kualitas pembelajaran sejarah Indonesia,
+                    khususnya pada materi Periode Kerajaan Islam di Nusantara.
+                </p>
+
+                <div class="mt-8 pt-5 border-t border-charcoal/15 flex items-center justify-between">
+                    <span class="text-xs uppercase tracking-[0.14em] text-stone-500">Karanganyar, 2026</span>
+                    <span class="text-sm font-semibold text-terra">Suryani, S.Pd</span>
+                </div>
+            </article>
+        </section>
+
+        <!-- SECTION: PETA KONSEP -->
+        <section id="peta-konsep" class="content-section max-w-4xl mx-auto py-10">
+            <h2 class="poster-title text-6xl text-terra mb-2">Peta Konsep</h2>
+            <p class="text-gray-600 mb-10 text-lg">Memahami masuk dan berkembangnya Islam melalui lensa multidimensi.
+            </p>
+
+            <div class="content-frame p-8 rounded-2xl relative overflow-hidden">
+                <div class="absolute -left-6 top-1/3 w-20 h-20 rounded-full bg-terra/20"></div>
+                <div class="absolute right-8 bottom-8 w-24 h-24 shape-ring opacity-40"></div>
+                <div class="absolute left-8 bottom-7 shape-connector hidden md:block"></div>
+                <div class="absolute left-40 bottom-3 hidden md:flex items-center justify-center shape-stamp text-2xl">
+                    <i class="fas fa-ship"></i>
+                </div>
+                <div class="absolute top-0 right-0 interdisciplinary-chip px-4 py-1 rounded-bl-lg text-sm">
+                    Interdisciplinary</div>
+
+                <p class="mb-6 leading-relaxed">
+                    Peta konsep ini tidak hanya melihat sejarah sebagai rentetan angka dan tahun, melainkan meninjau
+                    perkembangan Kerajaan Islam di Nusantara melalui empat kacamata interdisipliner utama untuk
+                    merangsang pemikiran kritis:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                    <!-- Kartu Konsep -->
+                    <div class="border-l-4 border-terra pl-4 py-2 hover:bg-gray-50 transition">
+                        <h4 class="font-medium text-xl text-charcoal flex items-center gap-2">
+                            <i class="fas fa-globe-asia text-terra"></i> Geografi & Pelayaran
+                        </h4>
+                        <p class="text-sm mt-2 text-gray-700">Analisis posisi strategis Nusantara (Selat Malaka)
+                            terhadap angin muson, jalur rempah, dan munculnya kota-kota pelabuhan pesisir.</p>
+                    </div>
+                    <div class="border-l-4 border-gold pl-4 py-2 hover:bg-gray-50 transition">
+                        <h4 class="font-medium text-xl text-charcoal flex items-center gap-2">
+                            <i class="fas fa-coins text-gold"></i> Ekonomi Maritim & Agraris
+                        </h4>
+                        <p class="text-sm mt-2 text-gray-700">Pergeseran sistem ekonomi dari agraris ke perdagangan
+                            internasional, mata uang, dan sistem syahbandar di kesultanan.</p>
+                    </div>
+                    <div class="border-l-4 border-blue-600 pl-4 py-2 hover:bg-gray-50 transition">
+                        <h4 class="font-medium text-xl text-charcoal flex items-center gap-2">
+                            <i class="fas fa-users text-blue-600"></i> Sosiologi & Budaya
+                        </h4>
+                        <p class="text-sm mt-2 text-gray-700">Akulturasi budaya lokal dengan nilai Islam (arsitektur
+                            masjid, seni pertunjukan), mobilitas sosial, dan peran Walisongo.</p>
+                    </div>
+                    <div class="border-l-4 border-green-700 pl-4 py-2 hover:bg-gray-50 transition">
+                        <h4 class="font-medium text-xl text-charcoal flex items-center gap-2">
+                            <i class="fas fa-landmark text-green-700"></i> Politik & Hukum
+                        </h4>
+                        <p class="text-sm mt-2 text-gray-700">Perubahan dari konsep Dewaraja menjadi Sultan/Khalifah,
+                            penerapan hukum adat yang bersendikan syarak, serta diplomasi politik antar kerajaan.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-4 bg-paper rounded-lg border border-dashed border-charcoal text-center">
+                    <p class="font-sans font-bold italic text-lg text-terra">
+                        "Bagaimana keempat faktor di atas saling berjalin membentuk peradaban Islam di Indonesia?"
+                    </p>
+                    <p class="text-xs text-gray-500 mt-2">Pertanyaan Pemantik (Critical Thinking)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: CP & ATP -->
+        <section id="cp-atp" class="content-section max-w-4xl mx-auto py-10">
+            <div class="flex items-center gap-4 mb-8">
+                <h2 class="poster-title text-6xl text-charcoal">Capaian & Tujuan</h2>
+                <div class="h-1 flex-1 bg-terra"></div>
+            </div>
+            <div class="mb-8 grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div
+                    class="bg-paper border border-charcoal/15 rounded-lg px-3 py-2 text-xs uppercase tracking-[0.12em] text-center">
+                    <i class="fas fa-mosque mr-1 text-terra"></i>Arsitektur
+                </div>
+                <div
+                    class="bg-paper border border-charcoal/15 rounded-lg px-3 py-2 text-xs uppercase tracking-[0.12em] text-center">
+                    <i class="fas fa-scroll mr-1 text-terra"></i>Naskah
+                </div>
+                <div
+                    class="bg-paper border border-charcoal/15 rounded-lg px-3 py-2 text-xs uppercase tracking-[0.12em] text-center">
+                    <i class="fas fa-ship mr-1 text-terra"></i>Maritim
+                </div>
+                <div
+                    class="bg-paper border border-charcoal/15 rounded-lg px-3 py-2 text-xs uppercase tracking-[0.12em] text-center">
+                    <i class="fas fa-scale-balanced mr-1 text-terra"></i>Hukum
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <div class="content-frame p-8">
+                    <h3 class="subheading text-2xl md:text-3xl mb-2 text-terra">Capaian Pembelajaran (CP) - Fase E</h3>
+                    <p class="text-sm uppercase tracking-[0.12em] text-gray-500 mb-4">Elemen: Pemahaman Konsep Sejarah
+                    </p>
+                    <p class="leading-relaxed text-gray-700">
+                        Pada akhir Fase E, peserta didik mampu memahami konsep dasar kerajaan-kerajaan Islam di
+                        Nusantara; menganalisis jalur perdagangan dan masuknya pengaruh Islam; serta mengevaluasi
+                        pengaruh peradaban Islam dalam kehidupan masyarakat Indonesia masa kini melalui berbagai
+                        perspektif (geografi, ekonomi, dan sosial-budaya).
+                    </p>
+                </div>
+
+                <div class="content-frame p-8">
+                    <h3 class="subheading text-2xl md:text-3xl mb-2 text-terra">Tujuan Pembelajaran (TP) - Semester 2
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-6">Tujuan ini disusun menggunakan format ABCD (Audience,
+                        Behavior, Condition, Degree) dan kata kerja yang mudah untuk dibuatkan instrumen penilaiannya di
+                        website Ibu nanti.</p>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-lg text-charcoal mb-3">Topik 1: Masuknya Islam & Jalur
+                                Perdagangan (Lensa Geografi & Ekonomi)</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
+                                <li>Menganalisis (C4) minimal 3 teori masuknya Islam ke Nusantara (Teori Gujarat,
+                                    Mekkah, dan Persia) melalui telaah sumber literasi digital dengan tepat.</li>
+                                <li>Menjelaskan (C2) keterkaitan letak geografis Nusantara dengan jalur perdagangan
+                                    internasional yang menjadi sarana penyebaran Islam.</li>
+                                <li>Mengidentifikasi (C1) komoditas utama perdagangan yang mendorong interaksi budaya
+                                    antara pedagang Muslim dengan masyarakat lokal.</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-lg text-charcoal mb-3">Topik 2: Perkembangan Kerajaan Islam
+                                (Lensa Politik & Sejarah)</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
+                                <li>Membandingkan (C4) struktur pemerintahan dan sistem birokrasi antara Kerajaan Islam
+                                    di Sumatera (Samudera Pasai/Aceh) dengan Kerajaan Islam di Jawa (Demak/Mataram).
+                                </li>
+                                <li>Mengklasifikasikan (C2) peran tokoh-tokoh kunci (Walisongo atau Sultan-Sultan) dalam
+                                    proses perluasan pengaruh Islam di berbagai wilayah Nusantara.</li>
+                                <li>Memerinci (C4) faktor-faktor internal dan eksternal yang menyebabkan masa kejayaan
+                                    hingga keruntuhan salah satu kerajaan Islam di Nusantara.</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-lg text-charcoal mb-3">Topik 3: Akulturasi & Berpikir Kritis
+                                (Lensa Seni & Budaya)</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
+                                <li>Menelaah (C4) bentuk-bentuk akulturasi budaya Islam dengan budaya pra-Islam pada
+                                    artefak arsitektur, sastra, dan sistem penanggalan.</li>
+                                <li>Mengevaluasi (C5) relevansi nilai-nilai toleransi pada masa kerajaan Islam terhadap
+                                    kehidupan kebhinekaan di Indonesia saat ini.</li>
+                                <li>Menyusun (C6) laporan analisis singkat mengenai jejak sejarah lokal Islam yang
+                                    ditemukan di wilayah sekitar (Kabupaten Karanganyar/Surakarta) sebagai bentuk
+                                    kesadaran sejarah.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: ALUR PEMBELAJARAN -->
+        <section id="alur-belajar" class="content-section max-w-4xl mx-auto py-10">
+            <h2 class="poster-title text-6xl text-terra text-center mb-12">Desain Pembelajaran</h2>
+
+            <div class="relative">
+                <!-- Garis Vertikal Timeline -->
+                <div
+                    class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-300 border-l border-dashed border-charcoal">
+                </div>
+
+                <div class="space-y-12 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 md:gap-0">
+                        <div class="md:w-1/2 md:pr-12 text-right">
+                            <h3 class="font-bold text-2xl text-charcoal">Tahap 1: Orientasi & Stimulus</h3>
+                            <p class="text-gray-600 mt-2">Siswa disajikan anomali sejarah. Mengapa kerajaan Mataram yang
+                                kuat secara militer justru melemah di sektor maritim? Siswa melihat peta kuno Nusantara.
+                            </p>
+                        </div>
+                        <div
+                            class="w-12 h-12 bg-terra rounded-full border-4 border-paper shadow-lg flex items-center justify-center text-white font-bold shrink-0 z-10">
+                            1</div>
+                        <div
+                            class="md:w-1/2 md:pl-12 text-left hidden md:block text-sm text-terra font-semibold tracking-wide">
+                            PENGAMATAN MULTIDISIPLIN</div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 md:gap-0 flex-col-reverse md:flex-row">
+                        <div
+                            class="md:w-1/2 md:pr-12 text-right hidden md:block text-sm text-gold font-semibold tracking-wide">
+                            KETERAMPILAN BERTANYA</div>
+                        <div
+                            class="w-12 h-12 bg-gold rounded-full border-4 border-paper shadow-lg flex items-center justify-center text-white font-bold shrink-0 z-10">
+                            2</div>
+                        <div class="md:w-1/2 md:pl-12 text-left">
+                            <h3 class="font-bold text-2xl text-charcoal">Tahap 2: Merumuskan Masalah</h3>
+                            <p class="text-gray-600 mt-2">Siswa membuat pertanyaan (Problem Statement) menggunakan
+                                minimal 2 perspektif (misal: Geografi dan Ekonomi) terkait kejatuhan Kesultanan Banten.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 md:gap-0">
+                        <div class="md:w-1/2 md:pr-12 text-right">
+                            <h3 class="font-bold text-2xl text-charcoal">Tahap 3: Investigasi Mandiri/Kelompok</h3>
+                            <p class="text-gray-600 mt-2">Siswa mengumpulkan data dari bahan ajar digital,
+                                mengeksplorasi infografis, sumber primer yang didigitalkan, dan menganalisis
+                                sebab-akibat.</p>
+                        </div>
+                        <div
+                            class="w-12 h-12 bg-charcoal rounded-full border-4 border-paper shadow-lg flex items-center justify-center text-white font-bold shrink-0 z-10">
+                            3</div>
+                        <div
+                            class="md:w-1/2 md:pl-12 text-left hidden md:block text-sm text-charcoal font-semibold tracking-wide">
+                            PENGUMPULAN DATA LINTAS ILMU</div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 md:gap-0 flex-col-reverse md:flex-row">
+                        <div
+                            class="md:w-1/2 md:pr-12 text-right hidden md:block text-sm text-terra font-semibold tracking-wide">
+                            EVALUASI & SINTESIS</div>
+                        <div
+                            class="w-12 h-12 bg-terra rounded-full border-4 border-paper shadow-lg flex items-center justify-center text-white font-bold shrink-0 z-10">
+                            4</div>
+                        <div class="md:w-1/2 md:pl-12 text-left">
+                            <h3 class="font-bold text-2xl text-charcoal">Tahap 4: Pembuktian & Argumen Kritis</h3>
+                            <p class="text-gray-600 mt-2">Siswa menyusun argumen yang logis (Verification), membuktikan
+                                hipotesis awal mereka, dan melakukan presentasi interaktif.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: MATERI -->
+        <section id="materi" class="content-section max-w-6xl mx-auto py-10">
+            <h2 class="poster-title text-6xl text-charcoal mb-4">Eksplorasi Kerajaan</h2>
+            <p class="text-gray-600 mb-8">Pilih wilayah untuk masuk ke sub-materi kerajaan Islam terkemuka di Nusantara.
+            </p>
+            <div class="flex flex-wrap gap-3 mb-8">
+                <span class="px-3 py-1 text-xs uppercase tracking-[0.14em] bg-terra text-paper rounded-full"><i
+                        class="fas fa-star-and-crescent mr-1"></i>Islamisasi</span>
+                <span class="px-3 py-1 text-xs uppercase tracking-[0.14em] bg-gold text-paper rounded-full"><i
+                        class="fas fa-compass mr-1"></i>Navigasi</span>
+                <span class="px-3 py-1 text-xs uppercase tracking-[0.14em] bg-charcoal text-paper rounded-full"><i
+                        class="fas fa-pepper-hot mr-1"></i>Jalur Rempah</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <button onclick="switchTab('materi-sumatra')"
+                    class="content-frame rounded-xl p-6 text-left hover:shadow-xl transition">
+                    <p class="subheading text-terra text-sm mb-2">Sumatra</p>
+                    <p class="text-sm text-gray-700">Perlak, Samudera Pasai, Aceh Darussalam.</p>
+                </button>
+                <button onclick="switchTab('materi-jawa')"
+                    class="content-frame rounded-xl p-6 text-left hover:shadow-xl transition">
+                    <p class="subheading text-terra text-sm mb-2">Jawa</p>
+                    <p class="text-sm text-gray-700">Demak, Banten, Mataram Islam, Cirebon.</p>
+                </button>
+                <button onclick="switchTab('materi-sulmal')"
+                    class="content-frame rounded-xl p-6 text-left hover:shadow-xl transition">
+                    <p class="subheading text-terra text-sm mb-2">Sulawesi & Maluku</p>
+                    <p class="text-sm text-gray-700">Gowa-Tallo, Ternate, dan Tidore.</p>
+                </button>
+                <button onclick="switchTab('materi-peran')"
+                    class="content-frame rounded-xl p-6 text-left hover:shadow-xl transition">
+                    <p class="subheading text-terra text-sm mb-2">Peran & Peninggalan</p>
+                    <p class="text-sm text-gray-700">Islamisasi damai, hukum, akulturasi, dan warisan budaya.</p>
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION: MATERI SUMATRA -->
+        <section id="materi-sumatra" class="content-section max-w-5xl mx-auto py-10">
+            <h2 class="poster-title text-6xl text-terra mb-4">Materi Sumatra</h2>
+            <p class="text-gray-600 mb-8">Pilih kerajaan untuk masuk ke modul atau artikel pembelajaran.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <article
+                    class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300">
+                    <div class="h-40 bg-stone-200 relative">
+                        <img src="assets/images/kerajaan/perlak.jpg" alt="Kesultanan Perlak"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                        <span
+                            class="absolute top-3 left-3 bg-terra text-white text-xs font-bold px-2 py-1 rounded">840-1292</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-2xl text-charcoal mb-2">Kesultanan Perlak</h3>
+                        <p class="text-sm text-gray-600 mb-4">Salah satu kerajaan Islam tertua di Aceh menurut hasil
+                            seminar sejarah.</p>
+                        <div class="flex gap-4 text-sm font-semibold">
+                            <a href="modules/perlak.html" class="text-terra hover:underline">Baca Modul <i
+                                    class="fas fa-chevron-right text-xs"></i></a>
+                            <a href="artikel/perlak.html" class="text-charcoal hover:underline">Baca Artikel</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300">
+                    <div class="h-40 bg-stone-200 relative">
+                        <img src="assets/images/kerajaan/samudera-pasai.jpg" alt="Kesultanan Samudera Pasai"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                        <span class="absolute top-3 left-3 bg-gold text-white text-xs font-bold px-2 py-1 rounded">Abad
+                            13</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-2xl text-charcoal mb-2">Samudera Pasai</h3>
+                        <p class="text-sm text-gray-600 mb-4">Kerajaan Islam signifikan di Aceh dalam penyebaran Islam
+                            awal di Nusantara.</p>
+                        <div class="flex gap-4 text-sm font-semibold">
+                            <a href="modules/samudera-pasai.html" class="text-terra hover:underline">Baca Modul <i
+                                    class="fas fa-chevron-right text-xs"></i></a>
+                            <a href="artikel/samudera-pasai.html" class="text-charcoal hover:underline">Baca Artikel</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300">
+                    <div class="h-40 bg-stone-200 relative">
+                        <img src="assets/images/kerajaan/aceh-darussalam.jpg" alt="Kesultanan Aceh Darussalam"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                        <span
+                            class="absolute top-3 left-3 bg-charcoal text-white text-xs font-bold px-2 py-1 rounded">1496-1903</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-2xl text-charcoal mb-2">Aceh Darussalam</h3>
+                        <p class="text-sm text-gray-600 mb-4">Pusat perdagangan dan studi Islam penting setelah
+                            kejatuhan Malaka.</p>
+                        <div class="flex gap-4 text-sm font-semibold">
+                            <a href="modules/aceh-darussalam.html" class="text-terra hover:underline">Baca Modul <i
+                                    class="fas fa-chevron-right text-xs"></i></a>
+                            <a href="artikel/aceh-darussalam.html" class="text-charcoal hover:underline">Baca
+                                Artikel</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECTION: MATERI JAWA -->
+        <section id="materi-jawa" class="content-section max-w-5xl mx-auto py-10">
+            <h2 class="poster-title text-6xl text-terra mb-4">Materi Jawa</h2>
+            <p class="text-gray-600 mb-8">Modul kerajaan Islam di Pulau Jawa.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <article
+                    class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300">
+                    <div class="h-40 bg-stone-200 relative"><img src="assets/images/kerajaan/demak.jpg"
+                            alt="Kesultanan Demak"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500"><span
+                            class="absolute top-3 left-3 bg-gold text-white text-xs font-bold px-2 py-1 rounded">Abad
+                            15</span></div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-2xl text-charcoal mb-2">Kesultanan Demak</h3>
+                        <p class="text-sm text-gray-600 mb-4">Kesultanan Islam pertama di Jawa, didirikan Raden Patah
+                            dengan pengaruh Wali Songo.</p>
+                        <div class="flex gap-4 text-sm font-semibold"><a href="modules/demak.html"
+                                class="text-terra hover:underline">Baca Modul <i
+                                    class="fas fa-chevron-right text-xs"></i></a><a href="artikel/demak.html"
+                                class="text-charcoal hover:underline">Baca Artikel</a></div>
+                    </div>
+                </article>
+                <article
+                    class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300">
+                    <div class="h-40 bg-stone-200 relative"><img src="assets/images/kerajaan/banten.jpg"
+                            alt="Kesultanan Banten"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500"><span
+                            class="absolute top-3 left-3 bg-terra text-white text-xs font-bold px-2 py-1 rounded">1552</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-2xl text-charcoal mb-2">Kesultanan Banten</h3>
+                        <p class="text-sm text-gray-600 mb-4">Kerajaan maritim kuat di ujung barat Jawa dengan komoditas
+                            utama lada.</p>
+                        <div class="flex gap-4 text-sm font-semibold"><a href="modules/banten.html"
+                                class="text-terra hover:underline">Baca Modul <i
+                                    class="fas fa-chevron-right text-xs"></i></a><a href="artikel/banten.html"
+                                class="text-charcoal hover:underline">Baca Artikel</a></div>
+                    </div>
+                </article>
+                <article
+                    class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300">
+                    <div class="h-40 bg-stone-200 relative"><img src="assets/images/kerajaan/mataram-islam.jpg"
+                            alt="Mataram Islam"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500"><span
+                            class="absolute top-3 left-3 bg-charcoal text-white text-xs font-bold px-2 py-1 rounded">Abad
+                            16</span></div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-2xl text-charcoal mb-2">Mataram Islam</h3>
+                        <p class="text-sm text-gray-600 mb-4">Kerajaan besar di pedalaman Jawa Tengah yang menyatukan
+                            hampir seluruh Jawa.</p>
+                        <div class="flex gap-4 text-sm font-semibold"><a href="modules/mataram-islam.html"
+                                class="text-terra hover:underline">Baca Modul <i
+                                    class="fas fa-chevron-right text-xs"></i></a><a href="artikel/mataram-islam.html"
+                                class="text-charcoal hover:underline">Baca Artikel</a></div>
+                    </div>
+                </article>
+                <article
+                    class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300 md:col-span-2 xl:col-span-1">
+                    <div class="h-40 bg-charcoal flex items-center justify-center"><img
+                            src="assets/images/kerajaan/cirebon.jpg" alt="Kesultanan Cirebon"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-2xl text-charcoal mb-2">Kesultanan Cirebon</h3>
+                        <p class="text-sm text-gray-600 mb-4">Didirikan Sunan Gunung Jati, menjadi pusat penyebaran
+                            Islam di Jawa Barat.</p>
+                        <div class="flex gap-4 text-sm font-semibold"><a href="modules/cirebon.html"
+                                class="text-terra hover:underline">Baca Modul <i
+                                    class="fas fa-chevron-right text-xs"></i></a><a href="artikel/cirebon.html"
+                                class="text-charcoal hover:underline">Baca Artikel</a></div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECTION: MATERI SULAWESI & MALUKU -->
+        <section id="materi-sulmal" class="content-section max-w-5xl mx-auto py-10">
+            <h2 class="poster-title text-6xl text-terra mb-4">Materi Sulawesi & Maluku</h2>
+            <p class="text-gray-600 mb-8">Modul kerajaan maritim dan pusat rempah Indonesia Timur.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <article
+                    class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300">
+                    <div class="h-40 bg-charcoal flex items-center justify-center"><img
+                            src="assets/images/kerajaan/gowa-tallo.jpg" alt="Kesultanan Gowa-Tallo"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-2xl text-charcoal mb-2">Kesultanan Gowa-Tallo</h3>
+                        <p class="text-sm text-gray-600 mb-4">Kerajaan maritim Sulawesi Selatan yang berpengaruh besar
+                            di Indonesia Timur.</p>
+                        <div class="flex gap-4 text-sm font-semibold"><a href="modules/gowa-tallo.html"
+                                class="text-terra hover:underline">Baca Modul <i
+                                    class="fas fa-chevron-right text-xs"></i></a><a href="artikel/gowa-tallo.html"
+                                class="text-charcoal hover:underline">Baca Artikel</a></div>
+                    </div>
+                </article>
+                <article
+                    class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition duration-300">
+                    <div class="h-40 bg-stone-200 relative"><img src="assets/images/kerajaan/ternate-tidore.jpg"
+                            alt="Kesultanan Ternate dan Tidore"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500"><span
+                            class="absolute top-3 left-3 bg-gold text-white text-xs font-bold px-2 py-1 rounded">Abad
+                            15</span></div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-2xl text-charcoal mb-2">Ternate & Tidore</h3>
+                        <p class="text-sm text-gray-600 mb-4">Pusat rempah di Maluku Utara dan kekuatan politik Islam
+                            yang penting.</p>
+                        <div class="flex gap-4 text-sm font-semibold"><a href="modules/ternate-tidore.html"
+                                class="text-terra hover:underline">Baca Modul <i
+                                    class="fas fa-chevron-right text-xs"></i></a><a href="artikel/ternate-tidore.html"
+                                class="text-charcoal hover:underline">Baca Artikel</a></div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECTION: MATERI PERAN -->
+        <section id="materi-peran" class="content-section max-w-5xl mx-auto py-10">
+            <h2 class="poster-title text-6xl text-terra mb-4">Peran & Peninggalan</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <article class="content-frame rounded-xl p-6">
+                    <h3 class="subheading text-terra text-sm mb-3">Modul Konsep</h3>
+                    <p class="text-sm text-gray-700 mb-4">Membahas Islamisasi damai, pemerintahan berbasis hukum Islam,
+                        dan akulturasi budaya lokal.</p>
+                    <a href="modules/peran-dan-peninggalan.html" class="text-terra font-semibold hover:underline">Baca
+                        Modul <i class="fas fa-chevron-right text-xs"></i></a>
+                </article>
+                <article class="content-frame rounded-xl p-6">
+                    <h3 class="subheading text-terra text-sm mb-3">Artikel Peninggalan</h3>
+                    <p class="text-sm text-gray-700 mb-4">Fokus pada masjid bersejarah, makam raja, sastra klasik, dan
+                        tradisi yang masih hidup.</p>
+                    <a href="artikel/warisan-kerajaan-islam.html" class="text-terra font-semibold hover:underline">Baca
+                        Artikel <i class="fas fa-chevron-right text-xs"></i></a>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Fungsi untuk navigasi ala Single Page Application / Hyperlink
+        function switchTab(tabId) {
+            // Sembunyikan semua section
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Hapus kelas active dari semua tombol nav
+            document.querySelectorAll('.nav-item').forEach(nav => {
+                nav.classList.remove('active');
+                nav.classList.remove('bg-terra');
+                nav.classList.remove('text-paper');
+                nav.classList.remove('border-l-4');
+                nav.classList.remove('border-gold');
+                nav.classList.add('hover:bg-gray-800'); // Kembalikan efek hover
+            });
+
+            // Tampilkan section yang dituju
+            document.getElementById(tabId).classList.add('active');
+
+            // Tambahkan style active ke tombol yang diklik
+            const activeNav = document.getElementById('nav-' + tabId);
+            activeNav.classList.add('active');
+            activeNav.classList.add('bg-terra');
+            activeNav.classList.add('text-paper');
+            activeNav.classList.add('border-l-4');
+            activeNav.classList.add('border-gold');
+            activeNav.classList.remove('hover:bg-gray-800');
+
+            // Scroll ke atas dengan halus
+            document.querySelector('main').scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Tutup menu sidebar di mobile
+            closeSidebar();
+        }
+
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('mobile-overlay').classList.add('show');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('mobile-overlay').classList.remove('show');
+        }
+    </script>
+</body>
+
+</html>
