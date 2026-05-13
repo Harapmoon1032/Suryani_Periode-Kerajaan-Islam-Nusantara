@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -73,7 +73,7 @@
             height: 100vh;
             z-index: -1;
             /* Menggunakan gambar pemandangan indah dari Unsplash */
-            background-image: url('./assets/images/theme/Masjid_Agung_Demak.jpg');
+            background-image: url('./ChatGPT Image May 13, 2026, 06_12_51 AM.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -96,6 +96,40 @@
     <!-- Latar Belakang -->
     <div class="bg-main"></div>
     <div class="bg-overlay"></div>
+
+    <!-- Overlay Sidebar Mobile -->
+    <div id="mobileOverlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[60] hidden"></div>
+
+    <!-- Sidebar Mobile -->
+    <aside id="mobileSidebar"
+        class="fixed top-0 left-0 h-full w-72 max-w-[85vw] glass-dark z-[70] p-6 transform -translate-x-full transition-transform duration-300 ease-out">
+        <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center gap-2">
+                <div
+                    class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <span class="font-bold text-base text-white">Menu Navigasi</span>
+            </div>
+            <button id="closeSidebarBtn"
+                class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white flex items-center justify-center"
+                aria-label="Tutup menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <nav class="flex flex-col gap-2 text-slate-200">
+            <a href="#hero" class="mobile-nav-link px-4 py-3 rounded-xl hover:bg-white/10 transition-colors">Beranda</a>
+            <a href="#alur" class="mobile-nav-link px-4 py-3 rounded-xl hover:bg-white/10 transition-colors">Alur
+                Belajar</a>
+            <a href="#materi"
+                class="mobile-nav-link px-4 py-3 rounded-xl hover:bg-white/10 transition-colors">Materi</a>
+            <a href="#infografis"
+                class="mobile-nav-link px-4 py-3 rounded-xl hover:bg-white/10 transition-colors">Infografis</a>
+            <a href="#asesmen" class="mobile-nav-link px-4 py-3 rounded-xl hover:bg-white/10 transition-colors">Asesmen
+                4C</a>
+        </nav>
+    </aside>
 
     <!-- Navigasi -->
     <nav class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
@@ -120,6 +154,11 @@
 
             <!-- Tombol Aksi -->
             <div class="flex items-center gap-3">
+                <button id="openSidebarBtn"
+                    class="md:hidden w-10 h-10 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow"
+                    aria-label="Buka menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
                 <a href="#materi"
                     class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                     Mulai Belajar
@@ -172,25 +211,33 @@
 
         <!-- Baris Statistik/Info di bawah (meniru referensi) -->
         <div
-            class="glass-dark rounded-[2.5rem] p-6 md:p-8 flex flex-wrap items-center justify-center gap-8 md:gap-16 w-full max-w-4xl mt-auto">
+            class="glass-dark rounded-[2rem] px-3 py-3 md:p-8 flex flex-nowrap items-center justify-between gap-2 md:gap-10 w-full max-w-3xl mt-auto">
             <div class="text-center">
-                <div class="text-4xl md:text-5xl font-bold mb-1">4</div>
-                <div class="text-slate-300 text-sm font-medium tracking-wide uppercase">Disiplin Ilmu</div>
+                <div class="text-xl md:text-4xl font-bold mb-1 text-[#05f2f2]">4</div>
+                <div
+                    class="text-slate-300 text-[11px] md:text-sm font-medium tracking-wide uppercase leading-tight max-w-[88px] md:max-w-none mx-auto">
+                    Disiplin Ilmu</div>
             </div>
-            <div class="w-px h-12 bg-slate-600/50 hidden md:block"></div>
+            <div class="w-px h-10 md:h-12 bg-slate-600/50"></div>
             <div class="text-center">
-                <div class="text-4xl md:text-5xl font-bold mb-1">5+</div>
-                <div class="text-slate-300 text-sm font-medium tracking-wide uppercase">Kerajaan Besar</div>
+                <div class="text-xl md:text-4xl font-bold mb-1 text-[#05f2f2]">5+</div>
+                <div
+                    class="text-slate-300 text-[11px] md:text-sm font-medium tracking-wide uppercase leading-tight max-w-[88px] md:max-w-none mx-auto">
+                    Kerajaan Besar</div>
             </div>
-            <div class="w-px h-12 bg-slate-600/50 hidden md:block"></div>
+            <div class="w-px h-10 md:h-12 bg-slate-600/50"></div>
             <div class="text-center">
-                <div class="text-4xl md:text-5xl font-bold mb-1">HOTS</div>
-                <div class="text-slate-300 text-sm font-medium tracking-wide uppercase">Level Kognitif</div>
+                <div class="text-xl md:text-4xl font-bold mb-1 text-[#05f2f2]">HOTS</div>
+                <div
+                    class="text-slate-300 text-[11px] md:text-sm font-medium tracking-wide uppercase leading-tight max-w-[88px] md:max-w-none mx-auto">
+                    Level Kognitif</div>
             </div>
-            <div class="w-px h-12 bg-slate-600/50 hidden md:block"></div>
+            <div class="w-px h-10 md:h-12 bg-slate-600/50"></div>
             <div class="text-center">
-                <div class="text-4xl md:text-5xl font-bold mb-1 text-teal-400">4C</div>
-                <div class="text-slate-300 text-sm font-medium tracking-wide uppercase">Keterampilan Abad 21</div>
+                <div class="text-xl md:text-4xl font-bold mb-1 text-[#05f2f2]">4C</div>
+                <div
+                    class="text-slate-300 text-[11px] md:text-sm font-medium tracking-wide uppercase leading-tight max-w-[88px] md:max-w-none mx-auto">
+                    Keterampilan Abad 21</div>
             </div>
         </div>
     </header>
@@ -1096,11 +1143,39 @@
                 class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-xl shadow-lg mb-4">
                 <i class="fa-solid fa-book-open"></i>
             </div>
-            <p class="text-sm md:text-base font-medium mb-2">Â© 2024 Media Interaktif Sejarah Kerajaan Islam
-                Interdisipliner.</p>
+            <p class="text-sm md:text-base font-medium mb-2">@harapmoonproduction 2026 Tugas Akhir S2 Pendidikan Sejarah
+                Universitas Siliwangi . Suryani S.Pd</p>
             <p class="text-xs text-slate-400">Dibuat untuk keperluan pendidikan dan penelitian.</p>
         </div>
     </footer>
+
+    <script>
+        const openSidebarBtn = document.getElementById('openSidebarBtn');
+        const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function openSidebar() {
+            mobileSidebar.classList.remove('-translate-x-full');
+            mobileOverlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSidebar() {
+            mobileSidebar.classList.add('-translate-x-full');
+            mobileOverlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        openSidebarBtn.addEventListener('click', openSidebar);
+        closeSidebarBtn.addEventListener('click', closeSidebar);
+        mobileOverlay.addEventListener('click', closeSidebar);
+
+        mobileNavLinks.forEach((link) => {
+            link.addEventListener('click', closeSidebar);
+        });
+    </script>
 
 </body>
 
