@@ -1047,6 +1047,9 @@
             document.body.classList.add('overflow-hidden');
         }
 
+        // Ensure function is available on window in case inline handlers run before scope binds
+        window.openMaterialPage = openMaterialPage;
+
         function closeSidebar() {
             mobileSidebar.classList.add('-translate-x-full');
             mobileOverlay.classList.add('hidden');
