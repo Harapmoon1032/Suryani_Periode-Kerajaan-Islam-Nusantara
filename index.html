@@ -586,18 +586,18 @@
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-bold mb-4 text-slate-800">Materi Kerajaan Islam</h2>
                 <p class="text-lg text-slate-600 max-w-3xl mx-auto">Eksplorasi sejarah kerajaan Islam di berbagai
-                    wilayah Nusantara. Klik tombol pada kartu untuk melihat video materi selengkapnya atau menguji
+                    wilayah Nusantara. Klik tombol <strong>Materi</strong> untuk membaca materi selengkapnya atau uji
                     pemahaman Anda melalui kuis.</p>
             </div>
 
             <!-- Kategori: Sumatera -->
             <h3 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-teal-500 pb-2 inline-block">Regional
                 Sumatera</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                 <!-- Pasai -->
                 <div class="glass-card flex flex-col h-full overflow-hidden group">
                     <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
-                        <img src="./samudera-pasai.jpg"
+                        <img src="./assets/images/kerajaan/samudera-pasai.jpg"
                             class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
                             alt="Samudera Pasai">
                         <div
@@ -610,12 +610,12 @@
                             Indonesia yang berdiri pada abad ke-13, dengan Sultan Malik al-Saleh sebagai raja
                             pertamanya.</p>
                         <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button
-                                class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2 rounded-lg transition-colors flex flex-col items-center justify-center gap-1"><i
+                            <button onclick="openMaterialPage('samudera_pasai')"
+                                class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
                                     class="fa-solid fa-play"></i> Materi</button>
-                            <button
-                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2 rounded-lg transition-colors flex flex-col items-center justify-center gap-1"><i
-                                    class="fa-solid fa-clipboard-question"></i> Kuis</button>
+                            <a href="https://wayground.com/join?pin=pasai_quiz" target="_blank"
+                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
+                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
                         </div>
                     </div>
                 </div>
@@ -634,60 +634,12 @@
                         <p class="text-xs text-slate-600 mb-5 flex-grow">Didirikan oleh Sultan Ali Mughayat Syah pada
                             1514. Pusat perdagangan dan pertahanan Islam yang sangat kuat di Nusantara barat.</p>
                         <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button
-                                class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2 rounded-lg transition-colors flex flex-col items-center justify-center gap-1"><i
+                            <button onclick="openMaterialPage('aceh_darussalam')"
+                                class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
                                     class="fa-solid fa-play"></i> Materi</button>
-                            <button
-                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2 rounded-lg transition-colors flex flex-col items-center justify-center gap-1"><i
-                                    class="fa-solid fa-clipboard-question"></i> Kuis</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Perlak -->
-                <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
-                        <img src="./perlak.jpg"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Perlak">
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-teal-800 text-xs px-3 py-1 rounded-full font-bold shadow">
-                            Sumatera</div>
-                    </div>
-                    <div class="p-5 flex-col flex flex-grow">
-                        <h4 class="text-lg font-bold mb-2 leading-tight">Kerajaan Perlak</h4>
-                        <p class="text-xs text-slate-600 mb-5 flex-grow">Terletak di Aceh Timur, kerajaan ini merupakan
-                            salah satu pelopor pusat Islam tertua di Nusantara sebelum era Samudera Pasai.</p>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button
-                                class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2 rounded-lg transition-colors flex flex-col items-center justify-center gap-1"><i
-                                    class="fa-solid fa-play"></i> Materi</button>
-                            <button
-                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2 rounded-lg transition-colors flex flex-col items-center justify-center gap-1"><i
-                                    class="fa-solid fa-clipboard-question"></i> Kuis</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Siak -->
-                <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
-                        <img src="./siak-sri-indrapura.jpg"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Siak">
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-teal-800 text-xs px-3 py-1 rounded-full font-bold shadow">
-                            Sumatera</div>
-                    </div>
-                    <div class="p-5 flex-col flex flex-grow">
-                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Siak Sri Indrapura</h4>
-                        <p class="text-xs text-slate-600 mb-5 flex-grow">Berpusat di Riau dan didirikan pada 1723 oleh
-                            Sultan Abdul Jalil Rahmad Syah. Berkembang menjadi kekuatan dominan pesisir.</p>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button
-                                class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2 rounded-lg transition-colors flex flex-col items-center justify-center gap-1"><i
-                                    class="fa-solid fa-play"></i> Materi</button>
-                            <button
-                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2 rounded-lg transition-colors flex flex-col items-center justify-center gap-1"><i
-                                    class="fa-solid fa-clipboard-question"></i> Kuis</button>
+                            <a href="https://wayground.com/join?pin=aceh_quiz" target="_blank"
+                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
+                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
                         </div>
                     </div>
                 </div>
@@ -696,272 +648,157 @@
             <!-- Kategori: Jawa -->
             <h3 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-blue-500 pb-2 inline-block">Regional
                 Jawa</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 <!-- Demak -->
                 <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-40 w-full bg-slate-200 overflow-hidden">
-                        <img src="./demak.jpg"
+                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
+                        <img src="./assets/images/kerajaan/demak.jpg"
                             class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
                             alt="Demak">
                         <div
                             class="absolute top-3 left-3 bg-white/90 backdrop-blur text-blue-800 text-xs px-3 py-1 rounded-full font-bold shadow">
                             Jawa</div>
                     </div>
-                    <div class="p-4 flex-col flex flex-grow">
-                        <h4 class="text-md font-bold mb-2 leading-tight">Kesultanan Demak</h4>
-                        <p class="text-[11px] text-slate-600 mb-4 flex-grow">Kerajaan Islam pertama di Pulau Jawa yang
+                    <div class="p-5 flex-col flex flex-grow">
+                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Demak</h4>
+                        <p class="text-xs text-slate-600 mb-5 flex-grow">Kerajaan Islam pertama di Pulau Jawa yang
                             berdiri akhir abad ke-15 setelah runtuhnya Kerajaan Majapahit.</p>
-                        <div class="grid grid-cols-2 gap-1 mt-auto">
-                            <button
-                                class="bg-slate-900 hover:bg-slate-800 text-white text-[10px] py-2 rounded-lg transition-colors"><i
-                                    class="fa-solid fa-play mb-1 block"></i> Materi</button>
-                            <button
-                                class="bg-blue-600 hover:bg-blue-700 text-white text-[10px] py-2 rounded-lg transition-colors"><i
-                                    class="fa-solid fa-clipboard-question mb-1 block"></i> Kuis</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Cirebon -->
-                <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-40 w-full bg-slate-200 overflow-hidden">
-                        <img src="./cirebon.jpg"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Cirebon">
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-blue-800 text-xs px-3 py-1 rounded-full font-bold shadow">
-                            Jawa</div>
-                    </div>
-                    <div class="p-4 flex-col flex flex-grow">
-                        <h4 class="text-md font-bold mb-2 leading-tight">Kesultanan Cirebon</h4>
-                        <p class="text-[11px] text-slate-600 mb-4 flex-grow">Didirikan oleh Sunan Gunung Jati pada abad
-                            ke-15, menjadi pusat penyebaran agama Islam di Jawa Barat.</p>
-                        <div class="grid grid-cols-2 gap-1 mt-auto">
-                            <button
-                                class="bg-slate-900 hover:bg-slate-800 text-white text-[10px] py-2 rounded-lg transition-colors"><i
-                                    class="fa-solid fa-play mb-1 block"></i> Materi</button>
-                            <button
-                                class="bg-blue-600 hover:bg-blue-700 text-white text-[10px] py-2 rounded-lg transition-colors"><i
-                                    class="fa-solid fa-clipboard-question mb-1 block"></i> Kuis</button>
+                        <div class="grid grid-cols-2 gap-2 mt-auto">
+                            <button onclick="openMaterialPage('demak')"
+                                class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
+                                    class="fa-solid fa-play"></i> Materi</button>
+                            <a href="https://wayground.com/join?pin=demak_quiz" target="_blank"
+                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
+                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
                         </div>
                     </div>
                 </div>
                 <!-- Banten -->
                 <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-40 w-full bg-slate-200 overflow-hidden">
-                        <img src="./banten.jpg"
+                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
+                        <img src="./assets/images/kerajaan/banten.jpg"
                             class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
                             alt="Banten">
                         <div
                             class="absolute top-3 left-3 bg-white/90 backdrop-blur text-blue-800 text-xs px-3 py-1 rounded-full font-bold shadow">
                             Jawa</div>
                     </div>
-                    <div class="p-4 flex-col flex flex-grow">
-                        <h4 class="text-md font-bold mb-2 leading-tight">Kesultanan Banten</h4>
-                        <p class="text-[11px] text-slate-600 mb-4 flex-grow">Berdiri pada 1524. Menjadi pusat
-                            perdagangan maritim yang sangat ramai dan makmur di pesisir barat.</p>
-                        <div class="grid grid-cols-2 gap-1 mt-auto">
-                            <button
-                                class="bg-slate-900 hover:bg-slate-800 text-white text-[10px] py-2 rounded-lg transition-colors"><i
-                                    class="fa-solid fa-play mb-1 block"></i> Materi</button>
-                            <button
-                                class="bg-blue-600 hover:bg-blue-700 text-white text-[10px] py-2 rounded-lg transition-colors"><i
-                                    class="fa-solid fa-clipboard-question mb-1 block"></i> Kuis</button>
+                    <div class="p-5 flex-col flex flex-grow">
+                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Banten</h4>
+                        <p class="text-xs text-slate-600 mb-5 flex-grow">Berdiri pada 1526. Menjadi pusat perdagangan
+                            maritim yang sangat ramai dan makmur di pesisir barat Pulau Jawa.</p>
+                        <div class="grid grid-cols-2 gap-2 mt-auto">
+                            <button onclick="openMaterialPage('banten')"
+                                class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
+                                    class="fa-solid fa-play"></i> Materi</button>
+                            <a href="https://wayground.com/join?pin=banten_quiz" target="_blank"
+                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
+                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
                         </div>
                     </div>
                 </div>
-                <!-- Mataram -->
+                <!-- Cirebon -->
                 <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-40 w-full bg-slate-200 overflow-hidden">
-                        <img src="./mataram-islam.jpg"
+                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
+                        <img src="./assets/images/kerajaan/cirebon.jpg"
                             class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Mataram">
+                            alt="Cirebon">
                         <div
                             class="absolute top-3 left-3 bg-white/90 backdrop-blur text-blue-800 text-xs px-3 py-1 rounded-full font-bold shadow">
                             Jawa</div>
                     </div>
-                    <div class="p-4 flex-col flex flex-grow">
-                        <h4 class="text-md font-bold mb-2 leading-tight">Mataram Islam</h4>
-                        <p class="text-[11px] text-slate-600 mb-4 flex-grow">Didirikan oleh Panembahan Senopati (1586),
-                            menguasai pedalaman Jawa dan menggabungkan kultur Jawa yang kuat.</p>
-                        <div class="grid grid-cols-2 gap-1 mt-auto">
-                            <button
-                                class="bg-slate-900 hover:bg-slate-800 text-white text-[10px] py-2 rounded-lg transition-colors"><i
-                                    class="fa-solid fa-play mb-1 block"></i> Materi</button>
-                            <button
-                                class="bg-blue-600 hover:bg-blue-700 text-white text-[10px] py-2 rounded-lg transition-colors"><i
-                                    class="fa-solid fa-clipboard-question mb-1 block"></i> Kuis</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Pajang -->
-                <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-40 w-full bg-slate-200 overflow-hidden">
-                        <img src="./pajang.jpg"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Pajang">
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-blue-800 text-xs px-3 py-1 rounded-full font-bold shadow">
-                            Jawa</div>
-                    </div>
-                    <div class="p-4 flex-col flex flex-grow">
-                        <h4 class="text-md font-bold mb-2 leading-tight">Kesultanan Pajang</h4>
-                        <p class="text-[11px] text-slate-600 mb-4 flex-grow">Didirikan oleh Jaka Tingkir (Hadiwijaya)
-                            pada 1568 sebagai penerus tahta dari Kesultanan Demak.</p>
-                        <div class="grid grid-cols-2 gap-1 mt-auto">
-                            <button
-                                class="bg-slate-900 hover:bg-slate-800 text-white text-[10px] py-2 rounded-lg transition-colors"><i
-                                    class="fa-solid fa-play mb-1 block"></i> Materi</button>
-                            <button
-                                class="bg-blue-600 hover:bg-blue-700 text-white text-[10px] py-2 rounded-lg transition-colors"><i
-                                    class="fa-solid fa-clipboard-question mb-1 block"></i> Kuis</button>
+                    <div class="p-5 flex-col flex flex-grow">
+                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Cirebon</h4>
+                        <p class="text-xs text-slate-600 mb-5 flex-grow">Didirikan oleh Sunan Gunung Jati pada abad
+                            ke-15, menjadi pusat penyebaran agama Islam di wilayah Jawa Barat.</p>
+                        <div class="grid grid-cols-2 gap-2 mt-auto">
+                            <button onclick="openMaterialPage('cirebon')"
+                                class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
+                                    class="fa-solid fa-play"></i> Materi</button>
+                            <a href="https://wayground.com/join?pin=cirebon_quiz" target="_blank"
+                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
+                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Kategori: Lainnya (Kalimantan, Sulawesi, Malaya) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-                <!-- Kolom Kalimantan -->
-                <div>
-                    <h3 class="text-xl font-bold text-slate-800 mb-4 border-b-2 border-amber-500 pb-2 inline-block">
-                        Kalimantan</h3>
-                    <div class="flex flex-col gap-4">
-                        <!-- Banjar -->
-                        <div class="glass-card flex flex-row h-32 overflow-hidden group">
-                            <div class="w-2/5 relative overflow-hidden">
-                                <img src="./banjar.jpg"
-                                    class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                                    alt="Banjar">
-                            </div>
-                            <div class="w-3/5 p-3 flex flex-col">
-                                <h4 class="text-sm font-bold mb-1">Kesultanan Banjar</h4>
-                                <p class="text-[10px] text-slate-600 mb-2 line-clamp-3">Berdiri pada 1526, menjadi pusat
-                                    penyebaran Islam di wilayah Kalimantan Selatan.</p>
-                                <div class="mt-auto flex gap-2">
-                                    <button class="text-slate-800 hover:text-amber-600 text-[10px] font-bold"><i
-                                            class="fa-solid fa-play"></i> Materi</button>
-                                    <button class="text-slate-800 hover:text-amber-600 text-[10px] font-bold ml-2"><i
-                                            class="fa-solid fa-pen"></i> Kuis</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Kutai -->
-                        <div class="glass-card flex flex-row h-32 overflow-hidden group">
-                            <div class="w-2/5 relative overflow-hidden">
-                                <img src="./kutai-kartanegara.jpg"
-                                    class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                                    alt="Kutai">
-                            </div>
-                            <div class="w-3/5 p-3 flex flex-col">
-                                <h4 class="text-sm font-bold mb-1">Kutai Kartanegara</h4>
-                                <p class="text-[10px] text-slate-600 mb-2 line-clamp-3">Peralihan dari Hindu ke Islam
-                                    pada abad ke-17 di bawah pimpinan Raja Aji Mahkota.</p>
-                                <div class="mt-auto flex gap-2">
-                                    <button class="text-slate-800 hover:text-amber-600 text-[10px] font-bold"><i
-                                            class="fa-solid fa-play"></i> Materi</button>
-                                    <button class="text-slate-800 hover:text-amber-600 text-[10px] font-bold ml-2"><i
-                                            class="fa-solid fa-pen"></i> Kuis</button>
-                                </div>
-                            </div>
+            <!-- Kategori: Sulawesi & Maluku -->
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-red-500 pb-2 inline-block">Regional
+                Sulawesi & Maluku</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Gowa-Tallo -->
+                <div class="glass-card flex flex-col h-full overflow-hidden group">
+                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
+                        <img src="./assets/images/kerajaan/gowa-tallo.jpg"
+                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                            alt="Gowa-Tallo">
+                        <div
+                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-red-800 text-xs px-3 py-1 rounded-full font-bold shadow">
+                            Sulawesi</div>
+                    </div>
+                    <div class="p-5 flex-col flex flex-grow">
+                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Gowa-Tallo</h4>
+                        <p class="text-xs text-slate-600 mb-5 flex-grow">Kerajaan maritim terbesar di Sulawesi Selatan
+                            (Makassar) yang memeluk Islam pada awal abad ke-17 di bawah Sultan Alauddin.</p>
+                        <div class="grid grid-cols-2 gap-2 mt-auto">
+                            <button onclick="openMaterialPage('gowa_tallo')"
+                                class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
+                                    class="fa-solid fa-play"></i> Materi</button>
+                            <a href="https://wayground.com/join?pin=gowatallo_quiz" target="_blank"
+                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
+                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Kolom Sulawesi & Nusa Tenggara -->
-                <div>
-                    <h3 class="text-xl font-bold text-slate-800 mb-4 border-b-2 border-red-500 pb-2 inline-block">
-                        Sulawesi & Nusa Tenggara</h3>
-                    <div class="flex flex-col gap-4">
-                        <!-- Gowa-Tallo -->
-                        <div class="glass-card flex flex-row h-32 overflow-hidden group">
-                            <div class="w-2/5 relative overflow-hidden">
-                                <img src="./gowa-tallo.jpg"
-                                    class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                                    alt="Gowa Tallo">
-                            </div>
-                            <div class="w-3/5 p-3 flex flex-col">
-                                <h4 class="text-sm font-bold mb-1">Gowa-Tallo</h4>
-                                <p class="text-[10px] text-slate-600 mb-2 line-clamp-3">Kerajaan maritim terbesar di
-                                    timur Nusantara (Makassar), memeluk Islam abad ke-17.</p>
-                                <div class="mt-auto flex gap-2">
-                                    <button class="text-slate-800 hover:text-red-600 text-[10px] font-bold"><i
-                                            class="fa-solid fa-play"></i> Materi</button>
-                                    <button class="text-slate-800 hover:text-red-600 text-[10px] font-bold ml-2"><i
-                                            class="fa-solid fa-pen"></i> Kuis</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Ternate Tidore -->
-                        <div class="glass-card flex flex-row h-32 overflow-hidden group">
-                            <div class="w-2/5 relative overflow-hidden">
-                                <img src="./ternate-tidore.jpg"
-                                    class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                                    alt="Ternate">
-                            </div>
-                            <div class="w-3/5 p-3 flex flex-col">
-                                <h4 class="text-sm font-bold mb-1">Ternate & Tidore</h4>
-                                <p class="text-[10px] text-slate-600 mb-2 line-clamp-3">Pusat rempah Maluku Utara yang
-                                    sangat berpengaruh menyebarkan Islam hingga Papua.</p>
-                                <div class="mt-auto flex gap-2">
-                                    <button class="text-slate-800 hover:text-red-600 text-[10px] font-bold"><i
-                                            class="fa-solid fa-play"></i> Materi</button>
-                                    <button class="text-slate-800 hover:text-red-600 text-[10px] font-bold ml-2"><i
-                                            class="fa-solid fa-pen"></i> Kuis</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Bima -->
-                        <div class="glass-card flex flex-row h-32 overflow-hidden group">
-                            <div class="w-2/5 relative overflow-hidden">
-                                <img src="./bima.jpg"
-                                    class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                                    alt="Bima">
-                            </div>
-                            <div class="w-3/5 p-3 flex flex-col">
-                                <h4 class="text-sm font-bold mb-1">Kesultanan Bima</h4>
-                                <p class="text-[10px] text-slate-600 mb-2 line-clamp-3">Terletak di Pulau Sumbawa, resmi
-                                    bercorak Islam pada awal abad ke-17.</p>
-                                <div class="mt-auto flex gap-2">
-                                    <button class="text-slate-800 hover:text-red-600 text-[10px] font-bold"><i
-                                            class="fa-solid fa-play"></i> Materi</button>
-                                    <button class="text-slate-800 hover:text-red-600 text-[10px] font-bold ml-2"><i
-                                            class="fa-solid fa-pen"></i> Kuis</button>
-                                </div>
-                            </div>
+                <!-- Ternate -->
+                <div class="glass-card flex flex-col h-full overflow-hidden group">
+                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
+                        <img src="./assets/images/extracted_materi/image11.png"
+                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                            alt="Ternate">
+                        <div
+                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-red-800 text-xs px-3 py-1 rounded-full font-bold shadow">
+                            Maluku</div>
+                    </div>
+                    <div class="p-5 flex-col flex flex-grow">
+                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Ternate</h4>
+                        <p class="text-xs text-slate-600 mb-5 flex-grow">Pusat rempah-rempah yang didirikan pada 1257 M,
+                            berkembang pesat sebagai kekuatan maritim di timur Nusantara.</p>
+                        <div class="grid grid-cols-2 gap-2 mt-auto">
+                            <button onclick="openMaterialPage('ternate')"
+                                class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
+                                    class="fa-solid fa-play"></i> Materi</button>
+                            <a href="https://wayground.com/join?pin=ternate_quiz" target="_blank"
+                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
+                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Kolom Semenanjung Malaya -->
-                <div>
-                    <h3 class="text-xl font-bold text-slate-800 mb-4 border-b-2 border-purple-500 pb-2 inline-block">
-                        Semenanjung Malaya</h3>
-                    <div class="flex flex-col gap-4">
-                        <!-- Malaka -->
-                        <div class="glass-card flex flex-col h-auto overflow-hidden group pb-4">
-                            <div class="w-full h-36 relative overflow-hidden">
-                                <img src="./malaka.jpg"
-                                    class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                                    alt="Malaka">
-                            </div>
-                            <div class="p-4 flex flex-col">
-                                <h4 class="text-md font-bold mb-2">Kesultanan Malaka</h4>
-                                <p class="text-xs text-slate-600 mb-4">Didirikan oleh Parameswara (Sultan Iskandar
-                                    Shah). Pusat perdagangan maritim terbesar di Asia Tenggara pada abad ke-15.</p>
-                                <div class="grid grid-cols-2 gap-2">
-                                    <button
-                                        class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2 rounded-lg transition-colors flex items-center justify-center gap-1"><i
-                                            class="fa-solid fa-play"></i> Materi</button>
-                                    <button
-                                        class="bg-purple-600 hover:bg-purple-700 text-white text-xs py-2 rounded-lg transition-colors flex items-center justify-center gap-1"><i
-                                            class="fa-solid fa-clipboard-question"></i> Kuis</button>
-                                </div>
-                            </div>
+                <!-- Tidore -->
+                <div class="glass-card flex flex-col h-full overflow-hidden group">
+                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
+                        <img src="./assets/images/extracted_materi/image12.png"
+                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                            alt="Tidore">
+                        <div
+                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-red-800 text-xs px-3 py-1 rounded-full font-bold shadow">
+                            Maluku</div>
+                    </div>
+                    <div class="p-5 flex-col flex flex-grow">
+                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Tidore</h4>
+                        <p class="text-xs text-slate-600 mb-5 flex-grow">Memiliki akar sejarah yang sama dengan Ternate,
+                            berkembang menjadi kerajaan Islam kuat pada akhir abad ke-15.</p>
+                        <div class="grid grid-cols-2 gap-2 mt-auto">
+                            <button onclick="openMaterialPage('tidore')"
+                                class="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
+                                    class="fa-solid fa-play"></i> Materi</button>
+                            <a href="https://wayground.com/join?pin=tidore_quiz" target="_blank"
+                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
+                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -1175,6 +1012,28 @@
         </div>
     </footer>
 
+    <!-- Fullscreen Material Overlay Page -->
+    <div id="materialPage"
+        class="fixed inset-0 z-[100] bg-slate-950/70 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-300 overflow-y-auto hidden">
+        <!-- Close Button Top Right -->
+        <button id="closeMaterialBtn"
+            class="fixed top-6 right-6 z-[110] w-12 h-12 rounded-full bg-white/10 hover:bg-red-600 hover:scale-110 active:scale-95 text-white border border-white/20 hover:border-red-500 shadow-lg flex items-center justify-center text-xl transition-all duration-300"
+            aria-label="Tutup Materi">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="min-h-screen flex items-center justify-center p-4 md:p-8">
+            <!-- Modal Card Content -->
+            <div id="materialContentCard"
+                class="w-full max-w-4xl bg-white/95 rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/40 transform scale-95 opacity-0 transition-all duration-300">
+                <!-- Content injected via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Import data materi -->
+    <script src="./assets/js/materi_data.js"></script>
+
     <script>
         const openSidebarBtn = document.getElementById('openSidebarBtn');
         const closeSidebarBtn = document.getElementById('closeSidebarBtn');
@@ -1201,6 +1060,155 @@
         mobileNavLinks.forEach((link) => {
             link.addEventListener('click', closeSidebar);
         });
+        // Materi Detail Page Logic
+        const materialPage = document.getElementById('materialPage');
+        const materialContentCard = document.getElementById('materialContentCard');
+        const closeMaterialBtn = document.getElementById('closeMaterialBtn');
+
+        function openMaterialPage(kingdomId) {
+            const kingdom = KERAJAAN_DATA.find(k => k.id === kingdomId);
+            if (!kingdom) return;
+
+            // Generate HTML content
+            let contentHtml = `
+                <!-- Cover Banner -->
+                <div class="relative h-64 md:h-96 w-full bg-slate-900 overflow-hidden">
+                    <img src="./assets/images/extracted_materi/${kingdom.banner}" class="w-full h-full object-cover opacity-80 transform hover:scale-105 transition-transform duration-700" alt="${kingdom.name}">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 text-white">
+                        <span class="bg-teal-500 text-white font-bold text-xs uppercase px-3.5 py-1.5 rounded-full tracking-wider shadow">${kingdom.region}</span>
+                        <h2 class="text-3xl md:text-5xl font-extrabold mt-3 tracking-tight drop-shadow-md leading-tight">${kingdom.name}</h2>
+                    </div>
+                </div>
+
+                <!-- Metadata Badges -->
+                <div class="px-6 py-6 md:px-10 border-b border-slate-200 bg-slate-50/50">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 text-lg"><i class="fa-solid fa-calendar-days"></i></div>
+                            <div>
+                                <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Era Kejayaan</div>
+                                <div class="text-sm font-bold text-slate-800">${kingdom.year}</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-slate-100 shadow-sm md:col-span-2">
+                            <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 text-lg"><i class="fa-solid fa-crown"></i></div>
+                            <div>
+                                <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Raja / Tokoh Kunci</div>
+                                <div class="text-sm font-bold text-slate-800">${kingdom.ruler}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body Content -->
+                <div class="p-6 md:p-10 max-w-none font-sans">
+                    <div class="prose prose-slate prose-teal text-slate-700 leading-relaxed text-base md:text-lg space-y-6">
+            `;
+
+            kingdom.content.forEach(item => {
+                if (item.type === 'text') {
+                    // Check if it's a short title or subheading
+                    const isSubheading = item.value.length < 50 && !item.value.endsWith('.') && !item.value.includes(':') && !item.value.includes('(');
+                    if (isSubheading) {
+                        contentHtml += `<h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-8 mb-4 border-l-4 border-teal-500 pl-3 leading-tight font-sans">${item.value}</h4>`;
+                    } else {
+                        contentHtml += `<p class="leading-relaxed text-slate-600 font-normal text-justify font-sans">${item.value}</p>`;
+                    }
+                } else if (item.type === 'image') {
+                    contentHtml += `
+                        <div class="my-8 flex flex-col items-center">
+                            <div class="relative max-w-2xl w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200">
+                                <img src="./assets/images/extracted_materi/${item.file}" class="w-full h-auto object-cover max-h-[450px] mx-auto" alt="${item.caption || kingdom.name}">
+                            </div>
+                            ${item.caption ? `<p class="text-xs md:text-sm text-slate-500 italic mt-3 text-center px-4 leading-normal font-medium bg-slate-50 py-1.5 px-3 rounded-full border border-slate-100 font-sans"><i class="fa-solid fa-circle-info text-teal-500 mr-1.5"></i>${item.caption}</p>` : ''}
+                        </div>
+                    `;
+                }
+            });
+
+            contentHtml += `
+                    </div>
+            `;
+
+            // Quiz/Activity Call-to-action Section
+            contentHtml += `
+                    <!-- Quiz/Activity CTA -->
+                    <div class="mt-12 p-6 md:p-8 rounded-3xl bg-gradient-to-br from-teal-500/10 via-teal-600/5 to-transparent border border-teal-500/20 shadow-sm relative overflow-hidden font-sans">
+                        <div class="absolute -right-8 -bottom-8 text-teal-500/10 text-9xl font-extrabold select-none pointer-events-none">
+                            <i class="fa-solid fa-clipboard-question"></i>
+                        </div>
+                        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                            <div class="text-center md:text-left">
+                                <span class="bg-teal-600 text-white font-bold text-[10px] uppercase px-3 py-1 rounded-full tracking-wider shadow-sm">AKTIVITAS SISWA</span>
+                                <h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-3 mb-2 leading-tight">Mari Uji Pemahaman Anda!</h4>
+                                <p class="text-sm md:text-base text-slate-600 font-medium">Kerjakan kuis interaktif mengenai ${kingdom.name} langsung di platform Wayground.</p>
+                            </div>
+                            <a href="${kingdom.quiz_url}" target="_blank" class="w-full md:w-auto bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-full font-bold text-base md:text-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 transform hover:-translate-y-0.5 whitespace-nowrap text-center">
+                                <i class="fa-solid fa-gamepad"></i> Mulai Kuis Wayground
+                            </a>
+                        </div>
+                    </div>
+            `;
+
+            // References Section
+            if (kingdom.references && kingdom.references.length > 0) {
+                contentHtml += `
+                    <!-- References -->
+                    <div class="mt-12 pt-8 border-t border-slate-200">
+                        <h5 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4"><i class="fa-solid fa-book-open-reader mr-2"></i>Referensi & Sumber Belajar</h5>
+                        <ul class="space-y-2 text-xs md:text-sm text-slate-500 font-medium font-sans">
+                `;
+                kingdom.references.forEach(ref => {
+                    contentHtml += `
+                        <li>
+                            <a href="${ref}" target="_blank" class="hover:text-teal-600 transition-colors flex items-center gap-2 break-all">
+                                <i class="fa-solid fa-link text-slate-400"></i> ${ref}
+                            </a>
+                        </li>
+                    `;
+                });
+                contentHtml += `
+                        </ul>
+                    </div>
+                `;
+            }
+
+            contentHtml += `
+                </div>
+            `;
+
+            materialContentCard.innerHTML = contentHtml;
+
+            // Show page overlay and trigger transition animations
+            materialPage.classList.remove('hidden');
+            // Force reflow
+            materialPage.offsetHeight;
+
+            materialPage.classList.remove('opacity-0', 'pointer-events-none');
+            materialContentCard.classList.remove('scale-95', 'opacity-0');
+
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeMaterialPage() {
+            materialPage.classList.add('opacity-0', 'pointer-events-none');
+            materialContentCard.classList.add('scale-95', 'opacity-0');
+
+            document.body.classList.remove('overflow-hidden');
+
+            setTimeout(() => {
+                materialPage.classList.add('hidden');
+            }, 300);
+        }
+
+        closeMaterialBtn.addEventListener('click', closeMaterialPage);
+        materialPage.addEventListener('click', (e) => {
+            if (e.target === materialPage) {
+                closeMaterialPage();
+            }
+        });
+
     </script>
 
 </body>
