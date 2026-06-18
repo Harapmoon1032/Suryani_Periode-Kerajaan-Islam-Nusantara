@@ -910,7 +910,7 @@
                 "year": "Abad ke-16 (1514 M)",
                 "ruler": "Sultan Ali Mughayat Syah / Sultan Iskandar Muda",
                 "banner": "image4.png",
-                "thumbnail": ".aceh-darussalam.jpg",
+                "thumbnail": "./aceh-darussalam.jpg",
                 "quiz_url": "https://wayground.com/join?pin=aceh_quiz",
                 "content": [
                     {
@@ -999,7 +999,7 @@
                 "year": "Abad ke-16 (1552 M)",
                 "ruler": "Sunan Gunung Jati / Maulana Hasanuddin / Sultan Ageng Tirtayasa",
                 "banner": "image6.png",
-                "thumbnail": "./ banten.jpg",
+                "thumbnail": "./banten.jpg",
                 "quiz_url": "https://wayground.com/join?pin=banten_quiz",
                 "content": [
                     {
@@ -1039,7 +1039,7 @@
                 "region": "Jawa",
                 "year": "Abad ke-15 (1479 M)",
                 "ruler": "Pangeran Cakrabuana (Walangsungsang) / Sunan Gunung Jati",
-                "banner": "./image8.png",
+                "banner": "image8.png",
                 "thumbnail": "./cirebon.jpg",
                 "quiz_url": "https://wayground.com/join?pin=cirebon_quiz",
                 "content": [
@@ -1241,7 +1241,7 @@
             let contentHtml = `
                 <!-- Cover Banner -->
                 <div class="relative h-64 md:h-96 w-full bg-slate-900 overflow-hidden">
-                    <img src="./ ${kingdom.banner}" class="w-full h-full object-cover opacity-80 transform hover:scale-105 transition-transform duration-700" alt="${kingdom.name}">
+                    <img src="./${kingdom.banner}" class="w-full h-full object-cover opacity-80 transform hover:scale-105 transition-transform duration-700" alt="${kingdom.name}">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
                     <div class="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 text-white">
                         <span class="bg-teal-500 text-white font-bold text-xs uppercase px-3.5 py-1.5 rounded-full tracking-wider shadow">${kingdom.region}</span>
@@ -1287,7 +1287,7 @@
                     contentHtml += `
                         <div class="my-8 flex flex-col items-center">
                             <div class="relative max-w-2xl w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200/50">
-                                <img src="./ ${item.file}" class="w-full h-auto object-cover max-h-[450px] mx-auto" alt="${item.caption || kingdom.name}">
+                                <img src="./${item.file}" class="w-full h-auto object-cover max-h-[450px] mx-auto" alt="${item.caption || kingdom.name}">
                             </div>
                             ${item.caption ? `<p class="text-xs md:text-sm text-slate-500 italic mt-3 text-center px-4 leading-normal font-medium bg-slate-700/50 py-1.5 px-3 rounded-full border border-slate-200/50 font-sans"><i class="fa-solid fa-circle-info text-teal-500 mr-1.5"></i>${item.caption}</p>` : ''}
                         </div>
