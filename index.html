@@ -1,1490 +1,740 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kerajaan Islam di Nusantara - Pendekatan Interdisipliner</title>
-
-    <!-- Memuat Tailwind CSS untuk styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Memuat Font Google: Inter (mirip dengan referensi gambar) -->
+    <title>Bahan Ajar: Kerajaan Islam Nusantara</title>
+    
+    <!-- Switching to Inter for a clean, modern UI look matching the reference -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- Memuat Font Awesome untuk Ikon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        theme: {
+                            bg: '#f2f5fa',         // Light grayish blue background
+                            card: '#ffffff',       // White cards
+                            primary: '#6b7ca8',    // Muted indigo/periwinkle
+                            primaryLight: '#8da3d6',
+                            textDark: '#2d3748',
+                            textMuted: '#64748b',
+                            accent: '#475b8a'
+                        }
+                    },
+                    boxShadow: {
+                        'ui': '0 8px 30px rgba(107, 124, 168, 0.08)',
+                        'float': '0 20px 40px rgba(107, 124, 168, 0.12)',
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        const lessonRoute = new URLSearchParams(window.location.search).get('lesson');
+        if (lessonRoute === 'pertemuan1' || lessonRoute === 'pertemuan2') {
+            document.documentElement.dataset.lesson = lessonRoute;
+        }
+    </script>
     <style>
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.45);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.65);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.08);
-        }
-
         body {
-            position: relative;
-            background: linear-gradient(135deg, #fffbeb 0%, #f0f9ff 50%, #e0f2fe 100%);
+            background-color: #f2f5fa;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(141, 163, 214, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(107, 124, 168, 0.08), transparent 25%);
+            background-attachment: fixed;
+            color: #2d3748;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('bg1.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.25;
-            /* Transparansi tinggi (75% transparan) */
-            z-index: -1;
-            pointer-events: none;
+        .text-justify-custom {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        main > #pertemuan1,
+        main > #pertemuan2 {
+            display: none;
+        }
+
+        html[data-lesson] main > #hero,
+        html[data-lesson] main > #capaian-tujuan,
+        html[data-lesson] main > #peta-konsep,
+        html[data-lesson] main > #menu-pertemuan,
+        html[data-lesson] main > #materi,
+        html[data-lesson] main > #materi2,
+        html[data-lesson] main > #pertemuan1,
+        html[data-lesson] main > #pertemuan2,
+        html[data-lesson] main > #tim-pengembang {
+            display: none;
+        }
+
+        html[data-lesson="pertemuan1"] main > #pertemuan1,
+        html[data-lesson="pertemuan2"] main > #pertemuan2 {
+            display: block;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f2f5fa; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b0c0d8; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8da3d6; 
         }
     </style>
 </head>
+<body class="antialiased min-h-screen flex flex-col">
 
-<body class="font-sans min-h-screen text-slate-800">
-    <!-- Header -->
-    <header class="py-12 px-4 text-center relative z-10">
-        <h1
-            class="text-4xl md:text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-700 via-emerald-600 to-cyan-700 tracking-tight">
-            Kerajaan Islam di Nusantara
-        </h1>
-        <p class="text-lg md:text-xl text-slate-500 max-w-3xl mx-auto mb-8">
-            Pendekatan Interdisipliner untuk Meningkatkan Keterampilan Berpikir Kritis
-        </p>
-        <div
-            class="flex items-center justify-center gap-6 md:gap-12 bg-white/65 backdrop-blur-md px-8 py-6 rounded-3xl border border-slate-200/50 max-w-md md:max-w-2xl mx-auto">
-            <div class="text-center">
-                <div class="text-xl md:text-4xl font-bold mb-1 text-teal-700">Fase E</div>
-                <div
-                    class="text-slate-600 text-[11px] md:text-sm font-medium tracking-wide uppercase leading-tight max-w-[88px] md:max-w-none mx-auto">
-                    Tingkat Kelas X</div>
+    <!-- Navigation Bar (UI Reference Style) -->
+    <nav class="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-white/50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Left Icons -->
+            <div class="flex items-center gap-3">
+                <img src="./logo uns.png" alt="Logo UNS" class="h-12 w-12 object-contain drop-shadow-sm">
+                <span class="font-bold text-theme-primary hidden sm:block text-lg tracking-tight">Universitas Sebelas Maret</span>
             </div>
-            <div class="w-px h-10 md:h-12 bg-slate-600/50"></div>
-            <div class="text-center">
-                <div class="text-xl md:text-4xl font-bold mb-1 text-teal-700">HOTS</div>
-                <div
-                    class="text-slate-600 text-[11px] md:text-sm font-medium tracking-wide uppercase leading-tight max-w-[88px] md:max-w-none mx-auto">
-                    Level Kognitif</div>
+            
+            <!-- Center Links -->
+            <div class="hidden md:flex space-x-10 text-sm font-medium text-theme-textMuted">
+                <a href="#" class="hover:text-theme-textDark transition">Beranda</a>
+                <div class="relative text-theme-textDark">
+                    <a href="#materi" class="font-semibold">Materi</a>
+                    <div class="absolute -bottom-7 left-0 right-0 h-0.5 bg-theme-textDark rounded-t-full"></div>
+                </div>
+                <a href="#aktivitas" class="hover:text-theme-textDark transition">Aktivitas</a>
             </div>
-            <div class="w-px h-10 md:h-12 bg-slate-600/50"></div>
-            <div class="text-center">
-                <div class="text-xl md:text-4xl font-bold mb-1 text-teal-700">4C</div>
-                <div
-                    class="text-slate-600 text-[11px] md:text-sm font-medium tracking-wide uppercase leading-tight max-w-[88px] md:max-w-none mx-auto">
-                    Keterampilan Abad 21</div>
+
+            <!-- Right Buttons -->
+            <div class="flex items-center gap-4 text-sm font-medium">
+                <a href="#" onclick="alert('Mengunduh semua modul PDF...')" class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-theme-primary/10 text-theme-primary hover:bg-theme-primary/20 transition font-semibold">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Unduh Semua PDF
+                </a>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Section 1: Alur Pembelajaran -->
-    <section id="alur" class="py-24 px-4 relative z-10">
-        <div class="max-w-7xl mx-auto">
+    <!-- Main Content Container -->
+    <main id="beranda" class="flex-grow max-w-7xl mx-auto px-6 py-10 w-full space-y-16">
 
-            <!-- Judul Peta Konsep -->
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-extrabold mb-3 text-slate-800 tracking-tight">Peta Konsep Alur
-                    Pembelajaran <br><span class="text-xl md:text-3xl font-bold text-teal-600 mt-2 block">(Model
-                        Problem-Based Learning)</span></h2>
-                <p class="text-lg text-slate-500 mb-6">Materi: Periode Kerajaan Islam di Nusantara <span
-                        class="mx-2">|</span> Kelas X Semester 2</p>
-                <div
-                    class="inline-block bg-slate-700 text-white px-6 py-2 rounded-full font-semibold text-sm shadow-md">
-                    Pendekatan: Interdisipliner (Sejarah, Geografi, Ekonomi, Sosiologi) & HOTS
+        <!-- HERO BANNER -->
+        <section id="hero" class="relative w-full rounded-[2.5rem] bg-gradient-to-r from-[#8da3d6] to-[#6b7ca8] overflow-hidden shadow-float">
+            <!-- Decorative Elements -->
+            <div class="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMiIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48L3N2Zz4=')] opacity-50"></div>
+            
+            <div class="relative z-10 px-10 py-16 md:py-24 md:px-16 flex flex-col md:flex-row items-center justify-between text-white">
+                <div class="md:w-3/5 space-y-6">
+                    <span class="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-sm font-semibold tracking-wider uppercase mb-2">
+                        Bahan Ajar Digital
+                    </span>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                        Kerajaan-Kerajaan Islam di Nusantara
+                    </h1>
+                    <p class="text-lg text-blue-50/90 leading-relaxed max-w-2xl">
+                        Menganalisis, mengevaluasi, dan memahami sejarah peradaban Islam di Nusantara melalui dimensi masa lalu, masa kini, dan masa depan.
+                    </p>
+                    <button class="mt-4 px-8 py-3 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-medium transition flex items-center gap-2 border border-white/30">
+                        Baca Selengkapnya
+                    </button>
+                </div>
+                <!-- Right-side illustration -->
+                <div class="hidden md:flex w-1/2 justify-end">
+                    <img src="./icon cover.png" alt="" aria-hidden="true" class="w-full max-w-[38rem] h-auto object-contain drop-shadow-[0_16px_18px_rgba(0,0,0,0.35)]">
                 </div>
             </div>
-
-            <!-- Timeline Container -->
-            <div class="relative w-full max-w-5xl mx-auto mt-12">
-                <!-- Garis Tengah Putus-putus (Desktop) -->
-                <div
-                    class="hidden md:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 border-l-2 border-dashed border-slate-400/50">
-                </div>
-
-                <!-- Tahap 1 (Biru) -->
-                <div class="relative flex flex-col md:flex-row items-center justify-between mb-10 w-full group">
-                    <!-- Angka Tengah -->
-                    <div
-                        class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 bg-slate-700 text-white rounded-full items-center justify-center text-xl font-bold z-10 shadow-[0_0_0_4px_rgba(255,255,255,0.5)] transition-transform group-hover:scale-110">
-                        1</div>
-
-                    <!-- Kartu Kiri (Tahap Utama) -->
-                    <div class="w-full md:w-[46%] flex md:justify-end mb-4 md:mb-0 relative">
-                        <!-- Indikator Angka Mobile -->
-                        <div
-                            class="md:hidden absolute -top-3 -left-2 w-8 h-8 bg-slate-700 text-white rounded-full flex items-center justify-center text-sm font-bold z-10 border-2 border-white shadow-sm">
-                            1</div>
-
-                        <div
-                            class="glass-card bg-slate-700/75 border-l-4 border-l-blue-500 w-full p-5 flex items-center gap-4  transition-colors">
-                            <div
-                                class="w-16 h-16 rounded-full bg-blue-100 flex-shrink-0 flex items-center justify-center text-blue-600 text-2xl border-2 border-blue-200">
-                                <i class="fa-solid fa-map-location-dot"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-blue-900 font-bold text-lg mb-1 leading-tight">Tahap 1: Orientasi Siswa
-                                    pada Masalah</h3>
-                                <p class="text-sm text-slate-600 leading-snug">Siswa disajikan masalah nyata (studi
-                                    kasus) atau anomali sejarah.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Kartu Kanan (Detail) -->
-                    <div class="w-full md:w-[46%] flex md:justify-start">
-                        <div
-                            class="glass-card bg-slate-700/50 w-full overflow-hidden flex flex-col sm:flex-row shadow-sm hover:shadow-md transition-shadow">
-                            <!-- Fokus Kegiatan -->
-                            <div
-                                class="p-5 pt-8 relative flex-1 border-b sm:border-b-0 sm:border-r border-slate-200/50">
-                                <div
-                                    class="bg-blue-600 text-white text-[10px] font-bold px-4 py-1 uppercase rounded-br-xl absolute top-0 left-0 shadow-sm">
-                                    Fokus: Menemukan Anomali</div>
-                                <ul class="list-disc pl-4 text-xs md:text-sm text-slate-800 space-y-1">
-                                    <li>Mengamati video/peta jalur perdagangan kuno.</li>
-                                    <li>Membaca narasi tentang kontrol ekonomi maritim/konflik rempah.</li>
-                                    <li>Siswa mengajukan pertanyaan kritis awal.</li>
-                                </ul>
-                            </div>
-                            <!-- Pendekatan -->
-                            <div class="p-5 pt-8 relative flex-1">
-                                <div
-                                    class="bg-teal-600 text-white text-[10px] font-bold px-4 py-1 uppercase rounded-br-xl absolute top-0 left-0 shadow-sm">
-                                    Pendekatan</div>
-                                <ul class="list-disc pl-4 text-xs md:text-sm text-slate-800 space-y-1">
-                                    <li>Geografi: Analisis angin muson & letak strategis.</li>
-                                    <li>Sejarah: Bukti kronologi kedatangan Islam.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tahap 2 (Emerald/Green) -->
-                <div class="relative flex flex-col md:flex-row items-center justify-between mb-10 w-full group">
-                    <!-- Angka Tengah -->
-                    <div
-                        class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 bg-slate-700 text-white rounded-full items-center justify-center text-xl font-bold z-10 shadow-[0_0_0_4px_rgba(255,255,255,0.5)] transition-transform group-hover:scale-110">
-                        2</div>
-
-                    <!-- Kartu Kiri (Tahap Utama) -->
-                    <div class="w-full md:w-[46%] flex md:justify-end mb-4 md:mb-0 relative">
-                        <!-- Indikator Angka Mobile -->
-                        <div
-                            class="md:hidden absolute -top-3 -left-2 w-8 h-8 bg-slate-700 text-white rounded-full flex items-center justify-center text-sm font-bold z-10 border-2 border-white shadow-sm">
-                            2</div>
-
-                        <div
-                            class="glass-card bg-slate-700/75 border-l-4 border-l-emerald-500 w-full p-5 flex items-center gap-4  transition-colors">
-                            <div
-                                class="w-16 h-16 rounded-full bg-emerald-100 flex-shrink-0 flex items-center justify-center text-emerald-600 text-2xl border-2 border-emerald-200">
-                                <i class="fa-solid fa-users"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-emerald-900 font-bold text-lg mb-1 leading-tight">Tahap 2:
-                                    Mengorganisasi Siswa untuk Belajar</h3>
-                                <p class="text-sm text-slate-600 leading-snug">Siswa membentuk kelompok dan
-                                    mendefinisikan masalah yang akan dipecahkan.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Kartu Kanan (Detail) -->
-                    <div class="w-full md:w-[46%] flex md:justify-start">
-                        <div
-                            class="glass-card bg-slate-700/50 w-full overflow-hidden flex flex-col sm:flex-row shadow-sm hover:shadow-md transition-shadow">
-                            <!-- Fokus Kegiatan -->
-                            <div
-                                class="p-5 pt-8 relative flex-1 border-b sm:border-b-0 sm:border-r border-slate-200/50">
-                                <div
-                                    class="bg-emerald-600 text-white text-[10px] font-bold px-4 py-1 uppercase rounded-br-xl absolute top-0 left-0 shadow-sm">
-                                    Fokus: Pembagian Peran</div>
-                                <ul class="list-disc pl-4 text-xs md:text-sm text-slate-800 space-y-1">
-                                    <li>Kelompok membagi tugas untuk meneliti aspek yang berbeda (ekonomi, sosial, dll).
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Pendekatan -->
-                            <div class="p-5 pt-8 relative flex-1">
-                                <div
-                                    class="bg-teal-600 text-white text-[10px] font-bold px-4 py-1 uppercase rounded-br-xl absolute top-0 left-0 shadow-sm">
-                                    Pendekatan</div>
-                                <ul class="list-disc pl-4 text-xs md:text-sm text-slate-800 space-y-1">
-                                    <li>Politik & Kekuasaan (peran sultan).</li>
-                                    <li>Kemampuan Kolaborasi (4C).</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tahap 3 (Oranye) -->
-                <div class="relative flex flex-col md:flex-row items-center justify-between mb-10 w-full group">
-                    <!-- Angka Tengah -->
-                    <div
-                        class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 bg-slate-700 text-white rounded-full items-center justify-center text-xl font-bold z-10 shadow-[0_0_0_4px_rgba(255,255,255,0.5)] transition-transform group-hover:scale-110">
-                        3</div>
-
-                    <!-- Kartu Kiri (Tahap Utama) -->
-                    <div class="w-full md:w-[46%] flex md:justify-end mb-4 md:mb-0 relative">
-                        <!-- Indikator Angka Mobile -->
-                        <div
-                            class="md:hidden absolute -top-3 -left-2 w-8 h-8 bg-slate-700 text-white rounded-full flex items-center justify-center text-sm font-bold z-10 border-2 border-white shadow-sm">
-                            3</div>
-
-                        <div
-                            class="glass-card bg-slate-700/75 border-l-4 border-l-orange-500 w-full p-5 flex items-center gap-4  transition-colors">
-                            <div
-                                class="w-16 h-16 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center text-orange-600 text-2xl border-2 border-orange-200">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-orange-900 font-bold text-lg mb-1 leading-tight">Tahap 3: Membimbing
-                                    Penyelidikan</h3>
-                                <p class="text-sm text-slate-600 leading-snug">Siswa melakukan pengumpulan data untuk
-                                    menjawab masalah.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Kartu Kanan (Detail) -->
-                    <div class="w-full md:w-[46%] flex md:justify-start">
-                        <div
-                            class="glass-card bg-slate-700/50 w-full overflow-hidden flex flex-col sm:flex-row shadow-sm hover:shadow-md transition-shadow">
-                            <!-- Fokus Kegiatan -->
-                            <div
-                                class="p-5 pt-8 relative flex-1 border-b sm:border-b-0 sm:border-r border-slate-200/50">
-                                <div
-                                    class="bg-orange-600 text-white text-[10px] font-bold px-4 py-1 uppercase rounded-br-xl absolute top-0 left-0 shadow-sm">
-                                    Fokus: Investigasi</div>
-                                <ul class="list-disc pl-4 text-xs md:text-sm text-slate-800 space-y-1">
-                                    <li>Mengeksplorasi modul, infografis, dan bukti sejarah dari 7 kerajaan Islam.</li>
-                                    <li>Mencari akar masalah dan solusi alternatif.</li>
-                                </ul>
-                            </div>
-                            <!-- Pendekatan -->
-                            <div class="p-5 pt-8 relative flex-1">
-                                <div
-                                    class="bg-teal-600 text-white text-[10px] font-bold px-4 py-1 uppercase rounded-br-xl absolute top-0 left-0 shadow-sm">
-                                    Pendekatan</div>
-                                <ul class="list-disc pl-4 text-xs md:text-sm text-slate-800 space-y-1">
-                                    <li>Ekonomi Maritim (Jalur Rempah).</li>
-                                    <li>Sosiologi (mobilitas sosial & interaksi).</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tahap 4 (Ungu) -->
-                <div class="relative flex flex-col md:flex-row items-center justify-between mb-10 w-full group">
-                    <!-- Angka Tengah -->
-                    <div
-                        class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 bg-slate-700 text-white rounded-full items-center justify-center text-xl font-bold z-10 shadow-[0_0_0_4px_rgba(255,255,255,0.5)] transition-transform group-hover:scale-110">
-                        4</div>
-
-                    <!-- Kartu Kiri (Tahap Utama) -->
-                    <div class="w-full md:w-[46%] flex md:justify-end mb-4 md:mb-0 relative">
-                        <!-- Indikator Angka Mobile -->
-                        <div
-                            class="md:hidden absolute -top-3 -left-2 w-8 h-8 bg-slate-700 text-white rounded-full flex items-center justify-center text-sm font-bold z-10 border-2 border-white shadow-sm">
-                            4</div>
-
-                        <div
-                            class="glass-card bg-slate-700/75 border-l-4 border-l-purple-500 w-full p-5 flex items-center gap-4  transition-colors">
-                            <div
-                                class="w-16 h-16 rounded-full bg-purple-100 flex-shrink-0 flex items-center justify-center text-purple-600 text-2xl border-2 border-purple-200">
-                                <i class="fa-solid fa-lightbulb"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-purple-900 font-bold text-lg mb-1 leading-tight">Tahap 4: Mengembangkan
-                                    dan Menyajikan Hasil Karya</h3>
-                                <p class="text-sm text-slate-600 leading-snug">Siswa menyusun draf solusi/argumen dan
-                                    mempresentasikannya.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Kartu Kanan (Detail) -->
-                    <div class="w-full md:w-[46%] flex md:justify-start">
-                        <div
-                            class="glass-card bg-slate-700/50 w-full overflow-hidden flex flex-col sm:flex-row shadow-sm hover:shadow-md transition-shadow">
-                            <!-- Fokus Kegiatan -->
-                            <div
-                                class="p-5 pt-8 relative flex-1 border-b sm:border-b-0 sm:border-r border-slate-200/50">
-                                <div
-                                    class="bg-purple-600 text-white text-[10px] font-bold px-4 py-1 uppercase rounded-br-xl absolute top-0 left-0 shadow-sm">
-                                    Fokus: Solusi Produk</div>
-                                <ul class="list-disc pl-4 text-xs md:text-sm text-slate-800 space-y-1">
-                                    <li>Diskusi kelompok mengaitkan data-data interdisipliner menjadi kesimpulan logis.
-                                    </li>
-                                    <li>Menuangkan hasil dalam bentuk laporan, infografis, atau presentasi.</li>
-                                </ul>
-                            </div>
-                            <!-- Pendekatan -->
-                            <div class="p-5 pt-8 relative flex-1">
-                                <div
-                                    class="bg-teal-600 text-white text-[10px] font-bold px-4 py-1 uppercase rounded-br-xl absolute top-0 left-0 shadow-sm">
-                                    Pendekatan</div>
-                                <ul class="list-disc pl-4 text-xs md:text-sm text-slate-800 space-y-1">
-                                    <li>Seni & Budaya (akulturasi sebagai solusi damai).</li>
-                                    <li>Kemampuan Komunikasi (4C).</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tahap 5 (Teal) -->
-                <div class="relative flex flex-col md:flex-row items-center justify-between w-full group">
-                    <!-- Angka Tengah -->
-                    <div
-                        class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 bg-slate-700 text-white rounded-full items-center justify-center text-xl font-bold z-10 shadow-[0_0_0_4px_rgba(255,255,255,0.5)] transition-transform group-hover:scale-110">
-                        5</div>
-
-                    <!-- Kartu Kiri (Tahap Utama) -->
-                    <div class="w-full md:w-[46%] flex md:justify-end mb-4 md:mb-0 relative">
-                        <!-- Indikator Angka Mobile -->
-                        <div
-                            class="md:hidden absolute -top-3 -left-2 w-8 h-8 bg-slate-700 text-white rounded-full flex items-center justify-center text-sm font-bold z-10 border-2 border-white shadow-sm">
-                            5</div>
-
-                        <div
-                            class="glass-card bg-slate-700/75 border-l-4 border-l-teal-500 w-full p-5 flex items-center gap-4  transition-colors">
-                            <div
-                                class="w-16 h-16 rounded-full bg-teal-100 flex-shrink-0 flex items-center justify-center text-teal-600 text-2xl border-2 border-teal-200">
-                                <i class="fa-solid fa-graduation-cap"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-teal-900 font-bold text-lg mb-1 leading-tight">Tahap 5: Mengevaluasi
-                                    Proses Pemecahan Masalah</h3>
-                                <p class="text-sm text-slate-600 leading-snug">Siswa dan guru melakukan evaluasi
-                                    terhadap proses pemecahan masalah.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Kartu Kanan (Detail) -->
-                    <div class="w-full md:w-[46%] flex md:justify-start">
-                        <div
-                            class="glass-card bg-slate-700/50 w-full overflow-hidden flex flex-col sm:flex-row shadow-sm hover:shadow-md transition-shadow">
-                            <!-- Fokus Kegiatan -->
-                            <div
-                                class="p-5 pt-8 relative flex-1 border-b sm:border-b-0 sm:border-r border-slate-200/50">
-                                <div
-                                    class="bg-teal-600 text-white text-[10px] font-bold px-4 py-1 uppercase rounded-br-xl absolute top-0 left-0 shadow-sm">
-                                    Fokus: Refleksi</div>
-                                <ul class="list-disc pl-4 text-xs md:text-sm text-slate-800 space-y-1">
-                                    <li>Kelompok lain memberi tanggapan & guru memberi penguatan.</li>
-                                    <li>Mengerjakan soal uji HOTS untuk mengukur ketajaman berpikir kritis.</li>
-                                </ul>
-                            </div>
-                            <!-- Pendekatan -->
-                            <div class="p-5 pt-8 relative flex-1">
-                                <div
-                                    class="bg-teal-600 text-white text-[10px] font-bold px-4 py-1 uppercase rounded-br-xl absolute top-0 left-0 shadow-sm">
-                                    Pendekatan</div>
-                                <ul class="list-disc pl-4 text-xs md:text-sm text-slate-800 space-y-1">
-                                    <li>Evaluasi Interdisipliner.</li>
-                                    <li>Refleksi Nilai Kebinekaan.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <!-- Slider Dots Indicator -->
+            <div class="absolute bottom-6 left-16 flex gap-2">
+                <div class="w-8 h-1.5 bg-white rounded-full"></div>
+                <div class="w-8 h-1.5 bg-white/30 rounded-full"></div>
+                <div class="w-8 h-1.5 bg-white/30 rounded-full"></div>
             </div>
-        </div>
-    </section>
-    <section id="materi" class="py-20 px-4 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-slate-800">Materi Kerajaan Islam</h2>
-                <p class="text-lg text-slate-500 max-w-3xl mx-auto">Eksplorasi sejarah kerajaan Islam di berbagai
-                    wilayah Nusantara. Klik tombol <strong>Materi</strong> untuk membaca materi selengkapnya atau uji
-                    pemahaman Anda melalui kuis.</p>
-            </div>
+        </section>
 
-            <!-- Kategori: Sumatera -->
-            <h3 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-teal-500 pb-2 inline-block">Regional
-                Sumatera</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                <!-- Pasai -->
-                <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
-                        <img src="./samudera-pasai.jpg"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Samudera Pasai">
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-blue-900 text-xs px-3 py-1 rounded-full font-bold shadow">
-                            Sumatera</div>
-                    </div>
-                    <div class="p-5 flex-col flex flex-grow">
-                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Samudera Pasai</h4>
-                        <p class="text-xs text-slate-500 mb-5 flex-grow">Diakui sebagai kerajaan Islam pertama di
-                            Indonesia yang berdiri pada abad ke-13, dengan Sultan Malik al-Saleh sebagai raja
-                            pertamanya.</p>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button onclick="openMaterialPage('samudera_pasai')"
-                                class="bg-slate-900 hover:bg-slate-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
-                                    class="fa-solid fa-play"></i> Materi</button>
-                            <a href="https://wayground.com/join?pin=pasai_quiz" target="_blank"
-                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
-                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Aceh -->
-                <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
-                        <img src="./aceh-darussalam.jpg"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Aceh">
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-blue-900 text-xs px-3 py-1 rounded-full font-bold shadow">
-                            Sumatera</div>
-                    </div>
-                    <div class="p-5 flex-col flex flex-grow">
-                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Aceh Darussalam</h4>
-                        <p class="text-xs text-slate-500 mb-5 flex-grow">Didirikan oleh Sultan Ali Mughayat Syah pada
-                            1514. Pusat perdagangan dan pertahanan Islam yang sangat kuat di Nusantara barat.</p>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button onclick="openMaterialPage('aceh_darussalam')"
-                                class="bg-slate-900 hover:bg-slate-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
-                                    class="fa-solid fa-play"></i> Materi</button>
-                            <a href="https://wayground.com/join?pin=aceh_quiz" target="_blank"
-                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
-                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kategori: Jawa -->
-            <h3 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-blue-500 pb-2 inline-block">Regional
-                Jawa</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <!-- Demak -->
-                <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
-                        <img src="./demak.jpg"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Demak">
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-blue-800 text-xs px-3 py-1 rounded-full font-bold shadow">
-                            Jawa</div>
-                    </div>
-                    <div class="p-5 flex-col flex flex-grow">
-                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Demak</h4>
-                        <p class="text-xs text-slate-500 mb-5 flex-grow">Kerajaan Islam pertama di Pulau Jawa yang
-                            berdiri akhir abad ke-15 setelah runtuhnya Kerajaan Majapahit.</p>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button onclick="openMaterialPage('demak')"
-                                class="bg-slate-900 hover:bg-slate-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
-                                    class="fa-solid fa-play"></i> Materi</button>
-                            <a href="https://wayground.com/join?pin=demak_quiz" target="_blank"
-                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
-                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Banten -->
-                <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
-                        <img src="./banten.jpg"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Banten">
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-blue-800 text-xs px-3 py-1 rounded-full font-bold shadow">
-                            Jawa</div>
-                    </div>
-                    <div class="p-5 flex-col flex flex-grow">
-                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Banten</h4>
-                        <p class="text-xs text-slate-500 mb-5 flex-grow">Berdiri pada 1526. Menjadi pusat perdagangan
-                            maritim yang sangat ramai dan makmur di pesisir barat Pulau Jawa.</p>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button onclick="openMaterialPage('banten')"
-                                class="bg-slate-900 hover:bg-slate-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
-                                    class="fa-solid fa-play"></i> Materi</button>
-                            <a href="https://wayground.com/join?pin=banten_quiz" target="_blank"
-                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
-                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Cirebon -->
-                <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
-                        <img src="./cirebon.jpg"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Cirebon">
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-blue-800 text-xs px-3 py-1 rounded-full font-bold shadow">
-                            Jawa</div>
-                    </div>
-                    <div class="p-5 flex-col flex flex-grow">
-                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Cirebon</h4>
-                        <p class="text-xs text-slate-500 mb-5 flex-grow">Didirikan oleh Sunan Gunung Jati pada abad
-                            ke-15, menjadi pusat penyebaran agama Islam di wilayah Jawa Barat.</p>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button onclick="openMaterialPage('cirebon')"
-                                class="bg-slate-900 hover:bg-slate-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
-                                    class="fa-solid fa-play"></i> Materi</button>
-                            <a href="https://wayground.com/join?pin=cirebon_quiz" target="_blank"
-                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
-                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kategori: Sulawesi & Maluku -->
-            <h3 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-red-500 pb-2 inline-block">Regional
-                Sulawesi & Maluku</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Gowa-Tallo -->
-                <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
-                        <img src="./gowa-tallo.jpg"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Gowa-Tallo">
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-red-800 text-xs px-3 py-1 rounded-full font-bold shadow">
-                            Sulawesi</div>
-                    </div>
-                    <div class="p-5 flex-col flex flex-grow">
-                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Gowa-Tallo</h4>
-                        <p class="text-xs text-slate-500 mb-5 flex-grow">Kerajaan maritim terbesar di Sulawesi Selatan
-                            (Makassar) yang memeluk Islam pada awal abad ke-17 di bawah Sultan Alauddin.</p>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button onclick="openMaterialPage('gowa_tallo')"
-                                class="bg-slate-900 hover:bg-slate-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
-                                    class="fa-solid fa-play"></i> Materi</button>
-                            <a href="https://wayground.com/join?pin=gowatallo_quiz" target="_blank"
-                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
-                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Ternate -->
-                <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
-                        <img src="./image11.png"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Ternate">
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-red-800 text-xs px-3 py-1 rounded-full font-bold shadow">
-                            Maluku</div>
-                    </div>
-                    <div class="p-5 flex-col flex flex-grow">
-                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Ternate</h4>
-                        <p class="text-xs text-slate-500 mb-5 flex-grow">Pusat rempah-rempah yang didirikan pada 1257 M,
-                            berkembang pesat sebagai kekuatan maritim di timur Nusantara.</p>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button onclick="openMaterialPage('ternate')"
-                                class="bg-slate-900 hover:bg-slate-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
-                                    class="fa-solid fa-play"></i> Materi</button>
-                            <a href="https://wayground.com/join?pin=ternate_quiz" target="_blank"
-                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
-                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Tidore -->
-                <div class="glass-card flex flex-col h-full overflow-hidden group">
-                    <div class="relative h-48 w-full bg-slate-200 overflow-hidden">
-                        <img src="./image12.png"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                            alt="Tidore">
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 backdrop-blur text-red-800 text-xs px-3 py-1 rounded-full font-bold shadow">
-                            Maluku</div>
-                    </div>
-                    <div class="p-5 flex-col flex flex-grow">
-                        <h4 class="text-lg font-bold mb-2 leading-tight">Kesultanan Tidore</h4>
-                        <p class="text-xs text-slate-500 mb-5 flex-grow">Memiliki akar sejarah yang sama dengan Ternate,
-                            berkembang menjadi kerajaan Islam kuat pada akhir abad ke-15.</p>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button onclick="openMaterialPage('tidore')"
-                                class="bg-slate-900 hover:bg-slate-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm"><i
-                                    class="fa-solid fa-play"></i> Materi</button>
-                            <a href="https://wayground.com/join?pin=tidore_quiz" target="_blank"
-                                class="bg-teal-600 hover:bg-teal-700 text-white text-xs py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 font-semibold active:scale-95 shadow-sm text-center"><i
-                                    class="fa-solid fa-clipboard-question"></i> Kuis</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 3: Infografis -->
-    <section id="infografis" class="py-20 px-4 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-slate-800">Galeri <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">Infografis</span>
+        <!-- CAPAIAN & TUJUAN PEMBELAJARAN (Grid Layout based on references) -->
+        <section id="capaian-tujuan" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Capaian (Left Column like "Artwork") -->
+            <div class="lg:col-span-5 space-y-4">
+                <h2 class="text-2xl font-bold text-theme-textDark flex items-center gap-2">
+                    Capaian Pembelajaran <svg class="w-5 h-5 text-theme-textMuted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </h2>
-                <p class="text-lg text-slate-500 max-w-2xl mx-auto">Rangkuman visual yang estetik dan informatif
-                    mengenai rute perdagangan, struktur sosial, dan kejayaan kerajaan Islam di Nusantara.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Infografis 1 -->
-                <div class="glass-card p-4 group cursor-pointer">
-                    <div class="relative h-64 w-full rounded-2xl overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1569937712399-80802f067d02?q=80&w=800&auto=format&fit=crop"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
-                            alt="Jalur Rempah">
-                        <div
-                            class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="bg-white/90 text-slate-900 font-bold px-4 py-2 rounded-full text-sm"><i
-                                    class="fa-solid fa-magnifying-glass-plus mr-2"></i>Perbesar</span>
-                        </div>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-800 mb-1">Jalur Rempah & Islamisasi</h3>
-                    <p class="text-sm text-slate-500">Peta interaktif persebaran Islam melalui jalur perdagangan
-                        maritim.</p>
-                </div>
-
-                <!-- Infografis 2 -->
-                <div class="glass-card p-4 group cursor-pointer">
-                    <div class="relative h-64 w-full rounded-2xl overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1599946347371-68eb71b16afc?q=80&w=800&auto=format&fit=crop"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
-                            alt="Struktur Sosial">
-                        <div
-                            class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="bg-white/90 text-slate-900 font-bold px-4 py-2 rounded-full text-sm"><i
-                                    class="fa-solid fa-magnifying-glass-plus mr-2"></i>Perbesar</span>
-                        </div>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-800 mb-1">Struktur Sosial Kesultanan</h3>
-                    <p class="text-sm text-slate-500">Peran Ulama, Umara, dan Syahbandar dalam masyarakat Islam pesisir.
-                    </p>
-                </div>
-
-                <!-- Infografis 3 -->
-                <div class="glass-card p-4 group cursor-pointer">
-                    <div class="relative h-64 w-full rounded-2xl overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=800&auto=format&fit=crop"
-                            class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
-                            alt="Akulturasi">
-                        <div
-                            class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="bg-white/90 text-slate-900 font-bold px-4 py-2 rounded-full text-sm"><i
-                                    class="fa-solid fa-magnifying-glass-plus mr-2"></i>Perbesar</span>
-                        </div>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-800 mb-1">Akulturasi Arsitektur</h3>
-                    <p class="text-sm text-slate-500">Perpaduan budaya lokal, Hindu-Buddha, dan Islam pada Masjid kuno.
+                <div class="glass-card rounded-[2rem] p-8 shadow-ui h-full">
+                    <p class="text-theme-textMuted leading-relaxed text-justify-custom font-medium">
+                        Peserta didik mampu memahami konsep dasar kerajaan Islam; menganalisis serta mengevaluasi manusia dalam kerajaan Islam; menganalisis serta mengevaluasi kerajaan Islam dalam ruang lingkup lokal, nasional, dan global; menganalisis serta mengevaluasi kerajaan Islam dalam dimensi masa lalu, masa kini, dan masa depan; menganalisis serta mengevaluasi kerajaan Islam dari pola perkembangan, perubahan, keberlanjutan, dan keberulangan; menganalisis serta mengevaluasi kerajaan Islam secara diakronis (kronologi) dan/atau sinkronis.
                     </p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Section 4: Asesmen 4C (HOTS) -->
-    <section id="asesmen" class="py-24 px-4 relative z-10">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <span
-                    class="bg-teal-100 text-blue-900 font-bold px-4 py-1.5 rounded-full text-sm inline-block mb-4">Evaluasi
-                    Berbasis HOTS</span>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-slate-800">Asesmen Keterampilan 4C</h2>
-                <p class="text-lg text-slate-500 max-w-2xl mx-auto">Uji kemampuan analisis, pemecahan masalah, dan
-                    pemikiran tingkat tinggi Anda melalui studi kasus sejarah di bawah ini.</p>
+            <!-- Tujuan (Right Column like Info Cards) -->
+            <div class="lg:col-span-7 space-y-4">
+                <h2 class="text-2xl font-bold text-theme-textDark flex items-center gap-2">
+                    Tujuan Pembelajaran
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Cards -->
+                    <div class="glass-card rounded-2xl p-5 shadow-ui flex gap-4 items-start transition hover:-translate-y-1 hover:shadow-float">
+                        <div class="w-10 h-10 shrink-0 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center font-bold text-lg">1</div>
+                        <p class="text-sm text-theme-textMuted leading-relaxed">Menjelaskan konsep dasar kerajaan Islam di Nusantara beserta karakteristik dan keterkaitannya dengan geografi & ekonomi.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-5 shadow-ui flex gap-4 items-start transition hover:-translate-y-1 hover:shadow-float">
+                        <div class="w-10 h-10 shrink-0 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center font-bold text-lg">2</div>
+                        <p class="text-sm text-theme-textMuted leading-relaxed">Menganalisis peran tokoh-tokoh kerajaan dalam politik, ekonomi, agama serta kontribusinya terhadap masyarakat.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-5 shadow-ui flex gap-4 items-start transition hover:-translate-y-1 hover:shadow-float">
+                        <div class="w-10 h-10 shrink-0 bg-green-100 text-green-600 rounded-xl flex items-center justify-center font-bold text-lg">3</div>
+                        <p class="text-sm text-theme-textMuted leading-relaxed">Menganalisis hubungan letak geografis, jalur perdagangan, dan sumber daya alam dengan perkembangan kerajaan Islam.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-5 shadow-ui flex gap-4 items-start transition hover:-translate-y-1 hover:shadow-float">
+                        <div class="w-10 h-10 shrink-0 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center font-bold text-lg">4</div>
+                        <p class="text-sm text-theme-textMuted leading-relaxed">Menganalisis keterkaitan perkembangan kerajaan masa lalu dengan kondisi kini serta nilai sejarah untuk masa depan.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-5 shadow-ui flex gap-4 items-start transition hover:-translate-y-1 hover:shadow-float md:col-span-2">
+                        <div class="w-10 h-10 shrink-0 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center font-bold text-lg">5&amp;6</div>
+                        <p class="text-sm text-theme-textMuted leading-relaxed">Mengevaluasi pola perkembangan, perubahan secara diakronis dan sinkronis dengan menghubungkan berbagai faktor berdasarkan bukti sejarah.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PETA KONSEP -->
+        <section id="peta-konsep" class="mb-10 w-full">
+            <div class="text-center mb-8 sm:mb-10">
+                <h2 class="text-2xl sm:text-3xl font-bold text-theme-textDark">Peta Konsep Alur Pembelajaran</h2>
+                <p class="text-sm sm:text-base text-theme-textMuted mt-2">Materi: Periode Kerajaan Islam di Nusantara | Kelas X</p>
+                <div class="inline-block max-w-full mt-4 px-4 sm:px-6 py-2 bg-[#2d3748] text-white rounded-full text-xs sm:text-sm font-semibold shadow-md">
+                    Pendekatan: Interdisipliner (Sejarah, Geografi, Ekonomi, Sosiologi)
+                </div>
             </div>
 
-            <!-- Menu Asesmen Card -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                <!-- Critical Thinking -->
-                <a href="#" class="glass-card p-6 flex flex-col items-center text-center group">
-                    <div
-                        class="w-16 h-16 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-brain"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2 text-slate-800">Critical Thinking</h3>
-                    <p class="text-sm text-slate-500 mb-4 flex-grow">Analisis kejatuhan Malaka dan dampaknya terhadap
-                        kebangkitan Kesultanan Aceh.</p>
-                    <span class="text-red-600 font-semibold text-sm group-hover:underline">Mulai Tes <i
-                            class="fa-solid fa-arrow-right ml-1 text-xs"></i></span>
-                </a>
-
-                <!-- Creativity -->
-                <a href="#" class="glass-card p-6 flex flex-col items-center text-center group">
-                    <div
-                        class="w-16 h-16 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-regular fa-lightbulb"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2 text-slate-800">Creativity</h3>
-                    <p class="text-sm text-slate-500 mb-4 flex-grow">Rancang peta rute alternatif perdagangan rempah
-                        jika Selat Malaka diblokir.</p>
-                    <span class="text-yellow-600 font-semibold text-sm group-hover:underline">Buka Tugas <i
-                            class="fa-solid fa-arrow-right ml-1 text-xs"></i></span>
-                </a>
-
-                <!-- Collaboration -->
-                <a href="#" class="glass-card p-6 flex flex-col items-center text-center group">
-                    <div
-                        class="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-people-group"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2 text-slate-800">Collaboration</h3>
-                    <p class="text-sm text-slate-500 mb-4 flex-grow">Diskusi kelompok: Peran Walisongo dalam akulturasi
-                        budaya tanpa peperangan.</p>
-                    <span class="text-blue-600 font-semibold text-sm group-hover:underline">Lihat Forum <i
-                            class="fa-solid fa-arrow-right ml-1 text-xs"></i></span>
-                </a>
-
-                <!-- Communication -->
-                <a href="#" class="glass-card p-6 flex flex-col items-center text-center group">
-                    <div
-                        class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-comments"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2 text-slate-800">Communication</h3>
-                    <p class="text-sm text-slate-500 mb-4 flex-grow">Presentasi debat: Apakah letak geografis adalah
-                        faktor penentu kejayaan Banten?</p>
-                    <span class="text-emerald-600 font-semibold text-sm group-hover:underline">Buka Lembar <i
-                            class="fa-solid fa-arrow-right ml-1 text-xs"></i></span>
-                </a>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 5: Tim Pengembang -->
-    <section class="py-20 px-4 relative z-10 border-t border-slate-200/30">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-2 text-slate-800">Tim Pengembang</h2>
-                <p class="text-slate-500">Orang-orang di balik media pembelajaran interaktif ini.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-
-                <!-- Pembimbing 1 -->
-                <div class="text-center w-full max-w-[250px]">
-                    <div class="glass-card p-2 rounded-full inline-block mb-4 relative group">
-                        <img src="./Dosen_Musa-Pelu.jpg"
-                            class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white shadow-md"
-                            alt="Pembimbing 1">
-                        <div
-                            class="absolute inset-0 bg-slate-900/60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                            <i class="fa-brands fa-linkedin text-2xl hover:text-teal-400 cursor-pointer"></i>
+            <!-- Vertical Timeline (like foto2) -->
+            <div class="relative max-w-5xl mx-auto py-4 sm:py-8">
+                <div class="absolute left-4 top-0 bottom-0 border-l-2 border-dashed border-gray-300 md:hidden z-0"></div>
+                <!-- Center dashed line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gray-300 border-dashed border-l-2 border-gray-300 hidden md:block z-0"></div>
+                
+                <div class="flex flex-col gap-8 md:gap-12 relative z-10">
+                    
+                    <!-- Item 1: Samudra Pasai -->
+                    <div class="grid grid-cols-[2rem_minmax(0,1fr)] items-stretch gap-x-3 gap-y-3 md:flex md:items-center md:gap-8 w-full">
+                        <div class="flex md:hidden col-start-1 row-start-1 row-span-2 self-center w-8 h-8 bg-[#2d3748] text-white rounded-full items-center justify-center font-bold shadow-lg shrink-0 z-10 border-4 border-[#f2f5fa]">1</div>
+                        <div class="col-start-2 row-start-1 w-full md:w-1/2 flex justify-end">
+                            <div class="bg-gradient-to-r from-blue-600 to-blue-500 p-1 rounded-2xl shadow-lg w-full md:w-5/6 hover:scale-[1.02] transition-transform">
+                                <div class="bg-blue-50 rounded-xl p-3 md:p-5 h-full flex items-center gap-3 md:gap-4">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 shadow-inner">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-blue-700 text-sm sm:text-base md:text-lg">Kerajaan Samudra Pasai</h4>
+                                        <p class="text-xs text-blue-600/80 font-medium">Pertemuan 1 • Perdagangan Maritim</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex w-12 h-12 bg-[#2d3748] text-white rounded-full items-center justify-center font-bold text-xl shadow-lg shrink-0 z-10 border-4 border-[#f2f5fa]">1</div>
+                        <div class="col-start-2 row-start-2 w-full md:w-1/2 flex flex-col gap-3">
+                            <div class="bg-gray-100 p-3 md:p-4 rounded-2xl border border-gray-200 shadow-sm w-full md:w-5/6">
+                                <div class="bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded w-fit mb-2 uppercase tracking-wide">Fokus & Pendekatan</div>
+                                <ul class="text-xs sm:text-sm text-gray-600 list-disc list-inside space-y-1">
+                                    <li>Geografis: Letak strategis Selat Malaka.</li>
+                                    <li>Ekonomi: Jalur pelayaran dan perdagangan.</li>
+                                    <li>Politik: Kekuasaan penguasa dan Islamisasi.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-800">Dr. Musa Pelu, S.Pd., M.Pd.</h3>
-                    <p class="text-blue-900 font-medium text-sm">Dosen Pembimbing I</p>
-                </div>
 
-                <!-- Penyusun (Tengah - Sedikit lebih besar) -->
-                <div class="text-center w-full max-w-[250px] transform md:-translate-y-4">
-                    <div class="glass-card p-2 rounded-full inline-block mb-4 relative group shadow-2xl">
-                        <img src="./pass foto.png"
-                            class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-teal-500"
-                            alt="Penyusun">
-                        <div
-                            class="absolute inset-0 bg-teal-900/60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 text-white">
-                            <i class="fa-brands fa-instagram text-2xl hover:text-blue-900 cursor-pointer"></i>
-                            <i class="fa-solid fa-envelope text-2xl hover:text-blue-900 cursor-pointer"></i>
+                    <!-- Item 2: Demak -->
+                    <div class="grid grid-cols-[2rem_minmax(0,1fr)] items-stretch gap-x-3 gap-y-3 md:flex md:items-center md:gap-8 w-full">
+                        <div class="flex md:hidden col-start-1 row-start-1 row-span-2 self-center w-8 h-8 bg-[#2d3748] text-white rounded-full items-center justify-center font-bold shadow-lg shrink-0 z-10 border-4 border-[#f2f5fa]">2</div>
+                        <div class="col-start-2 row-start-2 w-full md:w-1/2 flex justify-end md:order-1">
+                            <div class="w-full md:w-5/6 flex flex-col gap-3 items-end text-right">
+                                <div class="bg-gray-100 p-3 md:p-4 rounded-2xl border border-gray-200 shadow-sm w-full text-left">
+                                    <div class="bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded w-fit mb-2 uppercase tracking-wide">Fokus & Pendekatan</div>
+                                    <ul class="text-xs sm:text-sm text-gray-600 list-disc list-inside space-y-1">
+                                        <li>Sejarah: Pasca Majapahit & Raden Patah.</li>
+                                        <li>Sosiologi: Akulturasi budaya (Wayang, Masjid).</li>
+                                        <li>Politik: Konflik suksesi menuju Pajang.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex w-12 h-12 bg-[#2d3748] text-white rounded-full items-center justify-center font-bold text-xl shadow-lg shrink-0 z-10 border-4 border-[#f2f5fa] md:order-2">2</div>
+                        <div class="col-start-2 row-start-1 w-full md:w-1/2 flex justify-start md:order-3">
+                             <div class="bg-gradient-to-r from-orange-500 to-orange-400 p-1 rounded-2xl shadow-lg w-full md:w-5/6 hover:scale-[1.02] transition-transform">
+                                <div class="bg-orange-50 rounded-xl p-3 md:p-5 h-full flex items-center gap-3 md:gap-4">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center shrink-0 shadow-inner">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-orange-700 text-sm sm:text-base md:text-lg">Kesultanan Demak</h4>
+                                        <p class="text-xs text-orange-600/80 font-medium">Pertemuan 1 • Pusat Islam di Jawa</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-800">Suryani</h3>
-                    <p class="text-teal-600 font-semibold text-xs mb-1">NIM. S862508008</p>
-                    <p class="text-slate-500 font-medium text-sm">Mahasiswa Peneliti / Pengembang</p>
-                </div>
 
-                <!-- Pembimbing 2 -->
-                <div class="text-center w-full max-w-[250px]">
-                    <div class="glass-card p-2 rounded-full inline-block mb-4 relative group">
-                        <img src="./c w.jpg"
-                            class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white shadow-md"
-                            alt="Pembimbing 2">
-                        <div
-                            class="absolute inset-0 bg-slate-900/60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                            <i class="fa-brands fa-linkedin text-2xl hover:text-teal-400 cursor-pointer"></i>
+                    <!-- Item 3: Banten -->
+                    <div class="grid grid-cols-[2rem_minmax(0,1fr)] items-stretch gap-x-3 gap-y-3 md:flex md:items-center md:gap-8 w-full">
+                        <div class="flex md:hidden col-start-1 row-start-1 row-span-2 self-center w-8 h-8 bg-[#2d3748] text-white rounded-full items-center justify-center font-bold shadow-lg shrink-0 z-10 border-4 border-[#f2f5fa]">3</div>
+                        <div class="col-start-2 row-start-1 w-full md:w-1/2 flex justify-end">
+                            <div class="bg-gradient-to-r from-teal-500 to-teal-400 p-1 rounded-2xl shadow-lg w-full md:w-5/6 hover:scale-[1.02] transition-transform">
+                                <div class="bg-teal-50 rounded-xl p-3 md:p-5 h-full flex items-center gap-3 md:gap-4">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center shrink-0 shadow-inner">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-teal-700 text-sm sm:text-base md:text-lg">Kesultanan Banten</h4>
+                                        <p class="text-xs text-teal-600/80 font-medium">Pertemuan 2 • Geopolitik Selat Sunda</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex w-12 h-12 bg-[#2d3748] text-white rounded-full items-center justify-center font-bold text-xl shadow-lg shrink-0 z-10 border-4 border-[#f2f5fa]">3</div>
+                        <div class="col-start-2 row-start-2 w-full md:w-1/2 flex flex-col gap-3">
+                            <div class="bg-gray-100 p-3 md:p-4 rounded-2xl border border-gray-200 shadow-sm w-full md:w-5/6">
+                                <div class="bg-teal-500 text-white text-[10px] font-bold px-2 py-1 rounded w-fit mb-2 uppercase tracking-wide">Fokus & Pendekatan</div>
+                                <ul class="text-xs sm:text-sm text-gray-600 list-disc list-inside space-y-1">
+                                    <li>Sosiologi Politik: Elite lokal & Hukum Syariah.</li>
+                                    <li>Pendidikan: Sinergi Ulama, Kiai, Jawara.</li>
+                                    <li>Relasi: Diplomasi global dengan Mekah.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-800">Prof. Dr. C. Dyah Sulistyaningrum I., M.Pd.</h3>
-                    <p class="text-blue-900 font-medium text-sm">Dosen Pembimbing II</p>
-                </div>
 
+                    <!-- Item 4: Ternate -->
+                    <div class="grid grid-cols-[2rem_minmax(0,1fr)] items-stretch gap-x-3 gap-y-3 md:flex md:items-center md:gap-8 w-full">
+                        <div class="flex md:hidden col-start-1 row-start-1 row-span-2 self-center w-8 h-8 bg-[#2d3748] text-white rounded-full items-center justify-center font-bold shadow-lg shrink-0 z-10 border-4 border-[#f2f5fa]">4</div>
+                        <div class="col-start-2 row-start-2 w-full md:w-1/2 flex justify-end md:order-1">
+                            <div class="w-full md:w-5/6 flex flex-col gap-3 items-end text-right">
+                                <div class="bg-gray-100 p-3 md:p-4 rounded-2xl border border-gray-200 shadow-sm w-full text-left">
+                                    <div class="bg-purple-500 text-white text-[10px] font-bold px-2 py-1 rounded w-fit mb-2 uppercase tracking-wide">Fokus & Pendekatan</div>
+                                    <ul class="text-xs sm:text-sm text-gray-600 list-disc list-inside space-y-1">
+                                        <li>Ekonomi: Bandar rempah (Cengkeh) & Monopoli.</li>
+                                        <li>Militer: Perlawanan Sultan Baabullah.</li>
+                                        <li>Sosial: Pengaruh perdagangan ke bahasa & agama.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex w-12 h-12 bg-[#2d3748] text-white rounded-full items-center justify-center font-bold text-xl shadow-lg shrink-0 z-10 border-4 border-[#f2f5fa] md:order-2">4</div>
+                        <div class="col-start-2 row-start-1 w-full md:w-1/2 flex justify-start md:order-3">
+                             <div class="bg-gradient-to-r from-purple-500 to-purple-400 p-1 rounded-2xl shadow-lg w-full md:w-5/6 hover:scale-[1.02] transition-transform">
+                                <div class="bg-purple-50 rounded-xl p-3 md:p-5 h-full flex items-center gap-3 md:gap-4">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center shrink-0 shadow-inner">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-purple-700 text-sm sm:text-base md:text-lg">Kerajaan Ternate</h4>
+                                        <p class="text-xs text-purple-600/80 font-medium">Pertemuan 2 • Bandar Rempah Nusantara</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <!-- MENU PERTEMUAN CARDS (Style reference: Foto 1 Genshin UI 'Artwork' Cards) -->
+        <section id="menu-pertemuan" class="mb-10 w-full pt-10">
+            <div class="flex items-center gap-2 mb-6">
+                <h2 class="text-2xl font-bold text-theme-textDark">Pilih Pertemuan <span class="text-lg">›</span></h2>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3 sm:gap-6 max-w-3xl mx-auto">
+                <!-- Card Pertemuan 1 -->
+                <a href="?lesson=pertemuan1#pertemuan1" aria-label="Mulai belajar Pertemuan 1: Samudra Pasai dan Demak" class="group relative block aspect-square sm:aspect-[4/5] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-theme-primary">
+                    <img src="./cover/2.png" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]">
+                    <div class="absolute inset-x-0 bottom-0 p-2 pt-8 sm:p-4 sm:pt-12 bg-gradient-to-t from-black/75 to-transparent">
+                        <div class="w-full py-2 sm:py-3 text-xs sm:text-base bg-white/95 text-center rounded-lg font-bold text-theme-textDark group-hover:bg-theme-primary group-hover:text-white transition-colors shadow-sm">
+                            Mulai Belajar <span aria-hidden="true">→</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card Pertemuan 2 -->
+                <a href="?lesson=pertemuan2#pertemuan2" aria-label="Mulai belajar Pertemuan 2: Banten dan Ternate" class="group relative block aspect-square sm:aspect-[4/5] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-theme-primary">
+                    <img src="./cover/3.png" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]">
+                    <div class="absolute inset-x-0 bottom-0 p-2 pt-8 sm:p-4 sm:pt-12 bg-gradient-to-t from-black/75 to-transparent">
+                        <div class="w-full py-2 sm:py-3 text-xs sm:text-base bg-white/95 text-center rounded-lg font-bold text-theme-textDark group-hover:bg-theme-primary group-hover:text-white transition-colors shadow-sm">
+                            Mulai Belajar <span aria-hidden="true">→</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- TIM PENGEMBANG -->
+        <section id="tim-pengembang" class="w-full py-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-theme-textDark">Tim Pengembang</h2>
+                <p class="text-theme-textMuted mt-2">Orang-orang di balik media pembelajaran interaktif ini.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+                <article class="glass-card rounded-3xl p-6 shadow-ui flex flex-col items-center text-center">
+                    <img src="./Dosen_Musa-Pelu.jpg" alt="Dr. Musa Pelu" loading="lazy" class="w-36 h-36 rounded-full object-cover object-top border-4 border-white shadow-lg">
+                    <h3 class="font-bold text-lg text-theme-textDark mt-5">Dr. Musa Pelu, S.Pd., M.Pd.</h3>
+                    <p class="text-sm text-theme-primary font-medium mt-1">Dosen Pembimbing I</p>
+                </article>
+
+                <article class="glass-card rounded-3xl p-6 shadow-ui flex flex-col items-center text-center">
+                    <img src="./pass foto.png" alt="Suryani" loading="lazy" class="w-36 h-36 rounded-full object-cover object-top border-4 border-white shadow-lg">
+                    <h3 class="font-bold text-lg text-theme-textDark mt-5">Suryani</h3>
+                    <p class="text-sm text-theme-primary font-semibold mt-1">NIM. S862508008</p>
+                    <p class="text-sm text-theme-textMuted mt-1">Mahasiswa Peneliti / Pengembang</p>
+                </article>
+
+                <article class="glass-card rounded-3xl p-6 shadow-ui flex flex-col items-center text-center">
+                    <img src="./c w.jpg" alt="Prof. Dr. C. Dyah Sulistyaningrum I." loading="lazy" class="w-36 h-36 rounded-full object-cover object-top border-4 border-white shadow-lg">
+                    <h3 class="font-bold text-lg text-theme-textDark mt-5">Prof. Dr. C. Dyah Sulistyaningrum I., M.Pd.</h3>
+                    <p class="text-sm text-theme-primary font-medium mt-1">Dosen Pembimbing II</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- DIVIDER -->
+        <div id="materi" class="w-full h-px bg-theme-primary/20 my-10"></div>
+
+        <!-- ========================================== -->
+        <!-- PERTEMUAN 1: SAMUDRA PASAI & DEMAK         -->
+        <!-- ========================================== -->
+        <div id="pertemuan1" class="space-y-20 pt-10 scroll-mt-24">
+            <a href="index.html#menu-pertemuan" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-theme-textDark font-semibold text-sm shadow-sm border border-gray-200 hover:bg-gray-50 transition">← Kembali ke pilihan pertemuan</a>
+            <div class="text-center">
+                <span class="text-theme-primary font-bold tracking-widest uppercase text-sm">Pertemuan 1</span>
+                <h2 class="text-3xl font-bold text-theme-textDark mt-2">Materi Kerajaan Samudra Pasai & Demak</h2>
+            </div>
+
+            <!-- SAMUDRA PASAI -->
+            <section class="space-y-8 relative">
+                <!-- Section Header -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="flex items-center gap-4 bg-white p-4 pr-8 rounded-full shadow-sm w-fit border border-theme-primary/10">
+                        <div class="w-12 h-12 bg-theme-primary text-white rounded-full flex items-center justify-center shadow-md">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-theme-textDark">Samudra Pasai: Mengungkap Kejayaan</h3>
+                    </div>
+                    <a href="Samudra Pasai - Infografis.pdf" download="Samudra-Pasai-Infografis.pdf" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-blue-100 text-blue-600 rounded-full hover:bg-blue-50 transition shadow-sm text-sm font-semibold w-fit">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Unduh Infografis PDF
+                    </a>
+                </div>
+
+                <figure class="glass-card p-3 sm:p-5 rounded-[2rem] shadow-ui">
+                    <img src="./Samudra Pasai_ Sejarah dan Kejayaan Maritim.png" alt="Infografis Samudra Pasai: sejarah dan kejayaan maritim" loading="lazy" decoding="async" class="block w-full max-w-4xl h-auto mx-auto rounded-xl">
+                </figure>
+
+                <!-- Content Columns -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Text blocks -->
+                    <div class="space-y-6 text-theme-textMuted leading-relaxed text-justify-custom">
+                        <div class="glass-card p-8 rounded-[2rem] shadow-sm">
+                            <h4 class="font-bold text-lg text-theme-textDark mb-3">1. Asal-usul dan Perkembangan</h4>
+                            <p>Samudera Pasai merupakan salah satu kesultanan Islam awal di Nusantara yang berkembang di pesisir utara Aceh sekitar abad ke-13. Letaknya yang berdekatan dengan Selat Malaka memberikan keuntungan geografis karena kawasan tersebut menjadi jalur pelayaran dan perdagangan yang menghubungkan berbagai wilayah Asia.</p>
+                            <p class="mt-4">Dalam kajian sejarah, nama Samudera merujuk pada wilayah yang berkembang menjadi pusat pemerintahan dinasti Islam, sedangkan Pasai diduga berkaitan dengan kawasan politik lokal sebelumnya. Pedagang dari Timur Tengah, India, dan Asia Tenggara datang, mendorong pertukaran barang, pengetahuan, dan kebudayaan.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-[2rem] shadow-sm">
+                            <h4 class="font-bold text-lg text-theme-textDark mb-3">2. Perdagangan Maritim sebagai Jalur Islamisasi</h4>
+                            <p>Perdagangan maritim berperan penting dalam memperkenalkan Islam kepada masyarakat Samudera Pasai. Para pedagang Muslim tidak hanya terlibat dalam transaksi ekonomi, tetapi juga membangun hubungan sosial. Hubungan perdagangan, perkawinan, dan pembentukan komunitas Muslim di kawasan pelabuhan membuka kesempatan penyebaran Islam secara bertahap.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6 text-theme-textMuted leading-relaxed text-justify-custom">
+                        <div class="glass-card p-8 rounded-[2rem] shadow-sm">
+                            <h4 class="font-bold text-lg text-theme-textDark mb-3">3. Kekuasaan Politik dan Perkembangan Islam</h4>
+                            <p>Ketika Islam memperoleh kedudukan dalam lingkungan kerajaan, ajaran tersebut memiliki ruang untuk berkembang. Dukungan penguasa terhadap kegiatan keagamaan turut memperkuat kedudukan kerajaan sebagai pusat politik sekaligus keagamaan.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-[2rem] shadow-sm">
+                            <h4 class="font-bold text-lg text-theme-textDark mb-3">4 & 5. Pendekatan Interdisipliner & Bukti Sejarah</h4>
+                            <p>Geografi menjelaskan keuntungan letak Selat Malaka, ekonomi mengkaji perdagangan, politik menjelaskan kedudukan penguasa, dan sosial-budaya mengungkap interaksi masyarakat. Pemahaman ini memerlukan sumber sejarah yang dapat diperiksa seperti batu nisan (info tokoh, penanggalan) serta naskah sejarah.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Embed -->
+                <div class="glass-card rounded-[2rem] p-4 shadow-sm border border-gray-100">
+                    <h4 class="font-bold text-lg text-theme-textDark mb-4 px-4 pt-2">Video Pembelajaran: Samudra Pasai</h4>
+                    <div class="relative w-full overflow-hidden rounded-xl bg-gray-100" style="padding-top: 56.25%;">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/63Uvg-KAJhM" title="Video Samudra Pasai" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- Activity Box -->
+                <div class="bg-[#e4ebf5] border border-theme-primary/20 rounded-[2rem] p-8 flex flex-col md:flex-row gap-8 items-center shadow-inner relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/40 rounded-full blur-2xl"></div>
+                    <div class="flex-1 space-y-4 z-10">
+                        <div class="flex items-center gap-3">
+                            <span class="px-3 py-1 bg-theme-primary text-white text-xs font-bold rounded-md tracking-wide">TUGAS INDIVIDU</span>
+                            <h4 class="font-bold text-xl text-theme-textDark">Aktivitas Analisis Samudra Pasai</h4>
+                        </div>
+                        <p class="text-sm text-theme-textDark font-medium bg-white/50 p-4 rounded-xl">
+                            "Analisislah keterkaitan antara kondisi geografis, aktivitas perdagangan, dan kekuasaan politik dalam mendukung perkembangan Samudera Pasai. Jelaskan bagaimana ketiga faktor tersebut saling memengaruhi berdasarkan bukti sejarah yang telah kamu pelajari."
+                        </p>
+                    </div>
+                    <div class="w-full md:w-1/3 z-10">
+                        <h5 class="font-bold text-sm text-theme-textDark mb-2">Sumber Bacaan (Klik untuk melihat)</h5>
+                        <div class="flex flex-col gap-2">
+                            <a href="#" class="px-4 py-2 bg-white rounded-full text-xs text-theme-primary hover:bg-theme-primary hover:text-white transition shadow-sm border border-transparent truncate">📄 Buku Teks Kurikulum Merdeka</a>
+                            <a href="#" class="px-4 py-2 bg-white rounded-full text-xs text-theme-primary hover:bg-theme-primary hover:text-white transition shadow-sm border border-transparent truncate">🌐 Artikel RuangGuru: Samudera Pasai</a>
+                            <a href="#" class="px-4 py-2 bg-white rounded-full text-xs text-theme-primary hover:bg-theme-primary hover:text-white transition shadow-sm border border-transparent truncate">🎥 Video Pembelajaran YouTube</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DEMAK -->
+            <section class="space-y-8 pt-10">
+                <!-- Section Header -->
+                <div class="flex flex-col-reverse md:flex-row md:items-center justify-between gap-4">
+                    <a href="Kesultanan Demak - Infografis.pdf" download="Kesultanan-Demak-Infografis.pdf" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-orange-100 text-orange-600 rounded-full hover:bg-orange-50 transition shadow-sm text-sm font-semibold w-fit ml-auto md:ml-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Unduh Infografis PDF
+                    </a>
+                    <div class="flex items-center justify-end gap-4 bg-white p-4 pl-8 rounded-full shadow-sm w-fit ml-auto border border-theme-primary/10">
+                        <h3 class="text-2xl font-bold text-theme-textDark">Demak: Menelusuri Jejak Kesultanan</h3>
+                        <div class="w-12 h-12 bg-theme-primary text-white rounded-full flex items-center justify-center shadow-md">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="glass-card p-3 sm:p-5 rounded-[2rem] shadow-ui">
+                    <img src="./Kesultanan Demak_ Jejak Kejayaan Islam Jawa.png" alt="Infografis Kesultanan Demak: jejak kejayaan Islam Jawa" loading="lazy" decoding="async" class="block w-full max-w-4xl h-auto mx-auto rounded-xl">
+                </figure>
+
+                <!-- Content Grid (Mimicking "Recent Search" style pills for points to vary layout) -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 space-y-4">
+                        <div class="glass-card p-6 rounded-2xl flex flex-col gap-2">
+                            <h4 class="font-bold text-theme-textDark flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-theme-primary"></span> 1. Perspektif Sejarah & Politik</h4>
+                            <p class="text-sm text-theme-textMuted text-justify-custom">Pusat kekuasaan Islam berpengaruh di Jawa (akhir abad 15-16). Muncul setelah melemahnya Majapahit. Raden Patah sebagai pendiri dan Sultan Trenggana memperluas pengaruh. Perkembangan dikaji lewat kondisi politik, ekonomi, dan sosial masyarakat.</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl flex flex-col gap-2">
+                            <h4 class="font-bold text-theme-textDark flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-theme-primary"></span> 2. Geografi & Ekonomi</h4>
+                            <p class="text-sm text-theme-textMuted text-justify-custom">Letak pesisir utara Jawa menghubungkan dengan Laut Jawa. Perdagangan membangun jaringan, menyediakan sumber daya kerajaan (misal: ekspedisi Pati Unus ke Malaka). Peluang geografis harus didukung aktivitas ekonomi.</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl flex flex-col gap-2">
+                            <h4 class="font-bold text-theme-textDark flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-theme-primary"></span> 3. Sosiologi & Antropologi</h4>
+                            <p class="text-sm text-theme-textMuted text-justify-custom">Penyebaran Islam lewat interaksi pedagang, ulama, penguasa. Akulturasi budaya terlihat pada penggunaan wayang dalam dakwah dan arsitektur Masjid Agung Demak. Bukti interaksi agama dan tradisi Jawa.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="glass-card p-6 rounded-2xl bg-gradient-to-b from-white to-gray-50 h-full flex flex-col">
+                            <h4 class="font-bold text-theme-textDark mb-3 border-b pb-2">Aspek Lainnya</h4>
+                            <div class="space-y-4 flex-grow">
+                                <div>
+                                    <strong class="text-sm text-theme-textDark">4. Pendidikan & Agama</strong>
+                                    <p class="text-xs text-theme-textMuted mt-1">Masjid, langgar, dan pesantren menjadi pusat pembelajaran. Sinergi ulama dan penguasa memperluas penyebaran pengetahuan Islam.</p>
+                                </div>
+                                <div>
+                                    <strong class="text-sm text-theme-textDark">5. Kemunduran Demak</strong>
+                                    <p class="text-xs text-theme-textMuted mt-1">Konflik suksesi pasca Sultan Trenggana (Sunan Prawoto vs Arya Penangsang). Pergeseran kekuasaan menuju Pajang menggeser rute perdagangan dan politik.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Embed -->
+                <div class="glass-card rounded-[2rem] p-4 shadow-sm border border-gray-100">
+                    <h4 class="font-bold text-lg text-theme-textDark mb-4 px-4 pt-2">Video Pembelajaran: Kesultanan Demak</h4>
+                    <div class="relative w-full overflow-hidden rounded-xl bg-gray-100" style="padding-top: 56.25%;">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/2GiH5HzsWJ8" title="Video Demak" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- Activity Box -->
+                <div class="bg-white border-2 border-theme-primary/10 rounded-[2rem] p-6 shadow-ui flex flex-col lg:flex-row justify-between items-center gap-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-orange-100 text-orange-500 rounded-2xl flex items-center justify-center shrink-0">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg text-theme-textDark">Tugas Individu: Analisis Demak</h4>
+                            <p class="text-sm text-theme-textMuted mt-1 max-w-xl">
+                                Analisislah hubungan letak geografis, perdagangan, dan kekuatan politik. <b>Mengapa letak strategis saja tidak cukup menjamin kejayaan?</b>
+                            </p>
+                        </div>
+                    </div>
+                    <button class="px-6 py-3 rounded-full bg-theme-primary hover:bg-theme-accent text-white text-sm font-semibold transition whitespace-nowrap shadow-md">
+                        Kerjakan Tugas
+                    </button>
+                </div>
+            </section>
         </div>
-    </section>
+
+        <!-- DIVIDER -->
+        <div id="materi2" class="w-full h-px bg-theme-primary/20 my-10"></div>
+
+        <!-- ========================================== -->
+        <!-- PERTEMUAN 2: BANTEN & TERNATE              -->
+        <!-- ========================================== -->
+        <div id="pertemuan2" class="space-y-20 pt-10 scroll-mt-24">
+            <a href="index.html#menu-pertemuan" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-theme-textDark font-semibold text-sm shadow-sm border border-gray-200 hover:bg-gray-50 transition">← Kembali ke pilihan pertemuan</a>
+            <div class="text-center">
+                <span class="text-theme-primary font-bold tracking-widest uppercase text-sm">Pertemuan 2</span>
+                <h2 class="text-3xl font-bold text-theme-textDark mt-2">Materi Kerajaan Banten & Ternate</h2>
+            </div>
+
+            <!-- BANTEN -->
+            <section class="space-y-6">
+                 <!-- Section Header -->
+                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="flex items-center gap-4 bg-white p-4 pr-8 rounded-full shadow-sm w-fit border border-theme-primary/10">
+                        <div class="w-12 h-12 bg-[#6b7ca8] text-white rounded-full flex items-center justify-center shadow-md">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-theme-textDark">Banten: Persilangan Geopolitik</h3>
+                    </div>
+                    <a href="Kesultanan Banten - Infografis.pdf" download="Kesultanan-Banten-Infografis.pdf" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-teal-100 text-teal-600 rounded-full hover:bg-teal-50 transition shadow-sm text-sm font-semibold w-fit">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Unduh Infografis PDF
+                    </a>
+                </div>
+
+                <figure class="glass-card p-3 sm:p-5 rounded-[2rem] shadow-ui">
+                    <img src="./Kesultanan Banten_ Jejak Islam dan Perdagangan.png" alt="Infografis Kesultanan Banten: jejak Islam dan perdagangan" loading="lazy" decoding="async" class="block w-full max-w-4xl h-auto mx-auto rounded-xl">
+                </figure>
+
+                <div class="glass-card rounded-[2rem] p-8 shadow-ui">
+                    <div class="columns-1 md:columns-2 gap-8 space-y-6 text-theme-textMuted text-justify-custom leading-relaxed">
+                        <p>Penyebaran Islam di Banten tidak lepas dari persilangan antara geopolitik ekonomi maritim dan pendekatan kebudayaan lokal. Posisi strategis memicu perjumpaan intensif warga lokal dan jaringan pedagang Timur Tengah, Gujarat, Persia, dll. Penyebaran berlangsung damai; dai dan pedagang berbaur lewat keteladanan dengan masyarakat mayoritas Hindu, memicu akulturasi tanpa mengikis identitas budaya lokal.</p>
+                        <p>Secara sosiologi politik, peran elite lokal (Sunan Gunung Jati & Sultan Maulana Hasanuddin) meletakkan fondasi Kesultanan. Islam dilembagakan dalam pemerintahan & hukum syariah, memperkuat legitimasi dan menjalin relasi diplomatik dengan Mekah.</p>
+                        <p>Secara sosiologi pendidikan, masjid dan madrasah mentransfer ilmu. Sinergi ulama, kiai, dan jawara membentuk kepemimpinan informal yang solid di akar rumput sebagai pelindung dan penuntun spiritual.</p>
+                    </div>
+                </div>
+
+                <!-- Nobar Banner with Video Embed -->
+                <div class="bg-gradient-to-r from-[#2d3748] to-[#475b8a] rounded-[2rem] p-8 flex flex-col gap-8 text-white shadow-float relative overflow-hidden">
+                    <div class="absolute left-0 top-0 h-full w-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 pointer-events-none"></div>
+                    
+                    <div class="relative z-10 flex flex-col md:flex-row justify-between items-start gap-4">
+                        <div class="space-y-2">
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-xs tracking-wider uppercase inline-block mb-2">Tugas Individu</span>
+                            <h4 class="text-2xl md:text-3xl font-bold">Nobar Film: Tirtayasa the Sultan of Banten</h4>
+                            <p class="text-blue-100 max-w-xl text-sm leading-relaxed mt-2">
+                                Tontonlah video dokumenter sejarah di bawah ini dengan saksama. Setelah selesai, <b>tulis dan presentasikan hikmah serta nilai kepemimpinan</b> yang bisa diambil dari video film tersebut.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Embedded YouTube Player -->
+                    <div class="relative z-10 w-full overflow-hidden rounded-xl bg-black/50 border border-white/20 shadow-lg" style="padding-top: 56.25%;">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/YwB4wcDhNKg" title="Tirtayasa the Sultan of Banten" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TERNATE -->
+            <section class="space-y-6 pt-10 pb-20">
+                <!-- Section Header -->
+                <div class="flex flex-col-reverse md:flex-row md:items-center justify-between gap-4">
+                    <a href="Kesultanan Ternate - Infografis.pdf" download="Kesultanan-Ternate-Infografis.pdf" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-purple-100 text-purple-600 rounded-full hover:bg-purple-50 transition shadow-sm text-sm font-semibold w-fit ml-auto md:ml-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Unduh Infografis PDF
+                    </a>
+                    <div class="flex items-center justify-end gap-4 bg-white p-4 pl-8 rounded-full shadow-sm w-fit ml-auto border border-theme-primary/10">
+                        <h3 class="text-2xl font-bold text-theme-textDark">Ternate: Bandar Rempah Nusantara</h3>
+                        <div class="w-12 h-12 bg-theme-primary text-white rounded-full flex items-center justify-center shadow-md">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="glass-card p-3 sm:p-5 rounded-[2rem] shadow-ui">
+                    <img src="./Sultanate of Ternate_ Spice Trade Legacy.png" alt="Infografis Kesultanan Ternate: perdagangan rempah" loading="lazy" decoding="async" class="block w-full max-w-4xl h-auto mx-auto rounded-xl">
+                </figure>
+
+                <div class="glass-card rounded-[2rem] p-8 shadow-ui text-theme-textMuted text-justify-custom leading-relaxed">
+                    <p>Kerajaan Ternate berkembang berkat letak geografis strategis dan kekayaan alam (cengkeh). Menjadi jaringan perdagangan yang menghubungkan Nusantara dengan Arab, Melayu, Jawa, Tiongkok, dan Eropa. Perdagangan ini mendorong kemakmuran sekaligus memperkuat politik. Interaksi luas memperluas penyebaran agama, bahasa, dan budaya.</p>
+                    <p class="mt-4">Kekayaan ini menarik Eropa (Portugis & Belanda) yang berusaha memonopoli, memicu campur tangan politik. Perlawanan Sultan Baabullah menjadi bukti mempertahankan kedaulatan. Sejarah ini menunjukkan kaitan erat antara geografi, ekonomi, dan politik.</p>
+                </div>
+
+                <!-- Group Tasks Grid (Mimicking square cards/Artwork grid) -->
+                <div id="aktivitas" class="pt-6">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="px-3 py-1 bg-theme-accent text-white text-xs font-bold rounded-md tracking-wide">TUGAS KELOMPOK</span>
+                        <h4 class="text-xl font-bold text-theme-textDark">Pilih Topik Diskusi</h4>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Card 1 -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-ui transition border border-gray-100 group cursor-pointer relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-16 h-16 bg-blue-50 rounded-bl-full -z-10 group-hover:scale-150 transition-transform"></div>
+                            <div class="text-2xl font-bold text-blue-200 mb-2">01</div>
+                            <h5 class="font-bold text-theme-textDark text-sm mb-2">Geopolitik & Barat</h5>
+                            <p class="text-xs text-theme-textMuted leading-relaxed">Keterkaitan letak geografis, perdagangan cengkeh, dan kepentingan politik Barat yang memicu perebutan kekuasaan.</p>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-ui transition border border-gray-100 group cursor-pointer relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-16 h-16 bg-red-50 rounded-bl-full -z-10 group-hover:scale-150 transition-transform"></div>
+                            <div class="text-2xl font-bold text-red-200 mb-2">02</div>
+                            <h5 class="font-bold text-theme-textDark text-sm mb-2">Motif Perlawanan</h5>
+                            <p class="text-xs text-theme-textMuted leading-relaxed">Evaluasi perlawanan Sultan Baabullah: Apakah lebih didorong politik-ekonomi atau agama-kedaulatan budaya? Uji dengan bukti.</p>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-ui transition border border-gray-100 group cursor-pointer relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-16 h-16 bg-orange-50 rounded-bl-full -z-10 group-hover:scale-150 transition-transform"></div>
+                            <div class="text-2xl font-bold text-orange-200 mb-2">03</div>
+                            <h5 class="font-bold text-theme-textDark text-sm mb-2">Analisis Skenario VOC</h5>
+                            <p class="text-xs text-theme-textMuted leading-relaxed">Jika Ternate menolak monopoli VOC sejak awal, bagaimana nasib politik & perdagangannya? Tarik kesimpulan rasional.</p>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-ui transition border border-gray-100 group cursor-pointer relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-16 h-16 bg-teal-50 rounded-bl-full -z-10 group-hover:scale-150 transition-transform"></div>
+                            <div class="text-2xl font-bold text-teal-200 mb-2">04</div>
+                            <h5 class="font-bold text-theme-textDark text-sm mb-2">Dampak Sosial Budaya</h5>
+                            <p class="text-xs text-theme-textMuted leading-relaxed">Pengaruh perdagangan internasional terhadap penyebaran Islam, bahasa, dan sosial masyarakat (Ternate sebagai jalur sutra).</p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="relative z-10 glass-dark py-8 text-center text-slate-600 border-t border-slate-700">
-        <div class="max-w-4xl mx-auto px-4 flex flex-col items-center">
-            <img class="w-10 h-10 rounded-full object-cover shadow-lg mb-4 hover:rotate-12 transition-transform duration-300"
-                src="./ChatGPT Image May 13, 2026, 06_48_30 AM.png" alt="Logo">
-            <p class="text-sm md:text-base font-medium mb-2">@harapmoonproduction 2026 Tugas Akhir S2 Pendidikan Sejarah
-                Universitas Sebelas Maret</p>
-            <p class="text-xs text-slate-500">Dibuat untuk keperluan pendidikan dan penelitian.</p>
+    <footer class="bg-white border-t border-gray-200 py-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center text-center gap-4">
+            <div class="flex items-center gap-2 text-theme-primary font-bold text-xl">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg>
+                Jejak Kerajaan Islam Nusantara
+            </div>
+            <div class="text-sm text-theme-textMuted space-y-1">
+                <p>@harapmoonproduction 2026 Tugas Akhir S2 Pendidikan Sejarah Universitas Sebelas Maret</p>
+                <p>Dibuat untuk keperluan pendidikan dan penelitian.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Fullscreen Material Overlay Page -->
-    <div id="materialPage"
-        class="fixed inset-0 z-[100] bg-slate-950/70 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-300 hidden">
-        <!-- Close Button Top Right -->
-        <button id="closeMaterialBtn"
-            class="fixed top-6 right-6 z-[110] w-12 h-12 rounded-full bg-white/10 hover:bg-red-600 hover:scale-110 active:scale-95 text-white border border-white/20 hover:border-red-500 shadow-lg flex items-center justify-center text-xl transition-all duration-300"
-            aria-label="Tutup Materi">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-
-        <!-- Scrollable Wrapper -->
-        <div id="materialScrollWrapper"
-            class="w-full h-full overflow-y-auto p-4 md:p-8 flex justify-center items-start">
-            <div class="min-h-screen flex items-center justify-center w-full py-8">
-                <!-- Modal Card Content -->
-                <div id="materialContentCard"
-                    class="w-full max-w-4xl bg-white/95 rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/40 transform scale-95 opacity-0 transition-all duration-300">
-                    <!-- Content injected via JavaScript -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Import data materi -->
-    <script>
-        const KERAJAAN_DATA = [
-            {
-                "id": "samudera_pasai",
-                "name": "Kesultanan Samudera Pasai",
-                "region": "Sumatera",
-                "year": "Abad ke-13 (1267 M)",
-                "ruler": "Sultan Malik as-Saleh / Sultan Mahmud Malik Az-Zahir",
-                "banner": "image1.png",
-                "thumbnail": "./samudera-pasai.jpg",
-                "quiz_url": "https://wayground.com/join?pin=pasai_quiz",
-                "content": [
-                    {
-                        "type": "text",
-                        "value": "Kamu tahu apa pulau paling barat di Indonesia? Yap, Sabang. Pulau Sabang ada di Aceh, yang juga merupakan lokasi kerajaan Islam pertama di Nusantara. Nama kerajaannya Samudera Pasai. Kerajaan Samudera Pasai berdiri sejak tahun 1128 dan terletak di pantai timur Sumatra, atau kurang lebih di sekitar Kota Lhokseumawe dan Aceh Utara."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Samudera Pasai berkembang sebagai kerajaan maritim yang paling berpengaruh karena terletak di dekat Selat Malaka yang strategis. Oleh karena itu, nggak heran hal ini membuat Kerajaan Samudera Pasai banyak dijadikan tempat singgah dan menetap oleh banyak pedagang."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image1.png",
-                        "caption": "Wilayah kerajaan Samudra Pasai. (Sumber: skul-id.com)"
-                    },
-                    {
-                        "type": "text",
-                        "value": "Raja pertama Kesultanan Samudera Pasai adalah Sultan Malik as-Saleh. Kerajaan Samudera Pasai mencapai puncak kejayaan pada masa kepemimpinan Sultan Mahmud Malik Az-Zahir. Pada masa itu, kerajaan ini menjalin hubungan erat dalam bidang ekonomi dan perdagangan dengan kerajaan-kerajaan Islam di India dan Semenanjung Arab."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Nah ternyata, bukan hanya Kerajaan Sriwijaya saja yang menjadi pusat belajar agama Buddha. Kerajaan Samudera Pasai juga menjadi pusat studi Islam di Asia Tenggara ada awal abad ke-14. Para elite kerajaan menjadikan lingkungan kerajaan sebagai tempat diskusi ulama dengan para elite lainnya atau antarulama."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Perdagangan merupakan bagian dari kehidupan ekonomi Kerajaan Samudera Pasai yang cemerlang. Untuk mendukung perekonomian, masyarakat Samudera Pasai menggunakan alat tukar berupa koin dinar emas dan keueh dari timah. Nilai 1 dinar sama dengan 1.600 keueh."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Meski berjaya, peran Kerajaan Samudera Pasai sebagai pusat dagang di Selat Malaka mulai digantikan oleh pelabuhan-pelabuhan baru di Semenanjung Malaya. Hal ini menyebabkan kemunduran ekonomi Kerajaan Samudera Pasai, ditambah kedatangan Portugis yang menguasai dan memonopoli Malaka."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image2.png",
-                        "caption": "Mata uang logam emas (Dinar) Kerajaan Samudra Pasai. (Sumber: Republika.co.id)"
-                    },
-                    {
-                        "type": "text",
-                        "value": "Foto naskah surat Sultan Zainal ‘Abidin yang saat ini terdapat di Museum Negeri Aceh, Banda Aceh. (Sumber: mapesaaceh.com)"
-                    }
-                ],
-                "references": [
-                    "https://www.ruangguru.com/blog/kerajaan-kerajaan-maritim-islam-di-nusantara"
-                ]
-            },
-            {
-                "id": "aceh_darussalam",
-                "name": "Kesultanan Aceh Darussalam",
-                "region": "Sumatera",
-                "year": "Abad ke-16 (1514 M)",
-                "ruler": "Sultan Ali Mughayat Syah / Sultan Iskandar Muda",
-                "banner": "image4.png",
-                "thumbnail": "./aceh-darussalam.jpg",
-                "quiz_url": "https://wayground.com/join?pin=aceh_quiz",
-                "support_videos": [
-                    {
-                        "title": "Video Pendukung Kesultanan Aceh Darussalam",
-                        "url": "https://www.youtube.com/embed/roiCfl3_HXU?si=7to5Nn_EdBUFtIX1"
-                    }
-                ],
-                "content": [
-                    {
-                        "type": "text",
-                        "value": "Selain Samudera Pasai, di wilayah Aceh juga berdiri kerajaan lainnya. Namanya kerajaan Aceh Darussalam. Kerajaan Aceh Darussalam didirikan oleh Sultan Ali Mughayat Syah pada abad ke-16. Pusat kerajaannya berada di ujung utara Sumatra, yang kini merupakan Kabupaten Aceh Besar. Lokasi kerajaan ini sangat strategis bagi lintas perdagangan laut internasional karena dekat dengan Samudera Hindia."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Kerajaan Aceh berkembang menjadi kerajaan besar sejak Portugis menguasai Malaka dan banyak pedagang Muslim berpindah ke Aceh. Merasa akan dikalahkan, Portugis kemudian berusaha menaklukan Aceh. Usaha mereka gagal pada tahun 1521 karena dikalahkan oleh raja pertama Kerajaan Aceh, yiatu Sultan Ali Mughayat Syah. Pada tahun 1524 pun, pasukan Aceh berhasil menguasai Samudera Pasai."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Pada masa pemerintahan Sultan Iskandar Muda, Kerajaan Aceh Darussalam mencapai kejayaan. Wilayah kekuasaan Aceh mencapai wilayah-wilayah yang saat ini berada di Sumatra Utara, Riau, hingga Jambi. Kekuatan angkatan laut Aceh yang tangguh ketika masa Sultan Iskandar Muda mengkhawatirkan Belanda dan Inggris yang ingin menguasai Selat Malaka."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image3.png",
-                        "caption": "Pemimpin Kesultanan Aceh, Sultan Iskandar Muda. (Sumber: detik.com)"
-                    },
-                    {
-                        "type": "text",
-                        "value": "Bagai kehilangan induknya, Kerajaan Aceh mengalami kemunduran setelah Sultan Iskandar Muda wafat. Pengaruh Belanda dan Inggris mulai mengusik Aceh, dengan menguasai wilayah-wilayah Kerajaan Aceh."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Pada tahun 1873, Belanda menyatakan perang terhadap Aceh. Kegigihan rakyat Aceh mampu menahan serangan Belanda hingga awal abad ke-20. Belanda akhirnya berhasil mengurangi kekuatan Aceh, dan pada tahun 1903, raja Aceh berikutnya, yaitu Sultan Muhammad Daud Syah menyatakan menyerah."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image4.png",
-                        "caption": "Salah satu tinggalan Kesultanan Aceh, Masjid Raya Baiturrahman. Dibangun oleh Sultan Iskandar Muda pada tahun 1022 H/1612 M. (Sumber: en.m.wikipedia.org)"
-                    }
-                ],
-                "references": [
-                    "https://www.ruangguru.com/blog/kerajaan-kerajaan-maritim-islam-di-nusantara"
-                ]
-            },
-            {
-                "id": "demak",
-                "name": "Kesultanan Demak",
-                "region": "Jawa",
-                "year": "Akhir Abad ke-15 (1478 M)",
-                "ruler": "Raden Patah / Sultan Trenggana",
-                "banner": "image5.png",
-                "thumbnail": "./demak.jpg",
-                "quiz_url": "https://wayground.com/join?pin=demak_quiz",
-                "support_videos": [
-                    {
-                        "title": "Video Pendukung Kesultanan Demak",
-                        "url": "https://www.youtube.com/embed/6ax_O0yNWxg?si=F_-OPXnPqeN0DpVe"
-                    }
-                ],
-                "content": [
-                    {
-                        "type": "text",
-                        "value": "Tahukah kamu kalau Demak merupakan kerajaan maritim Islam pertama di Jawa? Kerajaan Demak berdiri di abad ke-16 oleh Raden Patah sebagai raja pertamanya, dan menguasai seluruh pantai utara Jawa, tepatnya di Kabupaten Demak, Jawa Tengah."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Kerajaan Demak memanfaatkan kemunduran Kerajaan Majapahit untuk membuat daerah-daerah pesisir melepaskan diri dari Majapahit dan bergabung dengan Demak."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image5.png",
-                        "caption": "Masjid Agung Demak merupakan salah satu peninggalan Kerajaan Demak yang beratap tumpang. (Sumber: greatnesia.id)"
-                    },
-                    {
-                        "type": "text",
-                        "value": "Portugis yang menguasai Malaka sejak tahun 1511 menjadi ancaman bagi perkembangan Demak. Kerajaan Demak kemudian melakukan ekspansi ke Selat Malaka yang dipimpin Adipati Unus (Pangeran Sabrang Lor) pada tahun 1512-1513. Sayangnya, ekspansi tersebut belum berhasil karena dikalahkan Portugis yang memiliki armada lebih kuat, dan kurangnya perbekalan pasukan Demak."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Kerajaan Demak mencapai puncak kejayaan di masa Sultan Trenggana. Di bawah kepemimpinannya, kerajaan ini berhasil memperluas kekuasaannya hingga ke seluruh Jawa Tengah dan Jawa Timur, serta memantapkan penguasaan pesisir Jawa. Hampir seluruh Jawa berada di bawah kekuasaan Demak, lho!"
-                    },
-                    {
-                        "type": "text",
-                        "value": "Kerajaan Demak juga mengirim Fatahillah untuk menyerang Banten, Sunda Kelapa, dan Cirebon pada 1522. Serangan tersebut bertujuan untuk memutuskan pengaruh Portugis di Pajajaran. Pada tahun 1527, pasukan Demak berhasil merebut Sunda Kelapa setelah mengalahkan kekuatan Portugis. Fatahillah kemudian mengubah nama Sunda Kelapa menjadi Jayakarta. Ini dia asal-usul nama Jakarta."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Dengan semakin luasnya wilayah kekuasaan Kerajaan Demak, membuat kerajaan ini juga berhasil memperluas penyebaran agama Islam. Bahkan, Kerajaan Demak menjadi pelopor penyebaran agama Islam di Pulau Jawa."
-                    }
-                ],
-                "references": [
-                    "https://www.ruangguru.com/blog/kerajaan-kerajaan-maritim-islam-di-nusantara"
-                ]
-            },
-            {
-                "id": "banten",
-                "name": "Kesultanan Banten",
-                "region": "Jawa",
-                "year": "Abad ke-16 (1552 M)",
-                "ruler": "Sunan Gunung Jati / Maulana Hasanuddin / Sultan Ageng Tirtayasa",
-                "banner": "image6.png",
-                "thumbnail": "./banten.jpg",
-                "quiz_url": "https://wayground.com/join?pin=banten_quiz",
-                "support_videos": [
-                    {
-                        "title": "Video Pendukung Kesultanan Banten",
-                        "url": "https://www.youtube.com/embed/XhD26L1MWdw?si=v1F37ei66Y3F-uP0"
-                    }
-                ],
-                "content": [
-                    {
-                        "type": "text",
-                        "value": "Di ujung barat Pulau Jawa, Kerajaan Banten berdiri sekitar tahun 1552. Kerajaan Banten didirikan oleh Syarif Hidayatullah atau yang lebih dikenal dengan julukan Sunan Gunung Jati. Wilayah kekuasaannya meliputi bagian barat Pulau Jawa, Lampung, Sumatra Selatan, dan Kalimantan Barat. Kemunculan kerajaan ini berhubungan dengan pengaruh Kerajaan Demak."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Kamu masih ingat dengan Sultan Trenggana dari Demak? Beliau memberi hadiah berupa wilayah Kerajaan Banten kepada Maulana Hasanuddin, yang merupakan putra Fatahillah dan raja pertama Kerajaan Banten. Banten kemudian menjadi kerajaan yang mandiri seiring melemahnya Kerajaan Demak."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Lokasi Kerajaan Banten strategis karena di sekitar Selat Sunda dan Laut Jawa, sehingga memungkinkan munculnya pelabuhan-pelabuhan besar untuk perdagangan. Banten juga menjadi kerajaan maritim yang terbuka dengan kedatangan para pedagang asing dari Arab, Turki, Tiongkok, India, Melayu, Portugis, dan Belanda."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Komoditas penting yang diperdagangkan di kerajaan Banten adalah lada. Lada banyak dihasilkan di Lampung dan Sumatra Selatan yang merupakan vassal Kerajaan Banten. Adapun Kalimantan Barat merupakan penghasil berlian. Pada masa Sultan Ageng Tirtayasa, Kerajaan Banten mencapai puncak kejayaan. Kejayaan Banten juga dapat menandingi VOC dalam perdagangan di Selat Sunda dan Laut Jawa."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image6.png",
-                        "caption": "Masjid Agung Banten merupakan salah satu peninggalan Kerajaan Banten di kawasan Banten Lama. (Sumber: id.wikipedia.org)"
-                    },
-                    {
-                        "type": "image",
-                        "file": "image7.png",
-                        "caption": "Lada, komoditas utama perdagangan maritim Kesultanan Banten. (Sumber: damarbanten.com)"
-                    }
-                ],
-                "references": [
-                    "https://www.ruangguru.com/blog/kerajaan-kerajaan-maritim-islam-di-nusantara"
-                ]
-            },
-            {
-                "id": "cirebon",
-                "name": "Kesultanan Cirebon",
-                "region": "Jawa",
-                "year": "Abad ke-15 (1479 M)",
-                "ruler": "Pangeran Cakrabuana (Walangsungsang) / Sunan Gunung Jati",
-                "banner": "image8.png",
-                "thumbnail": "./cirebon.jpg",
-                "quiz_url": "https://wayground.com/join?pin=cirebon_quiz",
-                "support_videos": [
-                    {
-                        "title": "Video Pendukung Kesultanan Cirebon",
-                        "url": "https://www.youtube.com/embed/XdiSL6fzW-Q?si=3LKX-HVxZxQElqFy"
-                    }
-                ],
-                "content": [
-                    {
-                        "type": "text",
-                        "value": "Kerajaan maritim Islam di Pulau Jawa berikutnya adalah Kerajaan Cirebon. Sesuai namanya, kerajaan ini terletak di wilayah Cirebon, Jawa Barat. Pada mulanya, Cirebon merupakan dukuh kecil yang dibangun oleh Ki Gedeng Tapa. Didukung oleh pelabuhan yang ramai, wilayah ini berkembang menjadi kota besar di pesisir utara Jawa."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Setelah Ki Gedeng Tapa wafat, cucunya yang bernama Walangsungsang mendirikan istana Pakungwati dan membentuk pemerintahan di Cirebon. Oleh sebab itu, sebagian orang berpendapat bahwa yang mendirikan Kerajaan Cirebon adalah Walangsungsang atau Pangeran Cakrabuana."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Kamu masih ingat dengan pendiri Kerajaan Banten, yaitu Sultan Syarif Hidayatullah atau Sunan Gunung Jati? Beliau pernah memimpin kerajaan ini pada 1479-1568 M hingga mencapai puncak kejayaannya. Kerajaan Cirebon berkembang sangat pesat di bidang agama, politik, dan ekonomi. Sultan Syarif Hidayatullah juga berperan dalam penyebaran agama Islam di Cirebon."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Pada masa itu, ia banyak menguasai daerah di Pulau Jawa, seperti Banten, Sunda Kelapa, dan Rajagaluh. Karena itulah, Sultan Syarif Hidayatullah diyakini sebagai pendiri dinasti raja-raja Kesultanan Cirebon dan Banten. Sementara itu, di bidang ekonomi, Sultan Syarif Hidayatullah memfokuskan perdagangan dengan India, Cina, dan Arab."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image8.png",
-                        "caption": "Keraton Kanoman, Cirebon, Jawa Barat. (Sumber: KOMPAS/WINDORO ADI)"
-                    },
-                    {
-                        "type": "image",
-                        "file": "image9.png",
-                        "caption": "Kereta Singa Barong, warisan seni-budaya adiluhung Kesultanan Cirebon. (Sumber: Detik.com)"
-                    }
-                ],
-                "references": []
-            },
-            {
-                "id": "ternate",
-                "name": "Kesultanan Ternate",
-                "region": "Maluku",
-                "year": "Abad ke-13 (1257 M)",
-                "ruler": "Baab Mashur Malamo / Sultan Baabullah",
-                "banner": "image11.png",
-                "thumbnail": "./ternate-tidore.jpg",
-                "quiz_url": "https://wayground.com/join?pin=ternate_quiz",
-                "content": [
-                    {
-                        "type": "text",
-                        "value": "Tentunya, kamu pernah melihat Pattimura di uang kertas seribu rupiah, kan? Coba kamu lihat gambar di baliknya! Itu dia Pulau Ternate dan Tidore. Kerajaan Ternate terletak di wilayah barat Halmahera dan di utara Tidore. Kerajaan Ternate didirikan oleh Baab Mashur Malamo pada 1257 M."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Saat menjadi kerajaan Islam di wilayah Ambon Utara, Ternate merupakan pemasok rempah, seperti lada, cengkeh, pala untuk para pedagang dari Jawa, Banten, Melayu, Makassar, dan Bugis. Hal inilah yang membuat Kerajaan Ternate dijuluki sebagai The Spice Island."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Di bawah kepemimpinan Sultan Baabullah, Kerajaan Ternate mencapai kejayaannya. Kora-kora sebagai kapal armada perangnya berhasil memperluas kekuasaan Kerajaan Ternate. Wilayah kekuasaan Ternate meliputi Maluku Utara, Pulau Buru, Seram, Sulawesi Utara, dan sekitar Teluk Tomini."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image10.png",
-                        "caption": "Cengkih, salah satu komoditas rempah unggulan pulau Maluku. (Sumber: jawapos.com)"
-                    },
-                    {
-                        "type": "text",
-                        "value": "Tapi, kamu tahu nggak sih, Kerajaan Ternate pernah mengalami pertempuran dengan tetangga dekatnya, yaitu Kerajaan Tidore. Alasannya karena persaingan untuk menguasai perdagangan di Kepulauan Maluku."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Pada saat itu, Kerajaan Ternate memimpin Uli Lima untuk melawan Kerajaan Tidore yang memimpin Uli Siwa. Sayangnya, persaingan itu semakin buruk ketika Portugis dan Spanyol datang berebut rempah-rempah di Maluku. Portugis semakin ingin menguasai Ternate setelah Spanyol pergi dari Maluku akibat Perjanjian Saragosa."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image11.png",
-                        "caption": "Istana Kedaton Sultan Ternate. (Sumber: kompasiana.com)"
-                    }
-                ],
-                "references": [
-                    "https://www.ruangguru.com/blog/kerajaan-kerajaan-maritim-islam-di-nusantara"
-                ]
-            },
-            {
-                "id": "tidore",
-                "name": "Kesultanan Tidore",
-                "region": "Maluku",
-                "year": "Abad ke-11 (Islam Abad ke-15)",
-                "ruler": "Sultan Syahjati / Sultan Nuku",
-                "banner": "image12.png",
-                "thumbnail": "./ternate-tidore.jpg",
-                "quiz_url": "https://wayground.com/join?pin=tidore_quiz",
-                "content": [
-                    {
-                        "type": "text",
-                        "value": "Nah, sekarang kita bahas lebih lanjut mengenai tetangga Kerajaan Ternate, yaitu Kerajaan Tidore. Menurut sejarahnya, kerajaan ini memiliki akar yang sama dari Kerajaan Ternate. Sebab, pendiri Kerajaan Tidore, yaitu Syahjati atau Muhammad Naqil, merupakan saudara dari Baab Mashur Malamo, pendiri Kerajaan Ternate."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Kerajaan Tidore didirikan sekitar abad ke-11, namun saat itu kerajaan ini belum bercorak Islam. Baru lah sekitar akhir abad ke-15, agama Islam masuk dan berkembang di wilayah ini. Dengan masuknya Islam ke Kerajaan Tidore, berbagai aspek di bidang politik, ekonomi, sosial, dan budaya di kehidupan masyarakatnya pun ikut terpengaruh. Beberapa peninggalan Kerajaan Tidore, antara lain Masjid Sultan Tidore dan Benteng Torre Dan Tahula."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Kerajaan Tidore berhasil mencapai puncak kejayaannya di bawah pimpinan Sultan Nuku. Pada masa itu, wilayah kekuasaan Kerajaan Tidore telah berkembang ke sebagian besar Pulau Halmahera, Pulau Buru, Pulau Seram, hingga kawasan Papua bagian barat. Bahkan, Sultan Nuku juga berhasil menyatukan Ternate dan Tidore untuk bersama-sama melawan Belanda."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image12.png",
-                        "caption": "Masjid Sultan Tidore yang ikonik di Maluku Utara."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image13.png",
-                        "caption": "Peta historis perluasan wilayah kekuasaan Kerajaan Tidore. (Sumber: sultansinindonesieblog.wordpress.com / Dok. Kemdikbud)"
-                    }
-                ],
-                "references": []
-            },
-            {
-                "id": "gowa_tallo",
-                "name": "Kesultanan Gowa-Tallo (Makassar)",
-                "region": "Sulawesi",
-                "year": "Abad ke-16 (Islam 1605 M)",
-                "ruler": "Sultan Alauddin / Sultan Hasanuddin (Ayam Jantan dari Timur)",
-                "banner": "image14.png",
-                "thumbnail": "./gowa-tallo.jpg",
-                "quiz_url": "https://wayground.com/join?pin=gowatallo_quiz",
-                "content": [
-                    {
-                        "type": "text",
-                        "value": "Kerajaan Gowa-Tallo merupakan kerajaan Islam terbesar di Sulawesi Selatan. Kerajaan ini disebut juga sebagai Kerajaan Makassar. Kerajaan Gowa-Tallo berawal dari penyatuan sembilan distrik yang disebut bate salapang oleh Pancalaya (ketua dewan adat), kemudian didirikan kerajaan dengan raja pertama bernama Tumanurung."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Agama Islam masuk ke Gowa pada masa Raja Gowa X, yaitu Karaeng Tunipallangga Ulaweng. Adapun Raja Gowa XIV I Mangarangi Daeng Manrabia (Sultan Alauddin) merupakan raja pertama yang beragama Islam. Pertumbuhan Islam di Gowa semakin pesat. Pada tahun kedua kesultanan Alauddin, semua rakyat berhasil diislamkan."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Kerajaan Gowa-Tallo mencapai masa kejayaan di bawah pimpinan Sultan Hasanuddin. Mungkin kamu juga sudah tidak asing dengan namanya ya? Sultan Hasanuddin diberi julukan Ayam Jantan dari Timur."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Peran orang Makassar dalam pelayaran di Nusantara berlangsung sejak abad ke-16. Gowa dengan Somba Opu sebagai pelabuhannya adalah kerajaan dagang yang kuat. Kerajaan ini memperdagangkan rempah-rempah untuk ditukarkan dengan komoditas dari Jawa dan Malaka, seperti beras, tekstil, sutra, dan porselen."
-                    },
-                    {
-                        "type": "text",
-                        "value": "Kerajaan Gowa dan Tallo pada masa kejayaannya berhasil menjadi pusat perdagangan terbesar di wilayah timur nusantara."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image14.png",
-                        "caption": "Peninggalan pertahanan maritim Kesultanan Gowa-Tallo. (Sumber: Kemdikbud)"
-                    },
-                    {
-                        "type": "image",
-                        "file": "image15.png",
-                        "caption": "Wilayah kekuasaan Kerajaan Gowa-Tallo di Sulawesi Selatan. (Sumber: en.wikipedia.org)"
-                    },
-                    {
-                        "type": "text",
-                        "value": "Kemajuan perdagangan bebas Makassar mengancam VOC yang sedang berusaha memonopoli rempah-rempah Nusantara. VOC tidak mau Makassar menandingi perdagangan VOC di Ambon and Batavia, sehingga menyebabkan Perang Makassar (1666-1669). Perang ini akhirnya meruntuhkan politik dan ekonomi Kerajaan Gowa-Tallo."
-                    },
-                    {
-                        "type": "image",
-                        "file": "image16.png",
-                        "caption": "Ilustrasi penyerangan bandar pelabuhan Makassar oleh armada VOC. (Sumber: vocwarfare.net)"
-                    }
-                ],
-                "references": [
-                    "https://www.ruangguru.com/blog/kerajaan-kerajaan-maritim-islam-di-nusantara"
-                ]
-            }
-        ];
-    </script>
-
-    <script>
-        const openSidebarBtn = document.getElementById('openSidebarBtn');
-        const closeSidebarBtn = document.getElementById('closeSidebarBtn');
-        const mobileSidebar = document.getElementById('mobileSidebar');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-        function openSidebar() {
-            mobileSidebar.classList.remove('-translate-x-full');
-            mobileOverlay.classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
-        }
-
-        function closeSidebar() {
-            mobileSidebar.classList.add('-translate-x-full');
-            mobileOverlay.classList.add('hidden');
-            document.body.classList.remove('overflow-hidden');
-        }
-
-        // Materi Detail Page Logic
-        const materialPage = document.getElementById('materialPage');
-        const materialContentCard = document.getElementById('materialContentCard');
-        const closeMaterialBtn = document.getElementById('closeMaterialBtn');
-
-        function openMaterialPage(kingdomId) {
-            const kingdom = KERAJAAN_DATA.find(k => k.id === kingdomId);
-            if (!kingdom) return;
-
-            // Generate HTML content
-            let contentHtml = `
-                <!-- Cover Banner -->
-                <div class="relative h-64 md:h-96 w-full bg-slate-900 overflow-hidden">
-                    <img src="./${kingdom.banner}" class="w-full h-full object-cover opacity-80 transform hover:scale-105 transition-transform duration-700" alt="${kingdom.name}">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
-                    <div class="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 text-white">
-                        <span class="bg-teal-500 text-white font-bold text-xs uppercase px-3.5 py-1.5 rounded-full tracking-wider shadow">${kingdom.region}</span>
-                        <h2 class="text-3xl md:text-5xl font-extrabold mt-3 tracking-tight drop-shadow-md leading-tight">${kingdom.name}</h2>
-                    </div>
-                </div>
-
-                <!-- Metadata Badges -->
-                <div class="px-6 py-6 md:px-10 border-b border-slate-200/50 bg-slate-700/50/50">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-slate-200/50 shadow-sm">
-                            <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 text-lg"><i class="fa-solid fa-calendar-days"></i></div>
-                            <div>
-                                <div class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Era Kejayaan</div>
-                                <div class="text-sm font-bold text-slate-800">${kingdom.year}</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-slate-200/50 shadow-sm md:col-span-2">
-                            <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 text-lg"><i class="fa-solid fa-crown"></i></div>
-                            <div>
-                                <div class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Raja / Tokoh Kunci</div>
-                                <div class="text-sm font-bold text-slate-800">${kingdom.ruler}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Body Content -->
-                <div class="p-6 md:p-10 max-w-none font-sans">
-                    <div class="prose prose-slate prose-teal text-slate-600 leading-relaxed text-base md:text-lg space-y-6">
-            `;
-
-            kingdom.content.forEach(item => {
-                if (item.type === 'text') {
-                    // Check if it's a short title or subheading
-                    const isSubheading = item.value.length < 50 && !item.value.endsWith('.') && !item.value.includes(':') && !item.value.includes('(');
-                    if (isSubheading) {
-                        contentHtml += `<h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-8 mb-4 border-l-4 border-teal-500 pl-3 leading-tight font-sans">${item.value}</h4>`;
-                    } else {
-                        contentHtml += `<p class="leading-relaxed text-slate-500 font-normal text-justify font-sans">${item.value}</p>`;
-                    }
-                } else if (item.type === 'image') {
-                    contentHtml += `
-                        <div class="my-8 flex flex-col items-center">
-                            <div class="relative max-w-2xl w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200/50">
-                                <img src="./${item.file}" class="w-full h-auto object-cover max-h-[450px] mx-auto" alt="${item.caption || kingdom.name}">
-                            </div>
-                            ${item.caption ? `<p class="text-xs md:text-sm text-slate-500 italic mt-3 text-center px-4 leading-normal font-medium bg-slate-700/50 py-1.5 px-3 rounded-full border border-slate-200/50 font-sans"><i class="fa-solid fa-circle-info text-teal-500 mr-1.5"></i>${item.caption}</p>` : ''}
-                        </div>
-                    `;
-                }
-            });
-
-            contentHtml += `
-                    </div>
-            `;
-
-            // Video Pembelajaran Section
-            const supportVideos = kingdom.support_videos || [
-                {
-                    title: 'Teori Masuk dan Jalur Penyebaran Islam di Nusantara',
-                    url: 'https://www.youtube.com/embed/63Uvg-KAJhM'
-                },
-                {
-                    title: 'Perkembangan Kerajaan-Kerajaan Islam di Nusantara',
-                    url: 'https://www.youtube.com/embed/Twx3EMkQwyk'
-                }
-            ];
-
-            contentHtml += `
-                    <!-- Video Pembelajaran -->
-                    <div class="mt-12 pt-8 border-t border-slate-200/50">
-                        <h4 class="text-xl md:text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2 font-sans">
-                            <i class="fa-solid fa-circle-play text-teal-600"></i> Video Pembelajaran Pendukung
-                        </h4>
-                        <div class="grid grid-cols-1 md:grid-cols-${supportVideos.length > 1 ? '2' : '1'} gap-6">
-            `;
-
-            supportVideos.forEach(video => {
-                contentHtml += `
-                            <div class="glass-card p-4 flex flex-col h-full bg-white/50 border border-slate-200/50 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
-                                <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-inner bg-slate-900">
-                                    <iframe 
-                                        class="absolute inset-0 w-full h-full"
-                                        src="${video.url}" 
-                                        title="${video.title}" 
-                                        frameborder="0" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                        allowfullscreen>
-                                    </iframe>
-                                </div>
-                                <h5 class="text-sm md:text-base font-bold text-slate-800 mt-4 line-clamp-2">${video.title}</h5>
-                            </div>
-                `;
-            });
-
-            contentHtml += `
-                        </div>
-                    </div>
-            `;
-
-            // Quiz/Activity Call-to-action Section
-            contentHtml += `
-                    <!-- Quiz/Activity CTA -->
-                    <div class="mt-12 p-6 md:p-8 rounded-3xl bg-gradient-to-br from-teal-500/10 via-teal-600/5 to-transparent border border-teal-500/20 shadow-sm relative overflow-hidden font-sans">
-                        <div class="absolute -right-8 -bottom-8 text-teal-500/10 text-9xl font-extrabold select-none pointer-events-none">
-                            <i class="fa-solid fa-clipboard-question"></i>
-                        </div>
-                        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                            <div class="text-center md:text-left">
-                                <span class="bg-teal-600 text-white font-bold text-[10px] uppercase px-3 py-1 rounded-full tracking-wider shadow-sm">AKTIVITAS SISWA</span>
-                                <h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-3 mb-2 leading-tight">Mari Uji Pemahaman Anda!</h4>
-                                <p class="text-sm md:text-base text-slate-500 font-medium">Kerjakan kuis interaktif mengenai ${kingdom.name} langsung di platform Wayground.</p>
-                            </div>
-                            <a href="${kingdom.quiz_url}" target="_blank" class="w-full md:w-auto bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-full font-bold text-base md:text-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 transform hover:-translate-y-0.5 whitespace-nowrap text-center">
-                                <i class="fa-solid fa-gamepad"></i> Mulai Kuis Wayground
-                            </a>
-                        </div>
-                    </div>
-            `;
-
-            // References Section
-            if (kingdom.references && kingdom.references.length > 0) {
-                contentHtml += `
-                    <!-- References -->
-                    <div class="mt-12 pt-8 border-t border-slate-200/50">
-                        <h5 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4"><i class="fa-solid fa-book-open-reader mr-2"></i>Referensi & Sumber Belajar</h5>
-                        <ul class="space-y-2 text-xs md:text-sm text-slate-500 font-medium font-sans">
-                `;
-                kingdom.references.forEach(ref => {
-                    contentHtml += `
-                        <li>
-                            <a href="${ref}" target="_blank" class="hover:text-teal-600 transition-colors flex items-center gap-2 break-all">
-                                <i class="fa-solid fa-link text-slate-500"></i> ${ref}
-                            </a>
-                        </li>
-                    `;
-                });
-                contentHtml += `
-                        </ul>
-                    </div>
-                `;
-            }
-
-            contentHtml += `
-                </div>
-            `;
-
-            materialContentCard.innerHTML = contentHtml;
-
-            // Reset scroll position of the wrapper to top
-            const materialScrollWrapper = document.getElementById('materialScrollWrapper');
-            materialScrollWrapper.scrollTop = 0;
-
-            // Show page overlay and trigger transition animations
-            materialPage.classList.remove('hidden');
-            // Force reflow
-            materialPage.offsetHeight;
-
-            materialPage.classList.remove('opacity-0', 'pointer-events-none');
-            materialContentCard.classList.remove('scale-95', 'opacity-0');
-
-            document.body.classList.add('overflow-hidden');
-        }
-
-        // Expose function globally for inline onclick handlers
-        window.openMaterialPage = openMaterialPage;
-
-        function closeMaterialPage() {
-            // Hentikan pemutaran video secara instan dengan menghapus src iframe
-            const iframes = materialContentCard.querySelectorAll('iframe');
-            iframes.forEach(iframe => {
-                iframe.src = '';
-            });
-
-            materialPage.classList.add('opacity-0', 'pointer-events-none');
-            materialContentCard.classList.add('scale-95', 'opacity-0');
-
-            document.body.classList.remove('overflow-hidden');
-
-            setTimeout(() => {
-                materialPage.classList.add('hidden');
-                materialContentCard.innerHTML = '';
-            }, 300);
-        }
-
-        closeMaterialBtn.addEventListener('click', closeMaterialPage);
-
-        // Close when clicking outside the content card (on the scrollable wrapper)
-        const materialScrollWrapper = document.getElementById('materialScrollWrapper');
-        materialScrollWrapper.addEventListener('click', (e) => {
-            if (e.target === materialScrollWrapper) {
-                closeMaterialPage();
-            }
-        });
-
-    </script>
-
 </body>
-
 </html>
