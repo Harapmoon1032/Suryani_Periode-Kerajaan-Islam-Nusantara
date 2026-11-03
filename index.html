@@ -69,6 +69,31 @@
             scroll-behavior: smooth;
         }
 
+        .site-nav-link {
+            position: relative;
+            transition: color 150ms ease;
+        }
+
+        .site-nav-link:hover,
+        .site-nav-link[aria-current="page"] {
+            color: #2d3748;
+        }
+
+        .site-nav-link[aria-current="page"] {
+            font-weight: 600;
+        }
+
+        .site-nav-link[aria-current="page"]::after {
+            position: absolute;
+            right: 0;
+            bottom: -1.75rem;
+            left: 0;
+            height: 2px;
+            border-radius: 9999px 9999px 0 0;
+            background: #2d3748;
+            content: "";
+        }
+
         main > #pertemuan1,
         main > #pertemuan2 {
             display: none;
@@ -77,11 +102,14 @@
         html[data-lesson] main > #hero,
         html[data-lesson] main > #capaian-tujuan,
         html[data-lesson] main > #peta-konsep,
+        html[data-lesson] main > #pretest,
         html[data-lesson] main > #menu-pertemuan,
+        html[data-lesson] main > #postest,
         html[data-lesson] main > #materi,
         html[data-lesson] main > #materi2,
         html[data-lesson] main > #pertemuan1,
         html[data-lesson] main > #pertemuan2,
+        html[data-lesson] main > #portofolio,
         html[data-lesson] main > #tim-pengembang {
             display: none;
         }
@@ -120,12 +148,9 @@
             
             <!-- Center Links -->
             <div class="hidden md:flex space-x-10 text-sm font-medium text-theme-textMuted">
-                <a href="#" class="hover:text-theme-textDark transition">Beranda</a>
-                <div class="relative text-theme-textDark">
-                    <a href="#menu-pertemuan" class="font-semibold">Materi</a>
-                    <div class="absolute -bottom-7 left-0 right-0 h-0.5 bg-theme-textDark rounded-t-full"></div>
-                </div>
-                <a href="#aktivitas" class="hover:text-theme-textDark transition">Aktivitas</a>
+                <a href="index.html#hero" data-nav-key="beranda" class="site-nav-link">Beranda</a>
+                <a href="index.html#menu-pertemuan" data-nav-key="materi" class="site-nav-link">Materi</a>
+                <a href="index.html#portofolio" data-nav-key="portofolio" class="site-nav-link">Portofolio</a>
             </div>
 
             <!-- Right Buttons -->
@@ -361,6 +386,12 @@
             </div>
         </section>
 
+        <section id="pretest" class="w-full py-8 text-center" aria-label="Pretest">
+            <button type="button" disabled title="Link pretest akan ditambahkan" class="inline-flex items-center justify-center px-10 py-5 bg-gradient-to-r from-blue-700 to-blue-500 text-white text-lg sm:text-xl font-bold tracking-wide rounded-2xl shadow-lg opacity-80 cursor-not-allowed">
+                KERJAKAN PRETEST
+            </button>
+        </section>
+
         <!-- MENU PERTEMUAN CARDS (Style reference: Foto 1 Genshin UI 'Artwork' Cards) -->
         <section id="menu-pertemuan" class="mb-10 w-full pt-10">
             <div class="flex items-center gap-2 mb-6">
@@ -370,8 +401,9 @@
             <div class="grid grid-cols-2 gap-3 sm:gap-6 max-w-3xl mx-auto">
                 <!-- Card Pertemuan 1 -->
                 <a href="?lesson=pertemuan1#pertemuan1" aria-label="Mulai belajar Pertemuan 1: Samudra Pasai dan Demak" class="group relative block aspect-square sm:aspect-[4/5] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-theme-primary">
-                    <img src="./2.png" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]">
+                    <img src="./2.png" alt="" class="absolute inset-0 w-full h-full object-cover scale-105 blur-[1px] transition-transform duration-500 group-hover:scale-110">
                     <div class="absolute inset-x-0 bottom-0 p-2 pt-8 sm:p-4 sm:pt-12 bg-gradient-to-t from-black/75 to-transparent">
+                        <h3 class="text-white text-sm sm:text-lg font-bold text-center leading-tight drop-shadow-md mb-2">PERTEMUAN 1 - Samudera Pasai &amp; Kesultanan Demak</h3>
                         <div class="w-full py-2 sm:py-3 text-xs sm:text-base bg-white/95 text-center rounded-lg font-bold text-theme-textDark group-hover:bg-theme-primary group-hover:text-white transition-colors shadow-sm">
                             Mulai Belajar <span aria-hidden="true">→</span>
                         </div>
@@ -380,14 +412,71 @@
 
                 <!-- Card Pertemuan 2 -->
                 <a href="?lesson=pertemuan2#pertemuan2" aria-label="Mulai belajar Pertemuan 2: Banten dan Ternate" class="group relative block aspect-square sm:aspect-[4/5] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-theme-primary">
-                    <img src="./3.png" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]">
+                    <img src="./3.png" alt="" class="absolute inset-0 w-full h-full object-cover scale-105 blur-[1px] transition-transform duration-500 group-hover:scale-110">
                     <div class="absolute inset-x-0 bottom-0 p-2 pt-8 sm:p-4 sm:pt-12 bg-gradient-to-t from-black/75 to-transparent">
+                        <h3 class="text-white text-sm sm:text-lg font-bold text-center leading-tight drop-shadow-md mb-2">PERTEMUAN 2 - Kesultanan Banten &amp; Kerajaan Ternate</h3>
                         <div class="w-full py-2 sm:py-3 text-xs sm:text-base bg-white/95 text-center rounded-lg font-bold text-theme-textDark group-hover:bg-theme-primary group-hover:text-white transition-colors shadow-sm">
                             Mulai Belajar <span aria-hidden="true">→</span>
                         </div>
                     </div>
                 </a>
             </div>
+        </section>
+
+        <section id="portofolio" class="w-full py-8 scroll-mt-24">
+            <div class="text-center mb-8">
+                <span class="inline-block px-3 py-1 rounded-full bg-theme-primary/10 text-theme-primary text-xs font-bold tracking-wider uppercase">Ruang Pengumpulan Tugas</span>
+                <h2 class="text-3xl font-bold text-theme-textDark mt-3">Portofolio</h2>
+                <p class="text-theme-textMuted mt-2 max-w-2xl mx-auto">Pilih ruang tugas untuk melihat petunjuk dan mengumpulkan hasil. Setiap tugas memiliki folder Google Drive tersendiri.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <article class="glass-card rounded-[2rem] p-6 sm:p-8 shadow-ui flex flex-col">
+                    <span class="text-xs font-bold text-theme-primary uppercase tracking-wide">Ruang Tugas 1 · Tugas Individu</span>
+                    <h3 class="font-bold text-xl text-theme-textDark mt-3">LKPD Analisis Samudra Pasai</h3>
+                    <p class="text-sm text-theme-textMuted leading-relaxed mt-3 flex-grow">Analisis hubungan kondisi geografis, perdagangan, dan kekuasaan politik dalam perkembangan Samudra Pasai.</p>
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <a href="?lesson=pertemuan1#aktivitas-samuderapasai" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white border border-gray-200 text-theme-textDark hover:bg-gray-50 transition text-sm font-semibold">Lihat petunjuk LKPD <span aria-hidden="true">→</span></a>
+                        <a href="https://drive.google.com/drive/folders/1DG_f8jut9_MscZCdHlpyQWC6JDqzVWSn?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-theme-primary text-white hover:bg-theme-accent transition text-sm font-semibold">Buka Folder Drive <span aria-hidden="true">↗</span></a>
+                    </div>
+                </article>
+
+                <article class="glass-card rounded-[2rem] p-6 sm:p-8 shadow-ui flex flex-col">
+                    <span class="text-xs font-bold text-theme-accent uppercase tracking-wide">Ruang Tugas 2 · Tugas Individu</span>
+                    <h3 class="font-bold text-xl text-theme-textDark mt-3">LKPD Analisis Kesultanan Demak</h3>
+                    <p class="text-sm text-theme-textMuted leading-relaxed mt-3 flex-grow">Analisis keterkaitan letak geografis, perdagangan, dan kekuatan politik dalam perkembangan Kesultanan Demak.</p>
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <a href="?lesson=pertemuan1#aktivitas-demak" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white border border-gray-200 text-theme-textDark hover:bg-gray-50 transition text-sm font-semibold">Lihat petunjuk LKPD <span aria-hidden="true">→</span></a>
+                        <a href="https://drive.google.com/drive/folders/1Zmk5Rj90t7eP1L6M4j6-7D9X9Yrad6xU?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-theme-primary text-white hover:bg-theme-accent transition text-sm font-semibold">Buka Folder Drive <span aria-hidden="true">↗</span></a>
+                    </div>
+                </article>
+
+                <article class="glass-card rounded-[2rem] p-6 sm:p-8 shadow-ui flex flex-col">
+                    <span class="text-xs font-bold text-theme-primary uppercase tracking-wide">Ruang Tugas 3 · Tugas Kelompok</span>
+                    <h3 class="font-bold text-xl text-theme-textDark mt-3">LKPD Film Tirtayasa</h3>
+                    <p class="text-sm text-theme-textMuted leading-relaxed mt-3 flex-grow">Diskusikan hikmah film bersama kelompok dan kaitkan kesimpulan dengan nilai kepemimpinan Sultan Ageng Tirtayasa.</p>
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <a href="?lesson=pertemuan2#aktivitas-banten" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white border border-gray-200 text-theme-textDark hover:bg-gray-50 transition text-sm font-semibold">Lihat petunjuk LKPD <span aria-hidden="true">→</span></a>
+                        <a href="https://drive.google.com/drive/folders/1YjZ4-KJA4GaDyXcTgLz5GRj-H2EZ6MTd?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-theme-primary text-white hover:bg-theme-accent transition text-sm font-semibold">Buka Folder Drive <span aria-hidden="true">↗</span></a>
+                    </div>
+                </article>
+
+                <article class="glass-card rounded-[2rem] p-6 sm:p-8 shadow-ui flex flex-col">
+                    <span class="text-xs font-bold text-theme-accent uppercase tracking-wide">Ruang Tugas 4 · Diskusi Kelompok</span>
+                    <h3 class="font-bold text-xl text-theme-textDark mt-3">LKPD Hasil Diskusi Kesultanan Ternate</h3>
+                    <p class="text-sm text-theme-textMuted leading-relaxed mt-3 flex-grow">Kumpulkan hasil diskusi kelompok tentang Kesultanan Ternate dengan bukti sejarah yang relevan.</p>
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <a href="?lesson=pertemuan2#aktivitas-ternate" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white border border-gray-200 text-theme-textDark hover:bg-gray-50 transition text-sm font-semibold">Lihat petunjuk LKPD <span aria-hidden="true">→</span></a>
+                        <a href="https://drive.google.com/drive/folders/1JGd8BRhTROJSoUw5wyR687HS_fQ-dnMB?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-theme-primary text-white hover:bg-theme-accent transition text-sm font-semibold">Buka Folder Drive <span aria-hidden="true">↗</span></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="postest" class="w-full py-8 text-center" aria-label="Postest">
+            <button type="button" disabled title="Link postest akan ditambahkan" class="inline-flex items-center justify-center px-10 py-5 bg-gradient-to-r from-purple-700 to-purple-500 text-white text-lg sm:text-xl font-bold tracking-wide rounded-2xl shadow-lg opacity-80 cursor-not-allowed">
+                KERJAKAN POSTEST
+            </button>
         </section>
 
         <!-- TIM PENGEMBANG -->
@@ -520,6 +609,7 @@
                             <h5 class="font-bold text-sm text-theme-textDark mt-5 mb-2">Pertanyaan Analisis</h5>
                             <p class="text-sm text-theme-textDark font-medium leading-relaxed">Analisislah keterkaitan antara kondisi geografis, aktivitas perdagangan, dan kekuasaan politik dalam mendukung perkembangan Samudera Pasai. Jelaskan bagaimana ketiga faktor tersebut saling memengaruhi berdasarkan bukti sejarah yang telah kamu pelajari.</p>
                         </div>
+                        <a href="https://bit.ly/4jSRO4e" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-5 px-5 py-2.5 bg-theme-primary text-white rounded-full hover:bg-theme-accent transition shadow-sm text-sm font-semibold">Buka Tugas Individu Samudra Pasai <span aria-hidden="true">→</span></a>
                     </section>
                     <section class="lg:col-span-2 glass-card p-6 sm:p-8 rounded-[2rem] shadow-ui">
                         <h4 class="font-bold text-lg text-theme-textDark mb-4">Sumber Bacaan</h4>
@@ -606,7 +696,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                <div id="aktivitas-demak" class="grid grid-cols-1 lg:grid-cols-5 gap-6 scroll-mt-24">
                     <section class="lg:col-span-3 bg-[#e4ebf5] border border-theme-primary/20 rounded-[2rem] p-6 sm:p-8 shadow-inner">
                         <div class="flex items-center gap-3 flex-wrap mb-5">
                             <span class="px-3 py-1 bg-theme-primary text-white text-xs font-bold rounded-md tracking-wide">TUGAS INDIVIDU</span>
@@ -618,6 +708,7 @@
                             <h5 class="font-bold text-sm text-theme-textDark mb-2">Pertanyaan Analisis</h5>
                             <p class="text-sm text-theme-textDark leading-relaxed">Kesultanan Demak berkembang karena didukung oleh letak geografis yang strategis, aktivitas perdagangan, dan kekuatan politik. Analisislah hubungan ketiga faktor tersebut dalam mendukung perkembangan Demak sebagai pusat kekuasaan Islam di Jawa. Mengapa letak geografis yang strategis saja tidak cukup untuk menjamin kejayaan suatu kerajaan?</p>
                         </div>
+                        <a href="https://bit.ly/4ilcVLy" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-5 px-5 py-2.5 bg-theme-primary text-white rounded-full hover:bg-theme-accent transition shadow-sm text-sm font-semibold">Buka Tugas Individu Demak <span aria-hidden="true">→</span></a>
                     </section>
                     <section class="lg:col-span-2 glass-card p-6 sm:p-8 rounded-[2rem] shadow-ui">
                         <h4 class="font-bold text-lg text-theme-textDark mb-4">Sumber Bacaan</h4>
@@ -630,6 +721,11 @@
                         </ul>
                     </section>
                 </div>
+                <div class="flex justify-center pt-2">
+                    <a href="index.html#menu-pertemuan" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white text-theme-textDark font-semibold text-sm shadow-sm border border-gray-200 hover:bg-gray-50 transition">
+                        Kembali ke pilihan pertemuan
+                    </a>
+                </div>  
             </section>
         </div>
 
@@ -730,17 +826,17 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                <div id="aktivitas-banten" class="grid grid-cols-1 lg:grid-cols-5 gap-6 scroll-mt-24">
                     <section class="lg:col-span-3 bg-[#e4ebf5] border border-theme-primary/20 rounded-[2rem] p-6 sm:p-8 shadow-inner">
                         <div class="flex items-center gap-3 flex-wrap mb-5">
-                            <span class="px-3 py-1 bg-theme-primary text-white text-xs font-bold rounded-md tracking-wide">TUGAS INDIVIDU</span>
-                            <h4 class="font-bold text-xl text-theme-textDark">Aktivitas Analisis Film Tirtayasa</h4>
+                            <span class="px-3 py-1 bg-theme-primary text-white text-xs font-bold rounded-md tracking-wide">TUGAS KELOMPOK</span>
+                            <h4 class="font-bold text-xl text-theme-textDark">LKPD Kesimpulan Film Tirtayasa</h4>
                         </div>
                         <h5 class="font-bold text-sm text-theme-textDark mb-2">Petunjuk Pengerjaan</h5>
-                        <p class="text-sm text-theme-textMuted mb-5">Tonton film “Tirtayasa the Sultan of Banten” dengan saksama, kemudian kerjakan tugas secara mandiri.</p>
+                        <p class="text-sm text-theme-textMuted mb-5">Tonton film “Tirtayasa the Sultan of Banten” dengan saksama, kemudian kerjakan tugas secara berkelompok. Unggah hasilnya ke folder Drive tugas pada bagian Portofolio setelah tautan folder tersedia.</p>
                         <div class="bg-white/70 p-5 rounded-2xl">
                             <h5 class="font-bold text-sm text-theme-textDark mb-2">Pertanyaan Analisis</h5>
-                            <p class="text-sm text-theme-textDark leading-relaxed">Tuliskan dan presentasikan hikmah serta nilai kepemimpinan yang dapat kamu ambil dari film tersebut. Sertakan peristiwa atau bukti dari film sebagai pendukung penjelasanmu.</p>
+                            <p class="text-sm text-theme-textDark leading-relaxed">Diskusikan dengan kelompok Anda pelajaran/hikmah dari film “Tirtayasa the Sultan of Banten” apabila dikaitkan dengan nilai kepemimpinan Sultan Ageng Tirtayasa.</p>
                         </div>
                     </section>
                     <section class="lg:col-span-2 glass-card p-6 sm:p-8 rounded-[2rem] shadow-ui">
@@ -793,10 +889,10 @@
                     <section class="bg-[#e4ebf5] border border-theme-primary/20 rounded-[2rem] p-6 sm:p-8 shadow-inner">
                         <div class="flex items-center gap-3 flex-wrap mb-5">
                             <span class="px-3 py-1 bg-theme-accent text-white text-xs font-bold rounded-md tracking-wide">TUGAS KELOMPOK</span>
-                            <h4 class="text-xl font-bold text-theme-textDark">Diskusi dan Analisis Kesultanan Ternate</h4>
+                            <h4 class="text-xl font-bold text-theme-textDark">LKPD Diskusi Kelompok Kesultanan Ternate</h4>
                         </div>
                         <h5 class="font-bold text-sm text-theme-textDark mb-2">Petunjuk Pengerjaan</h5>
-                        <p class="text-sm text-theme-textMuted mb-5">Buatlah kelompok. Gunakan berbagai sumber bacaan untuk mendiskusikan pertanyaan sesuai pembagian kelompok, lalu sampaikan hasil analisis dengan bukti sejarah yang relevan.</p>
+                        <p class="text-sm text-theme-textMuted mb-5">Buatlah kelompok. Gunakan berbagai sumber bacaan untuk mendiskusikan pertanyaan sesuai pembagian kelompok, lalu susun hasil analisis dengan bukti sejarah yang relevan. Unggah hasilnya ke folder Drive tugas pada bagian Portofolio setelah tautan folder tersedia.</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <article class="bg-white/80 p-5 rounded-2xl">
                                 <span class="text-xs font-bold text-theme-primary uppercase tracking-wide">Kelompok 1</span>
@@ -850,5 +946,50 @@
         </div>
     </footer>
 
+    <script>
+        const navLinks = document.querySelectorAll('[data-nav-key]');
+        const navParams = new URLSearchParams(window.location.search);
+        const lesson = navParams.get('lesson');
+        const activeLessonActivities = lesson === 'pertemuan1'
+            ? [document.getElementById('aktivitas-samuderapasai')]
+            : lesson === 'pertemuan2'
+                ? [
+                    document.getElementById('aktivitas-banten'),
+                    document.getElementById('aktivitas-ternate')
+                ]
+                : [];
+        const setActiveNav = (key) => {
+            navLinks.forEach((link) => {
+                if (link.dataset.navKey === key) {
+                    link.setAttribute('aria-current', 'page');
+                } else {
+                    link.removeAttribute('aria-current');
+                }
+            });
+        };
+        const updateActiveNav = () => {
+            if (lesson === 'pertemuan1' || lesson === 'pertemuan2') {
+                setActiveNav(activeLessonActivities.some((activity) => activity && activity.getBoundingClientRect().top <= 104)
+                    ? 'portofolio'
+                    : 'materi');
+                return;
+            }
+
+            const portfolio = document.getElementById('portofolio');
+            if (portfolio && portfolio.getBoundingClientRect().top <= 104) {
+                setActiveNav('portofolio');
+                return;
+            }
+
+            const meetingMenu = document.getElementById('menu-pertemuan');
+            setActiveNav(meetingMenu && meetingMenu.getBoundingClientRect().top <= 104
+                ? 'materi'
+                : 'beranda');
+        };
+
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        window.addEventListener('hashchange', updateActiveNav);
+        updateActiveNav();
+    </script>
 </body>
 </html>
